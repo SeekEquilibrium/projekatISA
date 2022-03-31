@@ -10,4 +10,5 @@ import rs.ac.uns.ftn.informatika.jpa.model.UserApp;
 public interface UserRepository extends JpaRepository<UserApp, Long> {
 	public UserApp findByEmail(String email);
 	public boolean existsByEmail(String email);
+	public boolean findById(Integer id);
 }
