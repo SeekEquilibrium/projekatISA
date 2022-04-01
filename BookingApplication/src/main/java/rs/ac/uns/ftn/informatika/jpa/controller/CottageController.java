@@ -21,7 +21,7 @@ public class CottageController {
 	@Autowired
 	private CottageService cottageService;
 	
-	@GetMapping(value = "/{name}")
+	@GetMapping("/{name}")
 	public ResponseEntity<CottageDTO> getCottage(@PathVariable String name){
 		Cottage cottage = cottageService.findCottage(name);
 		

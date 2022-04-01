@@ -13,6 +13,6 @@ public class CottageService {
 	private CottageRepository cottageReposiotry;
 	
 	public Cottage findCottage(String name) {
-		return cottageReposiotry.findByName(name);
+		return cottageReposiotry.findByNameIgnoringCase(name);
 	}
 }

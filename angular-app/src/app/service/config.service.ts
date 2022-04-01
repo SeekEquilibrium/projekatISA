@@ -5,9 +5,10 @@ import {Injectable} from '@angular/core';
 })
 export class ConfigService {
 
-  private _api_url = 'http://localhost:8080/api';
+  private _api_url = 'http://localhost:8080';
   private _auth_url = 'http://localhost:8080/registration';
   private _user_url = this._api_url + '/user';
+  private _cottage_url = this._api_url + '/cottage';
 
   private _login_url = this._auth_url + '/login';
 
@@ -39,4 +40,7 @@ export class ConfigService {
     return this._signup_url;
   }
 
+  public get_cottage_profile_url(name: string): string{
+    return this._cottage_url = this._cottage_url + '/' + name;
+  }
 }

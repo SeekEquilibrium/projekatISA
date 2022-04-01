@@ -9,5 +9,5 @@ import rs.ac.uns.ftn.informatika.jpa.model.Cottage;
 
 @Repository
 public interface CottageRepository extends JpaRepository<Cottage, Long> {
-	public Cottage findByName(String name);
+	public Cottage findByNameIgnoringCase(String name);
 }

@@ -24,19 +24,19 @@ public class Cottage {
 	private String address;
 	@Column
 	private String description;
-//	@OnDelete(action = OnDeleteAction.CASCADE)
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	private UserApp cottageOwner;
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@ManyToOne(fetch = FetchType.EAGER)
+	private CottageOwner cottageOwner;
 	
 	public Cottage() {}
 
-	public Cottage(long id, String name, String address, String description/*, UserApp cottageOwner*/) {
+	public Cottage(long id, String name, String address, String description, CottageOwner cottageOwner) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.description = description;
-		//this.cottageOwner = cottageOwner;
+		this.cottageOwner = cottageOwner;
 	}
 
 	public long getId() {
@@ -71,13 +71,13 @@ public class Cottage {
 		this.description = description;
 	}
 
-//	public UserApp getCottageOwner() {
-//		return cottageOwner;
-//	}
-//
-//	public void setCottageOwner(UserApp cottageOwner) {
-//		this.cottageOwner = cottageOwner;
-//	}
+	public CottageOwner getCottageOwner() {
+		return cottageOwner;
+	}
+
+	public void setCottageOwner(CottageOwner cottageOwner) {
+		this.cottageOwner = cottageOwner;
+	}
 
 	
 }

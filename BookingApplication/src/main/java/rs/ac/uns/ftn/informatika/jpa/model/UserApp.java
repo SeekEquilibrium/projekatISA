@@ -29,7 +29,7 @@ public class UserApp {
 	private String password;
 	@Column
 	private String phoneNumber;
-	@Enumerated(value = EnumType.STRING)
+//	@Enumerated(value = EnumType.STRING)
 	@Column
 	private UserType userType;
 	
