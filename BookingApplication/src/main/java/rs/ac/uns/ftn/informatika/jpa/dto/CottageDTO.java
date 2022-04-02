@@ -26,10 +26,10 @@ public class CottageDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAdress() {
+	public String getAddress() {
 		return address;
 	}
-	public void setAdress(String adress) {
+	public void setAddress(String adress) {
 		this.address = adress;
 	}
 	public String getDescription() {
@@ -38,10 +38,10 @@ public class CottageDTO {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public UserDTO getOwner() {
+	public UserDTO getCottageOwner() {
 		return cottageOwner;
 	}
-	public void setOwner(UserDTO cottageOwner) {
+	public void setCottageOwner(UserDTO cottageOwner) {
 		this.cottageOwner = cottageOwner;
 	}
 	
