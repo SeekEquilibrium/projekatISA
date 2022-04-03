@@ -1,5 +1,9 @@
 package rs.ac.uns.ftn.informatika.jpa.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,10 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Cottage {
@@ -27,6 +34,10 @@ public class Cottage {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@ManyToOne(fetch = FetchType.EAGER)
 	private CottageOwner cottageOwner;
+	@JsonIgnore
+	@OneToMany
+	(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	public Set<CottageImage> cottageImages = new HashSet<CottageImage>();
 	
 	public Cottage() {}
 

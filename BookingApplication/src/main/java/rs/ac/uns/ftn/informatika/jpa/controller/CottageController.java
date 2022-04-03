@@ -1,5 +1,7 @@
 package rs.ac.uns.ftn.informatika.jpa.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 
 import rs.ac.uns.ftn.informatika.jpa.model.Cottage;
+import rs.ac.uns.ftn.informatika.jpa.model.CottageImage;
+import rs.ac.uns.ftn.informatika.jpa.service.CottageImageService;
 import rs.ac.uns.ftn.informatika.jpa.service.CottageService;
 import rs.ac.uns.ftn.informatika.jpa.dto.CottageDTO;
+import rs.ac.uns.ftn.informatika.jpa.dto.ImagesDTO;
 
 @CrossOrigin
 @RestController
@@ -20,6 +25,8 @@ public class CottageController {
 	
 	@Autowired
 	private CottageService cottageService;
+	@Autowired
+	private CottageImageService cottageImageService;
 	
 	@GetMapping("/{name}")
 	public ResponseEntity<CottageDTO> getCottage(@PathVariable String name){
@@ -28,7 +35,9 @@ public class CottageController {
 		if(cottage == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		
-		return new ResponseEntity<>(new CottageDTO(cottage), HttpStatus.OK);
+//		ArrayList<CottageImage> images = cottageImageService.getCottageImages(cottage.getId());
+		ArrayList<String> images = cottageImageService.findImagePathsByCottageId(cottage.getId());
+		ImagesDTO imagesDto = new ImagesDTO(images);
+		return new ResponseEntity<>(new CottageDTO(cottage, imagesDto), HttpStatus.OK);
 	}
 }

@@ -7,6 +7,16 @@ public class CottageDTO {
 	private String address;
 	private String description;
 	private UserDTO cottageOwner;
+	private ImagesDTO cottageImages;
+	
+	public CottageDTO(String name, String address, String description, UserDTO cottageOwner, ImagesDTO cottageImages) {
+		super();
+		this.name = name;
+		this.address = address;
+		this.description = description;
+		this.cottageOwner = cottageOwner;
+		this.cottageImages = cottageImages;
+	}
 	
 	public CottageDTO(String name, String address, String description, UserDTO cottageOwner) {
 		super();
@@ -15,9 +25,14 @@ public class CottageDTO {
 		this.description = description;
 		this.cottageOwner = cottageOwner;
 	}
-	
+
 	public CottageDTO(Cottage cottage) {
 		this(cottage.getName(), cottage.getAddress(), cottage.getDescription(), new UserDTO(cottage.getCottageOwner()));
+	}
+	
+	public CottageDTO(Cottage cottage, ImagesDTO cottageImages) {
+		this(cottage.getName(), cottage.getAddress(), cottage.getDescription(), new UserDTO(cottage.getCottageOwner()));
+		this.cottageImages = cottageImages;
 	}
 	
 	public String getName() {
@@ -43,6 +58,14 @@ public class CottageDTO {
 	}
 	public void setCottageOwner(UserDTO cottageOwner) {
 		this.cottageOwner = cottageOwner;
+	}
+
+	public ImagesDTO getCottageImages() {
+		return cottageImages;
+	}
+
+	public void setCottageImages(ImagesDTO cottageImages) {
+		this.cottageImages = cottageImages;
 	}
 	
 	
