@@ -4,7 +4,8 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class ConfigService {
-
+  
+  private _image_path = '../../assets/images/'
   private _api_url = 'http://localhost:8080';
   private _auth_url = 'http://localhost:8080/registration';
   private _user_url = this._api_url + '/user';
@@ -42,5 +43,9 @@ export class ConfigService {
 
   public get_cottage_profile_url(name: string): string{
     return this._cottage_url = this._cottage_url + '/' + name;
+  }
+
+  public image_path(): string{
+    return this._image_path;
   }
 }

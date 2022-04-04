@@ -1,16 +1,22 @@
-<div class="cottage-card">
-    <mat-card >
-        <mat-card-header>
-            <mat-card-title>{{cottageProfile.name}}</mat-card-title>
-            <mat-card-subtitle>{{cottageProfile.address}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            {{cottageProfile.description}}
-        </mat-card-content>
-        <mat-divider inset></mat-divider>
-        <mat-card-actions>
-            <button mat-button>Reserve</button>
-        </mat-card-actions>
-    </mat-card>
+<div>
+    <div class="cottage-card">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>{{cottageProfile.name}}</mat-card-title>
+                <mat-card-subtitle>{{cottageProfile.address}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <br>
+                <img mat-card-image src="{{imagePath}}{{cottageProfile.cottageImages.imagePaths[0]}}">
+                {{cottageProfile.description}}
+                <br>
+                <br>
+                Owner: <a href="https://www.google.com/" target="_blank">{{cottageOwner.name}} {{cottageOwner.surname}}</a>
+            </mat-card-content>
+            <mat-divider inset></mat-divider>
+            <mat-card-actions>
+                <button mat-flat-button color="primary">Reserve</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
 </div>
-
