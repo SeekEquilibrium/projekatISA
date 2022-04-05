@@ -6,8 +6,11 @@
   
   .app-navbar {
     width: 100%;
+    z-index:1;
     display: flex;
     flex-wrap: wrap;
+    position: sticky;
+    top: 0;
   }
   
   .app-navbar span {
@@ -27,7 +30,3 @@
   .greeting-hamburger {
     display: none;
   }
-
-  
-  
-  
