@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigService } from '../service';
 import { CottageService } from '../service/cottage.service';
 import { CottageProfile } from '../shared/cottageProfile';
@@ -7,7 +8,8 @@ import { CottageProfile } from '../shared/cottageProfile';
 @Component({
   selector: 'app-cottage-profile',
   templateUrl: './cottage-profile.component.html',
-  styleUrls: ['./cottage-profile.component.css']
+  styleUrls: ['./cottage-profile.component.css'],
+  providers: [NgbCarouselConfig]
 })
 export class CottageProfileComponent implements OnInit {
   
@@ -15,14 +17,18 @@ export class CottageProfileComponent implements OnInit {
   cottageOwner: any;
   imagePath: string;
   returnUrl: string;
+  panelOpenState = false;
 
   constructor(
     private route:ActivatedRoute,
     private cottageService: CottageService,
     private configService: ConfigService,
     private router: Router,
+    config: NgbCarouselConfig
 
-    ) { }
+    ) {config.interval = 4000;
+      config.keyboard = true;
+      config.pauseOnHover = true; }
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';

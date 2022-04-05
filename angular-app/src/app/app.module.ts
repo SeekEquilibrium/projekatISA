@@ -25,6 +25,7 @@ import {ConfigService} from './service/config.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { CottageProfileComponent } from './cottage-profile/cottage-profile.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { CottageProfileComponent } from './cottage-profile/cottage-profile.compo
     AngularMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
   ],
   providers: [ 
     {
