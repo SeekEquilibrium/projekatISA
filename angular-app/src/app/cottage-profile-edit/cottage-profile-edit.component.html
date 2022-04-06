@@ -1,0 +1,35 @@
+<div *ngIf="cottageProfile" class="cottage-card" >
+    <mat-card>
+        <mat-card-title>Edit cottage profile</mat-card-title>
+        <mat-card-content>
+            <form (ngSubmit)="onSubmit()" [formGroup]="form" fxLayout="column" fxLayoutAlign="center start">
+                
+                <mat-label>Cottage name: </mat-label>
+                <mat-form-field appearance="outline">
+                    <input formControlName="name" [value]="cottageProfile.name" matInput>
+                </mat-form-field>
+                
+                <mat-label>Description: </mat-label>
+                <mat-form-field id="description-div" appearance="outline">
+                    <textarea formControlName="description" id="description-textarea" matInput [value]="cottageProfile.description"></textarea>
+                </mat-form-field>
+                
+                <mat-label>Rules: </mat-label>
+                <mat-form-field id="description-div" appearance="outline">
+                    <textarea formControlName="rules" id="rules-textarea" matInput [value]="cottageProfile.rules"></textarea>
+                </mat-form-field>
+
+                <mat-label>Number of rooms: </mat-label>
+                <mat-form-field id="number-input" appearance="outline">
+                    <input type="number" matInput min="1" [value]="cottageProfile.roomNumber">
+                </mat-form-field>
+
+                <mat-label>Number of beds: </mat-label>
+                <mat-form-field id="number-input" appearance="outline">
+                    <input type="number" matInput min="1" [value]="cottageProfile.bedNumber">
+                </mat-form-field>
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

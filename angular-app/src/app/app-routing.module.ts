@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { CottageProfileComponent } from './cottage-profile/cottage-profile.component';
+import { CottageProfileEditComponent } from './cottage-profile-edit/cottage-profile-edit.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'cottage/:name',
     component: CottageProfileComponent
+  },
+  {
+    path: 'cottage/:name/edit',
+    component: CottageProfileEditComponent
   }
 ];
 

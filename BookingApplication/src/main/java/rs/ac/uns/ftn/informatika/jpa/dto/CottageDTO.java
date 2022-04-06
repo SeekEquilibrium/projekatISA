@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.informatika.jpa.dto;
 import rs.ac.uns.ftn.informatika.jpa.model.Cottage;
 
 public class CottageDTO {
+	private long id;
 	private String name;
 	private String address;
 	private String description;
@@ -25,9 +26,10 @@ public class CottageDTO {
 		this.cottageImages = cottageImages;
 	}
 	
-	public CottageDTO(String name, String address, String description, Integer roomNumber, 
+	public CottageDTO(long id, String name, String address, String description, Integer roomNumber, 
 			Integer bedNumber, String rules, UserDTO cottageOwner) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.description = description;
@@ -38,16 +40,24 @@ public class CottageDTO {
 	}
 
 	public CottageDTO(Cottage cottage) {
-		this(cottage.getName(), cottage.getAddress(), cottage.getDescription(), cottage.getRoomNumber(),
+		this(cottage.getId(), cottage.getName(), cottage.getAddress(), cottage.getDescription(), cottage.getRoomNumber(),
 				cottage.getBedNumber(), cottage.getRules(), new UserDTO(cottage.getCottageOwner()));
 	}
 	
 	public CottageDTO(Cottage cottage, ImagesDTO cottageImages) {
-		this(cottage.getName(), cottage.getAddress(), cottage.getDescription(),  cottage.getRoomNumber(),
+		this(cottage.getId(), cottage.getName(), cottage.getAddress(), cottage.getDescription(),  cottage.getRoomNumber(),
 				cottage.getBedNumber(), cottage.getRules(), new UserDTO(cottage.getCottageOwner()));
 		this.cottageImages = cottageImages;
 	}
 	
+	
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}

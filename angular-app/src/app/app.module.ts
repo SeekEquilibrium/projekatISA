@@ -26,6 +26,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptor/TokenInterceptor';
 import { CottageProfileComponent } from './cottage-profile/cottage-profile.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CottageProfileEditComponent } from './cottage-profile-edit/cottage-profile-edit.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     SignUpComponent,
     CottageProfileComponent,
+    CottageProfileEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    FlexLayoutModule,
   ],
   providers: [ 
     {
