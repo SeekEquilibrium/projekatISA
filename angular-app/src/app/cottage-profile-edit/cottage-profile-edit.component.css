@@ -28,3 +28,15 @@
 #number-input {
     max-width: 100px;
 }
+
+.table-width {
+    max-width: 45%;
+}
+
+.image-width {
+    width: 45%;
+}
+
+.edit-buttons {
+    width: 100px;
+}

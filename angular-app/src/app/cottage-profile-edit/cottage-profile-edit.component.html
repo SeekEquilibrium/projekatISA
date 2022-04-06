@@ -19,17 +19,46 @@
                     <textarea formControlName="rules" id="rules-textarea" matInput [value]="cottageProfile.rules"></textarea>
                 </mat-form-field>
 
-                <mat-label>Number of rooms: </mat-label>
-                <mat-form-field id="number-input" appearance="outline">
-                    <input type="number" matInput min="1" [value]="cottageProfile.roomNumber">
-                </mat-form-field>
+                <div id="description-div" fxLayout="row" fxLayoutAlign="space-evenly start">
+                    <div fxLayout="column" fxLayoutAlign="start center" >
+                        <mat-label>Number of rooms: </mat-label>
+                        <mat-form-field id="number-input" appearance="outline">
+                            <input type="number" matInput min="1" [value]="cottageProfile.roomNumber">
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxLayoutAlign="start center" >
+                        <mat-label>Number of beds: </mat-label>
+                        <mat-form-field id="number-input" appearance="outline">
+                            <input type="number" matInput min="1" [value]="cottageProfile.bedNumber">
+                        </mat-form-field>
+                    </div>
+                </div>
 
-                <mat-label>Number of beds: </mat-label>
-                <mat-form-field id="number-input" appearance="outline">
-                    <input type="number" matInput min="1" [value]="cottageProfile.bedNumber">
-                </mat-form-field>
+                <br>
 
+                <div fxLayout="row" fxLayoutAlign="space-between start">
+                    <table class="table table-hover table-width">
+                        <thead>
+                            <tr>
+                            <th scope="col">Images</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let image of imageNames">
+                                <td (click)="selectedImage(image)">{{image}}</td>
+                                <td><button mat-flat-button color="warn">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <img class="image-width rounded" src="{{imagePath}}{{displayImage}}" alt="">
+                </div>
             </form>
         </mat-card-content>
+        <mat-divider inset></mat-divider>
+
+        <mat-card-actions style="margin-right: 3px;" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+            <a class="edit-buttons" mat-stroked-button color="primary" href="/cottage/{{cottageProfile.name}}">Cancel</a>
+            <button class="edit-buttons" mat-flat-button color="primary">Save</button>
+        </mat-card-actions>
     </mat-card>
 </div>

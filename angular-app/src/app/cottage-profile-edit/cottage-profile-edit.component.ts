@@ -15,6 +15,9 @@ export class CottageProfileEditComponent implements OnInit {
   cottageProfile: CottageProfile;
   cottageOwner: any;
   imagePath: string;
+  imageNames: string[];
+  displayImage: string;
+
   returnUrl: string;
   panelOpenState = false;
 
@@ -25,17 +28,21 @@ export class CottageProfileEditComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     ) { 
-    
+      this.imagePath = this.configService.image_path()
   }
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    this.imagePath = this.configService.image_path()
     this.cottageService.getCottageProfile(this.route.snapshot.paramMap.get('name')).subscribe(
       response => {
         this.cottageProfile = response;
         this.cottageOwner = this.cottageProfile.cottageOwner;
+        this.imageNames = response.cottageImages.imagePaths;
         console.log(this.cottageProfile)
+        console.log(this.imageNames)
+        if(this.imageNames != null){
+          this.displayImage = this.imageNames[0];
+        }
       },
       error => {
         this.router.navigate([this.returnUrl]);
@@ -47,7 +54,10 @@ export class CottageProfileEditComponent implements OnInit {
       description:[''],
       rules:[''],
     });
+  }
 
+  selectedImage(image: string) {
+    this.displayImage = image;
   }
 
 }
