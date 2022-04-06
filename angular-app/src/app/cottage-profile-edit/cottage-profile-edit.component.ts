@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigService } from '../service';
 import { CottageService } from '../service/cottage.service';
@@ -50,9 +50,11 @@ export class CottageProfileEditComponent implements OnInit {
     )
 
     this.form = this.formBuilder.group({
-      name:[''],
+      name:['', Validators.required],
       description:[''],
       rules:[''],
+      roomNumber:[Validators.min(1)],
+      bedNumber:[Validators.min(1)],
     });
   }
 
@@ -60,4 +62,7 @@ export class CottageProfileEditComponent implements OnInit {
     this.displayImage = image;
   }
 
+  onSubmit() {
+    console.log(this.cottageProfile)
+  }
 }
