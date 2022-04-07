@@ -53,8 +53,8 @@ export class CottageProfileEditComponent implements OnInit {
       name:['', Validators.required],
       description:[''],
       rules:[''],
-      roomNumber:[Validators.min(1)],
-      bedNumber:[Validators.min(1)],
+      roomNumber:[Validators.min(1), Validators.required],
+      bedNumber:[Validators.min(1), Validators.required],
     });
   }
 

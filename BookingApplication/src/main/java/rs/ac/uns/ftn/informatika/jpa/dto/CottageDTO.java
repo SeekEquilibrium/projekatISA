@@ -13,6 +13,24 @@ public class CottageDTO {
 	private UserDTO cottageOwner;
 	private ImagesDTO cottageImages;
 	
+	
+	
+	public CottageDTO() {
+		super();
+	}
+
+	public CottageDTO(long id, String name, String address, String description, Integer roomNumber, Integer bedNumber,
+			String rules) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.description = description;
+		this.roomNumber = roomNumber;
+		this.bedNumber = bedNumber;
+		this.rules = rules;
+	}
+
 	public CottageDTO(String name, String address, String description, Integer roomNumber, 
 			Integer bedNumber, String rules, UserDTO cottageOwner, ImagesDTO cottageImages) {
 		super();
