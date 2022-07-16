@@ -3,8 +3,8 @@ package com.bookingapplication.dto;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+import com.bookingapplication.model.Role;
 import com.bookingapplication.model.UserApp;
-import com.bookingapplication.model.UserType;
 
 public class UserDTO {
 	private String name;
@@ -13,14 +13,14 @@ public class UserDTO {
 	private String password;
 	private String phoneNumber;
 	@Enumerated(value = EnumType.STRING)
-	private UserType userType;
+	private Role userType;
 	
 	public UserDTO(UserApp userApp) {
 		this(userApp.getName(), userApp.getSurname(), userApp.getEmail(),
-				userApp.getPassword(), userApp.getPhoneNumber(), userApp.getUserType());
+				userApp.getPassword(), userApp.getPhoneNumber(), userApp.getRole());
 	}
 	
-	public UserDTO(String name, String surname, String email, String password, String phoneNumber, UserType userType) {
+	public UserDTO(String name, String surname, String email, String password, String phoneNumber, Role userType) {
 		super();
 		this.name = name;
 		this.surname = surname;
@@ -65,10 +65,10 @@ public class UserDTO {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public UserType getUserType() {
+	public Role getUserType() {
 		return userType;
 	}
-	public void setUserType(UserType userType) {
+	public void setUserType(Role userType) {
 		this.userType = userType;
 	}
 }

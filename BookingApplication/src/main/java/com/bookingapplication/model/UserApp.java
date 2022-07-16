@@ -1,56 +1,58 @@
 package com.bookingapplication.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.SequenceGenerator;
+import com.bookingapplication.dto.RegistrationRequestDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class UserApp {
 	@Id
 	@SequenceGenerator(name = "userAppSeqGen", sequenceName = "userAppSeq", initialValue = 1, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userAppSeqGen")
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "userAppSeqGen")
 	@Column(name="id", unique=true, nullable=false)
 	private long id;
 	@Column
 	private String name;
 	@Column
 	private String surname;
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String email;
+	@Column(unique = true, nullable = false)
+	private String username;
 	@Column
 	private String password;
 	@Column
 	private String phoneNumber;
-//	@Enumerated(value = EnumType.STRING)
-	@Column
-	private UserType userType;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Role role;
+
 	
-	public UserApp(long id, String name, String surname, String email, String password, String phoneNumber,
-			UserType userType) {
+	public UserApp(long id, String username, String name, String surname, String email, String password, String phoneNumber,
+				   Role role) {
 		super();
 		this.id = id;
+		this.username = username;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
-		this.userType = userType;
+		this.role = role;
 	}
 
-	public UserApp(String name, String surname, String email, String password, String phoneNumber, UserType userType) {
+	public UserApp(String username, String name, String surname, String email, String password, String phoneNumber, Role role) {
 		super();
+		this.username = username;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
-		this.userType = userType;
+		this.role = role;
 	}
 
 	public UserApp() {
@@ -63,6 +65,14 @@ public class UserApp {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getName() {
@@ -105,12 +115,12 @@ public class UserApp {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public UserType getUserType() {
-		return userType;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setUserType(UserType userType) {
-		this.userType = userType;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 	
