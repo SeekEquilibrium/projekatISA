@@ -60,6 +60,17 @@ public class Cottage {
 		this.cottageOwner = cottageOwner;
 	}
 
+	public Cottage(String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules, CottageOwner cottageOwner, Set<CottageImage> cottageImages) {
+		this.name = name;
+		this.address = address;
+		this.description = description;
+		this.roomNumber = roomNumber;
+		this.bedNumber = bedNumber;
+		this.rules = rules;
+		this.cottageOwner = cottageOwner;
+		this.cottageImages = cottageImages;
+	}
+
 	public long getId() {
 		return id;
 	}

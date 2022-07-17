@@ -1,5 +1,6 @@
 package com.bookingapplication.service;
 
+import com.bookingapplication.dto.RegisterCottageRequestDTO;
 import com.bookingapplication.model.Cottage;
 import com.bookingapplication.repository.CottageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,7 @@ public class CottageService {
 		cottage.setBedNumber(cottageDTO.getBedNumber());
 		return cottageReposiotry.save(cottage);
 	}
+
+//	public Cottage register(RegisterCottageRequestDTO requestDTO){
+//	}
 }
