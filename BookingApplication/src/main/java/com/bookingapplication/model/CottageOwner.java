@@ -22,6 +22,7 @@ public class CottageOwner extends UserApp {
 	}
 	
 	public CottageOwner(UserApp userApp) {
-		super(userApp.getId(), userApp.getName(), userApp.getSurname(), userApp.getEmail(), userApp.getPassword(), userApp.getPhoneNumber(), userApp.getUserType());
+		super(userApp.getUsername(), userApp.getName(), userApp.getSurname(), userApp.getEmail(), userApp.getPassword(),
+				userApp.getPhoneNumber(), userApp.getRole());
 	}
 }

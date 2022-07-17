@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/cottage")
 public class CottageController {
-	
+
 	@Autowired
 	private CottageService cottageService;
 	@Autowired
@@ -36,7 +36,7 @@ public class CottageController {
 	@GetMapping("/{name}")
 	public ResponseEntity<CottageDTO> getCottage(@PathVariable String name){
 		Cottage cottage = cottageService.findCottage(name);
-		
+
 		if(cottage == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -45,7 +45,7 @@ public class CottageController {
 		ImagesDTO imagesDto = new ImagesDTO(images);
 		return new ResponseEntity<>(new CottageDTO(cottage, imagesDto), HttpStatus.OK);
 	}
-	
+
 	@PutMapping(path="/edit")
 	public ResponseEntity<CottageDTO> updateCottage(@RequestBody CottageDTO cottageDTO){
 		Cottage cottage = cottageService.editCottage(cottageDTO);
