@@ -1,12 +1,23 @@
 package com.bookingapplication.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class RegistrationRequestDTO {
+    @NotBlank
     private String name;
+    @NotBlank
     private String surname;
+    @NotBlank
     private String username;
+    @NotBlank
+    @Email
     private String email;
+    @NotBlank
     private String password;
+    @NotBlank
     private String phoneNumber;
+    @NotBlank
     private String role;
 
     public String getRole() {
