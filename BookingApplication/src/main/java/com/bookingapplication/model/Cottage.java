@@ -29,7 +29,7 @@ public class Cottage {
 	private String name;
 	@Column
 	private String address;
-	@Column(length = 1000)
+	@Column
 	private String description;
 	@Column
 	private Integer roomNumber;
