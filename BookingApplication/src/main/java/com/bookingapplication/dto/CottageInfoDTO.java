@@ -2,7 +2,7 @@ package com.bookingapplication.dto;
 
 import com.bookingapplication.model.Cottage;
 
-public class CottageDTO {
+public class CottageInfoDTO {
 	private long id;
 	private String name;
 	private String address;
@@ -15,11 +15,11 @@ public class CottageDTO {
 	
 	
 	
-	public CottageDTO() {
+	public CottageInfoDTO() {
 		super();
 	}
 
-	public CottageDTO(long id, String name, String address, String description, Integer roomNumber, Integer bedNumber,
+	public CottageInfoDTO(long id, String name, String address, String description, Integer roomNumber, Integer bedNumber,
 			String rules) {
 		super();
 		this.id = id;
@@ -31,7 +31,7 @@ public class CottageDTO {
 		this.rules = rules;
 	}
 
-	public CottageDTO(String name, String address, String description, Integer roomNumber, 
+	public CottageInfoDTO(String name, String address, String description, Integer roomNumber,
 			Integer bedNumber, String rules, UserDTO cottageOwner, ImagesDTO cottageImages) {
 		super();
 		this.name = name;
@@ -44,7 +44,7 @@ public class CottageDTO {
 		this.cottageImages = cottageImages;
 	}
 	
-	public CottageDTO(long id, String name, String address, String description, Integer roomNumber, 
+	public CottageInfoDTO(long id, String name, String address, String description, Integer roomNumber,
 			Integer bedNumber, String rules, UserDTO cottageOwner) {
 		super();
 		this.id = id;
@@ -57,12 +57,12 @@ public class CottageDTO {
 		this.cottageOwner = cottageOwner;
 	}
 
-	public CottageDTO(Cottage cottage) {
+	public CottageInfoDTO(Cottage cottage) {
 		this(cottage.getId(), cottage.getName(), cottage.getAddress(), cottage.getDescription(), cottage.getRoomNumber(),
 				cottage.getBedNumber(), cottage.getRules(), new UserDTO(cottage.getCottageOwner()));
 	}
 	
-	public CottageDTO(Cottage cottage, ImagesDTO cottageImages) {
+	public CottageInfoDTO(Cottage cottage, ImagesDTO cottageImages) {
 		this(cottage.getId(), cottage.getName(), cottage.getAddress(), cottage.getDescription(),  cottage.getRoomNumber(),
 				cottage.getBedNumber(), cottage.getRules(), new UserDTO(cottage.getCottageOwner()));
 		this.cottageImages = cottageImages;

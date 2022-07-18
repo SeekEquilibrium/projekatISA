@@ -37,10 +37,10 @@ public class Cottage {
 	private Integer bedNumber;
 	@Column
 	private String rules;
+	@JsonIgnore
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@ManyToOne(fetch = FetchType.EAGER)
 	private CottageOwner cottageOwner;
-	@JsonIgnore
 	@OneToMany
 	(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
 	public Set<CottageImage> cottageImages = new HashSet<CottageImage>();

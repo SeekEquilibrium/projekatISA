@@ -3,8 +3,7 @@ package com.bookingapplication.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.bookingapplication.dto.EditCottageRequestDTO;
-import com.bookingapplication.dto.RegisterCottageRequestDTO;
+import com.bookingapplication.dto.*;
 import com.bookingapplication.model.Cottage;
 import com.bookingapplication.model.CottageOwner;
 import com.bookingapplication.model.UserApp;
@@ -20,8 +19,6 @@ import org.springframework.http.ResponseEntity;
 
 import com.bookingapplication.service.CottageImageService;
 import com.bookingapplication.service.CottageService;
-import com.bookingapplication.dto.CottageDTO;
-import com.bookingapplication.dto.ImagesDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -42,19 +39,19 @@ public class CottageController {
 	private ImageValidation imageValidation;
 
 	@GetMapping("/{name}")
-	public ResponseEntity<CottageDTO> getCottage(@PathVariable String name){
+	public ResponseEntity<CottageInfoDTO> getCottage(@PathVariable String name){
 		Cottage cottage = cottageService.findCottage(name);
 		if(cottage == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		ArrayList<String> images = cottageImageService.findImagePathsByCottageId(cottage.getId());
 		ImagesDTO imagesDto = new ImagesDTO(images);
-		return new ResponseEntity<>(new CottageDTO(cottage, imagesDto), HttpStatus.OK);
+		return new ResponseEntity<>(new CottageInfoDTO(cottage, imagesDto), HttpStatus.OK);
 	}
 
 	@PutMapping(path="/edit")
 	@PreAuthorize("hasAuthority('COTTAGE_OWNER')")
-	public ResponseEntity<CottageDTO> updateCottage(@RequestBody EditCottageRequestDTO requestDTO){
+	public ResponseEntity<EditCottageResponseDTO> updateCottage(@RequestBody EditCottageRequestDTO requestDTO){
 		UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		CottageOwner cottageOwner = cottageOwnerService.findCottageOwner(userApp.getId());
 		Cottage existingCottage = cottageService.findCottage(requestDTO.getName());
@@ -62,12 +59,14 @@ public class CottageController {
 			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
 		}
 		Cottage cottage = cottageService.editCottage(requestDTO);
-		return new ResponseEntity<>(new CottageDTO(cottage), HttpStatus.OK);
+		ArrayList<String> images = cottageImageService.findImagePathsByCottageId(cottage.getId());
+		ImagesDTO imagesDto = new ImagesDTO(images);
+		return new ResponseEntity<>(new EditCottageResponseDTO(cottage, imagesDto), HttpStatus.OK);
 	}
 
 	@PostMapping("/register")
 	@PreAuthorize("hasAuthority('COTTAGE_OWNER')")
-	public ResponseEntity<Cottage> registerCottage(@Valid @ModelAttribute RegisterCottageRequestDTO requestDTO) throws IOException {
+	public ResponseEntity<RegisterCottageResponseDTO> registerCottage(@Valid @ModelAttribute RegisterCottageRequestDTO requestDTO) throws IOException {
 		if(cottageService.cottageExists(requestDTO.getName())){
 			return new ResponseEntity<>(null, HttpStatus.CONFLICT);
 		}
@@ -82,7 +81,9 @@ public class CottageController {
 		UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		CottageOwner cottageOwner = cottageOwnerService.findCottageOwner(userApp.getId());
 		Cottage cottage = cottageService.registerCottage(requestDTO, cottageOwner);
-		return new ResponseEntity<>(cottage, HttpStatus.OK);
+		ArrayList<String> images = cottageImageService.findImagePathsByCottageId(cottage.getId());
+		ImagesDTO imagesDto = new ImagesDTO(images);
+		return new ResponseEntity<>(new RegisterCottageResponseDTO(cottage, imagesDto), HttpStatus.OK);
 	}
 
 
