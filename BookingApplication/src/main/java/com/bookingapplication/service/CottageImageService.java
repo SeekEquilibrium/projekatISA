@@ -19,4 +19,8 @@ public class CottageImageService {
 	public ArrayList<String> findImagePathsByCottageId(long id){
 		return cottageImageRepository.findImagePathsByCottageId(id);
 	}
+
+	public CottageImage save (CottageImage image){
+		return cottageImageRepository.save(image);
+	}
 }

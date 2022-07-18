@@ -27,6 +27,11 @@ public class CottageImage extends ImageApp {
 		this.cottage = cottage;
 	}
 
+	public CottageImage(String path, Cottage cottage) {
+		super(path);
+		this.cottage = cottage;
+	}
+
 	public Cottage getCottage() {
 		return cottage;
 	}

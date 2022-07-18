@@ -60,7 +60,7 @@ public class Cottage {
 		this.cottageOwner = cottageOwner;
 	}
 
-	public Cottage(String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules, CottageOwner cottageOwner, Set<CottageImage> cottageImages) {
+	public Cottage(String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules, CottageOwner cottageOwner) {
 		this.name = name;
 		this.address = address;
 		this.description = description;
@@ -68,7 +68,6 @@ public class Cottage {
 		this.bedNumber = bedNumber;
 		this.rules = rules;
 		this.cottageOwner = cottageOwner;
-		this.cottageImages = cottageImages;
 	}
 
 	public long getId() {

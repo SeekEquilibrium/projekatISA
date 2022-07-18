@@ -3,6 +3,7 @@ insert into role(id, name) values (nextval('role_id_seq'), 'COTTAGE_OWNER');    
 --password123
 insert into user_app(id, email, name, password, phone_number, role_id, surname, username) values
     (nextval('user_app_seq'), 'srdjan@gmail.com', 'Srdjan', '$2a$10$SFp508WvAPKDbemvKcYdd.wLahgUcoBDOPjBRXgNMzDBe3ot/ElwG', '2131231', 1, 'Beric', 'srdjan');
+insert into cottage_owner(id) values (1);
 --insert into user_app(id, name, surname, email, password, phone_number, user_type) values ( nextval('user_app_seq'), 'Srdjan', 'Beric', 'srdjan@gmail', '123', '12345678', 1 );
 --
 --insert into cottage_owner (id) values (1);

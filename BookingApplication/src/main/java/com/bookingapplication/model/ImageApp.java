@@ -28,6 +28,11 @@ public class ImageApp {
 		this.id = id;
 		this.path = path;
 	}
+
+	public ImageApp(String path) {
+		super();
+		this.path = path;
+	}
 	
 	public long getId() {
 		return id;

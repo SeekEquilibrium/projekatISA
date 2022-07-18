@@ -1,5 +1,7 @@
 package com.bookingapplication.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class RegisterCottageRequestDTO {
     private String name;
     private String address;
@@ -7,6 +9,7 @@ public class RegisterCottageRequestDTO {
     private Integer roomNumber;
     private Integer bedNumber;
     private String rules;
+    private MultipartFile[] files;
 
     public RegisterCottageRequestDTO(String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules) {
         this.name = name;
@@ -68,4 +71,11 @@ public class RegisterCottageRequestDTO {
         this.rules = rules;
     }
 
+    public MultipartFile[] getFiles() {
+        return files;
+    }
+
+    public void setFiles(MultipartFile[] files) {
+        this.files = files;
+    }
 }
