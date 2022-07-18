@@ -1,5 +1,6 @@
 package com.bookingapplication.service;
 
+import com.bookingapplication.dto.EditCottageRequestDTO;
 import com.bookingapplication.dto.RegisterCottageRequestDTO;
 import com.bookingapplication.model.Cottage;
 import com.bookingapplication.model.CottageImage;
@@ -31,7 +32,7 @@ public class CottageService {
 
 	public Boolean cottageExists(String name) { return cottageReposiotry.existsByName(name); }
 
-	public Cottage editCottage(CottageDTO cottageDTO) {
+	public Cottage editCottage(EditCottageRequestDTO cottageDTO) {
 		Cottage cottage = cottageReposiotry.findById(cottageDTO.getId());
 		cottage.setName(cottageDTO.getName());
 		cottage.setAddress(cottageDTO.getAddress());

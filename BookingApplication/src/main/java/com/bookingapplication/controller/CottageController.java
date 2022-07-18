@@ -3,6 +3,7 @@ package com.bookingapplication.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.bookingapplication.dto.EditCottageRequestDTO;
 import com.bookingapplication.dto.RegisterCottageRequestDTO;
 import com.bookingapplication.model.Cottage;
 import com.bookingapplication.model.CottageOwner;
@@ -43,19 +44,24 @@ public class CottageController {
 	@GetMapping("/{name}")
 	public ResponseEntity<CottageDTO> getCottage(@PathVariable String name){
 		Cottage cottage = cottageService.findCottage(name);
-
 		if(cottage == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-//		ArrayList<CottageImage> images = cottageImageService.getCottageImages(cottage.getId());
 		ArrayList<String> images = cottageImageService.findImagePathsByCottageId(cottage.getId());
 		ImagesDTO imagesDto = new ImagesDTO(images);
 		return new ResponseEntity<>(new CottageDTO(cottage, imagesDto), HttpStatus.OK);
 	}
 
 	@PutMapping(path="/edit")
-	public ResponseEntity<CottageDTO> updateCottage(@RequestBody CottageDTO cottageDTO){
-		Cottage cottage = cottageService.editCottage(cottageDTO);
+	@PreAuthorize("hasAuthority('COTTAGE_OWNER')")
+	public ResponseEntity<CottageDTO> updateCottage(@RequestBody EditCottageRequestDTO requestDTO){
+		UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		CottageOwner cottageOwner = cottageOwnerService.findCottageOwner(userApp.getId());
+		Cottage existingCottage = cottageService.findCottage(requestDTO.getName());
+		if(!existingCottage.getCottageOwner().getUsername().equals(cottageOwner.getUsername())){
+			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+		}
+		Cottage cottage = cottageService.editCottage(requestDTO);
 		return new ResponseEntity<>(new CottageDTO(cottage), HttpStatus.OK);
 	}
 

@@ -9,10 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImageValidation {
     public boolean validateImageFile (MultipartFile file) {
         String type = file.getContentType();
+        assert type != null;
         type = type.split("/")[0];
-        if(!type.equals("image")){
-            return false;
-        }
-        return true;
+        return type.equals("image");
     }
 }
