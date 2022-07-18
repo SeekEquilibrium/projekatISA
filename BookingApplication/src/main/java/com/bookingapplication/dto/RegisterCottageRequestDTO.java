@@ -2,11 +2,20 @@ package com.bookingapplication.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class RegisterCottageRequestDTO {
+    @NotBlank
     private String name;
+    @NotBlank
     private String address;
+    @NotBlank
     private String description;
+    @NotNull
     private Integer roomNumber;
+    @NotNull
     private Integer bedNumber;
     private String rules;
     private MultipartFile[] files;

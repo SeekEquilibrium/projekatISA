@@ -9,6 +9,7 @@ import com.bookingapplication.model.CottageOwner;
 import com.bookingapplication.model.UserApp;
 import com.bookingapplication.service.CottageOwnerService;
 import com.bookingapplication.service.UserService;
+import com.bookingapplication.validation.ImageValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,6 +23,8 @@ import com.bookingapplication.dto.CottageDTO;
 import com.bookingapplication.dto.ImagesDTO;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/cottage")
 public class CottageController {
@@ -34,6 +37,8 @@ public class CottageController {
 	private CottageOwnerService cottageOwnerService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ImageValidation imageValidation;
 
 	@GetMapping("/{name}")
 	public ResponseEntity<CottageDTO> getCottage(@PathVariable String name){
@@ -56,12 +61,14 @@ public class CottageController {
 
 	@PostMapping("/register")
 	@PreAuthorize("hasAuthority('COTTAGE_OWNER')")
-	public ResponseEntity<Cottage> registerCottage(@ModelAttribute RegisterCottageRequestDTO requestDTO) throws IOException {
+	public ResponseEntity<Cottage> registerCottage(@Valid @ModelAttribute RegisterCottageRequestDTO requestDTO) throws IOException {
+		if(cottageService.cottageExists(requestDTO.getName())){
+			return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+		}
+
 		if(requestDTO.getFiles() != null){
 			for (MultipartFile file : requestDTO.getFiles()) {
-				String type = file.getContentType();
-				type = type.split("/")[0];
-				if(!type.equals("image")){
+				if(!imageValidation.validateImageFile(file)){
 					return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 				}
 			}

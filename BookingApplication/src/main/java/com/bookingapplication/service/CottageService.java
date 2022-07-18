@@ -28,7 +28,9 @@ public class CottageService {
 	public Cottage findCottage(String name) {
 		return cottageReposiotry.findByNameIgnoringCase(name);
 	}
-	
+
+	public Boolean cottageExists(String name) { return cottageReposiotry.existsByName(name); }
+
 	public Cottage editCottage(CottageDTO cottageDTO) {
 		Cottage cottage = cottageReposiotry.findById(cottageDTO.getId());
 		cottage.setName(cottageDTO.getName());

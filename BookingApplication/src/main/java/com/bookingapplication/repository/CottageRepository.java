@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface CottageRepository extends JpaRepository<Cottage, Long> {
 	public Cottage findByNameIgnoringCase(String name);
 	public Cottage findById(long id);
+	public Boolean existsByName(String name);
 }
