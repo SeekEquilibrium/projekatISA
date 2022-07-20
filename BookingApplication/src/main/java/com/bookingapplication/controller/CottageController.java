@@ -40,7 +40,7 @@ public class CottageController {
 
 	@GetMapping("/{name}")
 	public ResponseEntity<CottageInfoDTO> getCottage(@PathVariable String name){
-		Cottage cottage = cottageService.findCottage(name);
+		Cottage cottage = cottageService.findCottageByName(name);
 		if(cottage == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -54,7 +54,7 @@ public class CottageController {
 	public ResponseEntity<EditCottageResponseDTO> updateCottage(@RequestBody EditCottageRequestDTO requestDTO){
 		UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		CottageOwner cottageOwner = cottageOwnerService.findCottageOwner(userApp.getId());
-		Cottage existingCottage = cottageService.findCottage(requestDTO.getName());
+		Cottage existingCottage = cottageService.findCottageByName(requestDTO.getName());
 		if(!existingCottage.getCottageOwner().getUsername().equals(cottageOwner.getUsername())){
 			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
 		}
@@ -67,7 +67,7 @@ public class CottageController {
 	@PostMapping("/register")
 	@PreAuthorize("hasAuthority('COTTAGE_OWNER')")
 	public ResponseEntity<RegisterCottageResponseDTO> registerCottage(@Valid @ModelAttribute RegisterCottageRequestDTO requestDTO) throws IOException {
-		if(cottageService.cottageExists(requestDTO.getName())){
+		if(cottageService.cottageExistsByName(requestDTO.getName())){
 			return new ResponseEntity<>(null, HttpStatus.CONFLICT);
 		}
 

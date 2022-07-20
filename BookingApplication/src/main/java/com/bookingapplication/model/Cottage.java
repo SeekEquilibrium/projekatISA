@@ -44,7 +44,11 @@ public class Cottage {
 	@OneToMany
 	(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
 	public Set<CottageImage> cottageImages = new HashSet<CottageImage>();
-	
+
+	@OneToMany
+			(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	public Set<AppointmentCottage> availableAppointmentsCottages = new HashSet<AppointmentCottage>();
+
 	public Cottage() {}
 
 	public Cottage(long id, String name, String address, String description, Integer roomNumber, 

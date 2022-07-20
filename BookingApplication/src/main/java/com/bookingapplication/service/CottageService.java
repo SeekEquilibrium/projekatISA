@@ -10,7 +10,6 @@ import com.bookingapplication.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bookingapplication.dto.CottageDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -26,11 +25,16 @@ public class CottageService {
 	@Autowired
 	private CottageImageService cottageImageService;
 
-	public Cottage findCottage(String name) {
+	public Cottage findCottageByName(String name) {
 		return cottageReposiotry.findByNameIgnoringCase(name);
 	}
+	public Cottage findCottageById(long id) {
+		return cottageReposiotry.findById(id);
+	}
 
-	public Boolean cottageExists(String name) { return cottageReposiotry.existsByName(name); }
+	public Boolean cottageExistsByName(String name) { return cottageReposiotry.existsByName(name); }
+
+	public Boolean cottageExistsById(long id) { return cottageReposiotry.existsById(id); }
 
 	public Cottage editCottage(EditCottageRequestDTO cottageDTO) {
 		Cottage cottage = cottageReposiotry.findById(cottageDTO.getId());
