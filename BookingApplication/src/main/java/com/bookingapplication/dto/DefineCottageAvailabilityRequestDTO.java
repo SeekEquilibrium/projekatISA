@@ -12,7 +12,8 @@ public class DefineCottageAvailabilityRequestDTO {
     private long cottageId;
     @NotNull
     private double pricePerDay;
-
+    @NotNull
+    private boolean hasAction;
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE_TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -22,11 +23,12 @@ public class DefineCottageAvailabilityRequestDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
-    public DefineCottageAvailabilityRequestDTO(long cottageId, double pricePerDay, LocalDate startDate, LocalDate endDate) {
+    public DefineCottageAvailabilityRequestDTO(long cottageId, double pricePerDay, boolean hasAction, LocalDate startDate, LocalDate endDate) {
         this.cottageId = cottageId;
         this.pricePerDay = pricePerDay;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.hasAction = hasAction;
     }
 
     public DefineCottageAvailabilityRequestDTO() {
@@ -62,5 +64,13 @@ public class DefineCottageAvailabilityRequestDTO {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public boolean isHasAction() {
+        return hasAction;
+    }
+
+    public void setHasAction(boolean hasAction) {
+        this.hasAction = hasAction;
     }
 }

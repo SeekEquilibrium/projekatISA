@@ -9,4 +9,5 @@ import java.time.LocalDate;
 @Repository
 public interface AppointmentCottageRepository extends JpaRepository<AppointmentCottage, Long> {
     public Boolean existsByDate(LocalDate date);
+    public AppointmentCottage findByDate(LocalDate date);
 }

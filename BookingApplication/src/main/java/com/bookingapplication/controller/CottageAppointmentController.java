@@ -38,8 +38,7 @@ public class CottageAppointmentController {
 
     @PostMapping("/defineAvailability")
     @PreAuthorize("hasAuthority('COTTAGE_OWNER')")
-    public ResponseEntity<DefineCottageAvailabilityResponseDTO> defineAvailability(
-            @Valid @RequestBody DefineCottageAvailabilityRequestDTO request){
+    public ResponseEntity<DefineCottageAvailabilityResponseDTO> defineAvailabilityOrActions(@Valid @RequestBody DefineCottageAvailabilityRequestDTO request){
         UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         CottageOwner cottageOwner = cottageOwnerService.findCottageOwner(userApp.getId());
         //Da li vikendica postoji
@@ -56,8 +55,15 @@ public class CottageAppointmentController {
                 !dateValidation.isFirstBeforeSecondDate(request.getStartDate(), request.getEndDate())){
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-
-        DefineCottageAvailabilityResponseDTO response = appointmentCottageService.DefineCottageAvailability(request, cottage);
+        DefineCottageAvailabilityResponseDTO response = null;
+        //Da li je definisanje akcija ili slobodnih termina
+        if(request.isHasAction()){
+            response = appointmentCottageService.DefineCottageAction(request, cottage);
+        }else{
+            response = appointmentCottageService.DefineCottageAvailability(request, cottage);
+        }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+
 }

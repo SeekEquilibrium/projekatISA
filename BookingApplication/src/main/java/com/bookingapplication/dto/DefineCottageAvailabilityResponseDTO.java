@@ -8,16 +8,18 @@ import java.time.LocalDateTime;
 public class DefineCottageAvailabilityResponseDTO {
     private long cottageId;
     private double pricePerDay;
+    private boolean hasAction;
     @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDate startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDate endDate;
 
-    public DefineCottageAvailabilityResponseDTO(long cottageId, double pricePerDay, LocalDate startDate, LocalDate endDate) {
+    public DefineCottageAvailabilityResponseDTO(long cottageId, double pricePerDay, boolean hasAction, LocalDate startDate, LocalDate endDate) {
         this.cottageId = cottageId;
         this.pricePerDay = pricePerDay;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.hasAction = hasAction;
     }
 
     public DefineCottageAvailabilityResponseDTO() {
@@ -54,4 +56,13 @@ public class DefineCottageAvailabilityResponseDTO {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
+
+    public boolean isHasAction() {
+        return hasAction;
+    }
+
+    public void setHasAction(boolean hasAction) {
+        this.hasAction = hasAction;
+    }
+
 }
