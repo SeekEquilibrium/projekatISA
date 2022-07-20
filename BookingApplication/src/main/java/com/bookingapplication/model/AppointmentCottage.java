@@ -13,6 +13,9 @@ public class AppointmentCottage extends Appointment {
     @ManyToOne(fetch = FetchType.EAGER)
     private Cottage cottage;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Client client;
+
     @Column
     private Double pricePerDay;
 
@@ -58,5 +61,13 @@ public class AppointmentCottage extends Appointment {
 
     public void setType(AppointmentType type) {
         this.type = type;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }
