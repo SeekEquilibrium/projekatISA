@@ -1,9 +1,10 @@
 package com.bookingapplication.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class DefineCottageAvailabilityRequestDTO {
@@ -11,12 +12,17 @@ public class DefineCottageAvailabilityRequestDTO {
     private long cottageId;
     @NotNull
     private double pricePerDay;
-    @NotNull
-    private LocalDateTime startDate;
-    @NotNull
-    private LocalDateTime endDate;
 
-    public DefineCottageAvailabilityRequestDTO(long cottageId, double pricePerDay, LocalDateTime startDate, LocalDateTime endDate) {
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate startDate;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
+
+    public DefineCottageAvailabilityRequestDTO(long cottageId, double pricePerDay, LocalDate startDate, LocalDate endDate) {
         this.cottageId = cottageId;
         this.pricePerDay = pricePerDay;
         this.startDate = startDate;
@@ -42,19 +48,19 @@ public class DefineCottageAvailabilityRequestDTO {
         this.pricePerDay = pricePerDay;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 }

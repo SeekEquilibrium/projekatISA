@@ -2,16 +2,15 @@ package com.bookingapplication.validation;
 
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Component
 public class DateValidation {
-    public boolean isDateBeforeToday (LocalDateTime date){
-        //ako je danasnji dan, vracace true, jer je date before now
-        return date.isBefore(LocalDateTime.now());
+    public boolean isDateBeforeToday (LocalDate date){
+        return date.isBefore(LocalDate.now());
     }
 
-    public boolean isFirstBeforeSecondDate (LocalDateTime first, LocalDateTime second){
+    public boolean isFirstBeforeSecondDate (LocalDate first, LocalDate second){
         return first.isBefore(second);
     }
 }

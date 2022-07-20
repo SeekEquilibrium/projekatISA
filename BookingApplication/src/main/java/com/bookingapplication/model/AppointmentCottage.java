@@ -4,6 +4,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -28,7 +29,7 @@ public class AppointmentCottage extends Appointment {
         this.type = type;
     }
 
-    public AppointmentCottage(LocalDateTime date, boolean hasAction, Cottage cottage, Double pricePerDay, AppointmentType type) {
+    public AppointmentCottage(LocalDate date, boolean hasAction, Cottage cottage, Double pricePerDay, AppointmentType type) {
         super(date, hasAction);
         this.cottage = cottage;
         this.pricePerDay = pricePerDay;

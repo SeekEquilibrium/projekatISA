@@ -8,6 +8,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @MappedSuperclass   //u bazi ce biti tabele samo superklase
@@ -23,7 +24,7 @@ public class Appointment {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    private LocalDateTime date;
+    private LocalDate date;
 
     @Column
     private boolean hasAction;
@@ -31,7 +32,7 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(LocalDateTime date, boolean hasAction) {
+    public Appointment(LocalDate date, boolean hasAction) {
         this.date = date;
         this.hasAction = hasAction;
     }
@@ -44,11 +45,11 @@ public class Appointment {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

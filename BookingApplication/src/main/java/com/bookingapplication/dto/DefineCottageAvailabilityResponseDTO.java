@@ -2,17 +2,18 @@ package com.bookingapplication.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class DefineCottageAvailabilityResponseDTO {
     private long cottageId;
     private double pricePerDay;
     @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime startDate;
+    private LocalDate startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
-    public DefineCottageAvailabilityResponseDTO(long cottageId, double pricePerDay, LocalDateTime startDate, LocalDateTime endDate) {
+    public DefineCottageAvailabilityResponseDTO(long cottageId, double pricePerDay, LocalDate startDate, LocalDate endDate) {
         this.cottageId = cottageId;
         this.pricePerDay = pricePerDay;
         this.startDate = startDate;
@@ -38,19 +39,19 @@ public class DefineCottageAvailabilityResponseDTO {
         this.pricePerDay = pricePerDay;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 }

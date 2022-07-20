@@ -46,8 +46,8 @@ public class CottageAppointmentController {
         if(!cottageService.cottageExistsById(request.getCottageId())){
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
+        //Da li vikendica pripada gazdi koji salje zahtev
         Cottage cottage = cottageService.findCottageById(request.getCottageId());
-        //Da li vikendica pripada tom gazdi
         if(cottage.getCottageOwner().getId() != cottageOwner.getId()){
             return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
         }
