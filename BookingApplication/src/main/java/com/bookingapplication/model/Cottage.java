@@ -49,6 +49,10 @@ public class Cottage {
 			(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
 	public Set<AppointmentCottage> availableAppointmentsCottages = new HashSet<AppointmentCottage>();
 
+	@OneToMany
+			(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	public Set<CottageReport> cottageReports = new HashSet<CottageReport>();
+
 	public Cottage() {}
 
 	public Cottage(long id, String name, String address, String description, Integer roomNumber, 

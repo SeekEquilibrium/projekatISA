@@ -47,14 +47,16 @@ public class AppointmentCottageService {
                 AppointmentCottage appointment = findByDate(date);
                 if(!appointment.isHasAction()){
                     appointment.setHasAction(true);
+                    appointment.setPricePerDay(request.getPricePerDay());
                     save(appointment);
                 }
             }
         }
         return new DefineCottageAvailabilityResponseDTO(cottage.getId(), request.getPricePerDay(), request.isHasAction(), request.getStartDate(), request.getEndDate());
     }
-
+    //Vlasnik vikendice kreira rezervaciju za klijenta
     public CottageOwnerReservationResponseDTO CreateReservationForClient (CottageOwnerReservationRequestDTO request){
+        //Ako pokusa da rezervise u terminima kada nije definisana dostupnos vikendice
         if(!existsByDate(request.getStartDate()) || !existsByDate(request.getEndDate())){
             return null;
         }
