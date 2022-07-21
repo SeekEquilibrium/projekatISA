@@ -40,7 +40,7 @@ public class CottageController {
 
 	@GetMapping("/{name}")
 	public ResponseEntity<CottageInfoDTO> getCottage(@PathVariable String name){
-		Cottage cottage = cottageService.findCottageByName(name);
+		Cottage cottage = cottageService.findByName(name);
 		if(cottage == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -53,8 +53,8 @@ public class CottageController {
 	@PreAuthorize("hasAuthority('COTTAGE_OWNER')")
 	public ResponseEntity<EditCottageResponseDTO> updateCottage(@RequestBody EditCottageRequestDTO requestDTO){
 		UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-		CottageOwner cottageOwner = cottageOwnerService.findCottageOwner(userApp.getId());
-		Cottage existingCottage = cottageService.findCottageByName(requestDTO.getName());
+		CottageOwner cottageOwner = cottageOwnerService.findById(userApp.getId());
+		Cottage existingCottage = cottageService.findByName(requestDTO.getName());
 		if(!existingCottage.getCottageOwner().getUsername().equals(cottageOwner.getUsername())){
 			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
 		}
@@ -67,7 +67,7 @@ public class CottageController {
 	@PostMapping("/register")
 	@PreAuthorize("hasAuthority('COTTAGE_OWNER')")
 	public ResponseEntity<RegisterCottageResponseDTO> registerCottage(@Valid @ModelAttribute RegisterCottageRequestDTO requestDTO) throws IOException {
-		if(cottageService.cottageExistsByName(requestDTO.getName())){
+		if(cottageService.existsByName(requestDTO.getName())){
 			return new ResponseEntity<>(null, HttpStatus.CONFLICT);
 		}
 
@@ -79,7 +79,7 @@ public class CottageController {
 			}
 		}
 		UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-		CottageOwner cottageOwner = cottageOwnerService.findCottageOwner(userApp.getId());
+		CottageOwner cottageOwner = cottageOwnerService.findById(userApp.getId());
 		Cottage cottage = cottageService.registerCottage(requestDTO, cottageOwner);
 		ArrayList<String> images = cottageImageService.findImagePathsByCottageId(cottage.getId());
 		ImagesDTO imagesDto = new ImagesDTO(images);

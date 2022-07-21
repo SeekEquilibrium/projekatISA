@@ -25,16 +25,15 @@ public class CottageService {
 	@Autowired
 	private CottageImageService cottageImageService;
 
-	public Cottage findCottageByName(String name) {
-		return cottageReposiotry.findByNameIgnoringCase(name);
-	}
-	public Cottage findCottageById(long id) {
+	public Cottage findByName(String name) { return cottageReposiotry.findByNameIgnoringCase(name);	}
+
+	public Cottage findById(long id) {
 		return cottageReposiotry.findById(id);
 	}
 
-	public Boolean cottageExistsByName(String name) { return cottageReposiotry.existsByName(name); }
+	public Boolean existsByName(String name) { return cottageReposiotry.existsByName(name); }
 
-	public Boolean cottageExistsById(long id) { return cottageReposiotry.existsById(id); }
+	public Boolean existsById(long id) { return cottageReposiotry.existsById(id); }
 
 	public Cottage editCottage(EditCottageRequestDTO cottageDTO) {
 		Cottage cottage = cottageReposiotry.findById(cottageDTO.getId());
@@ -69,5 +68,10 @@ public class CottageService {
 		cottage.setCottageImages(cottageImages);
 		cottageReposiotry.save(cottage);
 		return cottage;
+	}
+
+	public boolean ownerOwnsCottage(long cottageOwnerId, long cottageId){
+		//odraditi ovaj deo preko query
+		return findById(cottageId).getCottageOwner().equals(cottageOwnerId);
 	}
 }

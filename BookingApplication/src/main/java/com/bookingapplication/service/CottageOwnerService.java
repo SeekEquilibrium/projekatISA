@@ -10,7 +10,7 @@ public class CottageOwnerService {
     @Autowired
     private CottageOwnerRepository cottageOwnerRepository;
 
-    public CottageOwner findCottageOwner(long Id){
+    public CottageOwner findById(long Id){
         return cottageOwnerRepository.findById(Id);
     }
 }

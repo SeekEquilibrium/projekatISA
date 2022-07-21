@@ -11,7 +11,6 @@ public class RoleService {
     private RoleRepository roleRepository;
 
     public Role findRole(String name){
-        Role role =roleRepository.findByName(name);
-        return role;
+        return roleRepository.findByName(name);
     }
 }
