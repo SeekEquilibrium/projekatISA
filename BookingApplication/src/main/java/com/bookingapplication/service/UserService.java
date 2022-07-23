@@ -53,6 +53,8 @@ public class UserService implements UserDetailsService {
 
 	public UserApp FindUserByUsername(String username) { return userRepository.findByUsername(username); }
 
+	public UserApp FindById(long id) { return userRepository.findById(id); }
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return userRepository.findByUsername(username);

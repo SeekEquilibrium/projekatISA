@@ -3,10 +3,7 @@ package com.bookingapplication.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,7 +13,16 @@ public class CottageOwner extends UserApp {
 	@OneToMany
 	(mappedBy = "cottageOwner", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
 	public Set<Cottage> cottages = new HashSet<Cottage>();
-	
+
+	@OneToMany
+	(mappedBy = "cottageOwner", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	public Set<CottageReport> reports = new HashSet<>();
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	private UserApp owner;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Client client;
+
 	public CottageOwner() {
 		super();
 	}

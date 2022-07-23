@@ -1,5 +1,6 @@
 package com.bookingapplication.model;
 
+
 import javax.persistence.*;
 
 @MappedSuperclass
@@ -9,38 +10,16 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "reportSeqGen")
     private long id;
     @Column
-    private UserApp cottageOwner;
-    @Column
-    private Client client;
-    @Column
     private String description;
     @Column
     private Boolean reportClient;
 
-    public Report(UserApp cottageOwner, Client client, String description, Boolean reportClient) {
-        this.cottageOwner = cottageOwner;
-        this.client = client;
+    public Report(String description, Boolean reportClient) {
         this.description = description;
         this.reportClient = reportClient;
     }
 
     public Report() {
-    }
-
-    public UserApp getCottageOwner() {
-        return cottageOwner;
-    }
-
-    public void setCottageOwner(UserApp cottageOwner) {
-        this.cottageOwner = cottageOwner;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 
     public String getDescription() {
