@@ -15,5 +15,5 @@ public class Client extends UserApp {
 
     @OneToMany
     (mappedBy = "client", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
-    public Set<CottageReport> reports = new HashSet<>();
+    public Set<Report> reports = new HashSet<>();
 }

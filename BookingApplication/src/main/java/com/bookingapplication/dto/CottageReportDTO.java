@@ -12,12 +12,15 @@ public class CottageReportDTO {
     private String description;
     @NotNull
     private boolean reportClient;
+    @NotNull
+    private boolean didNotShowUp;
 
-    public CottageReportDTO(long cottageId, long clientId, String description, boolean reportClient) {
+    public CottageReportDTO(long cottageId, long clientId, String description, boolean reportClient, boolean didNotShowUp) {
         this.cottageId = cottageId;
         this.clientId = clientId;
         this.description = description;
         this.reportClient = reportClient;
+        this.didNotShowUp = didNotShowUp;
     }
 
     public long getCottageId() {
@@ -50,5 +53,13 @@ public class CottageReportDTO {
 
     public void setReportClient(boolean reportClient) {
         this.reportClient = reportClient;
+    }
+
+    public boolean isDidNotShowUp() {
+        return didNotShowUp;
+    }
+
+    public void setDidNotShowUp(boolean didNotShowUp) {
+        this.didNotShowUp = didNotShowUp;
     }
 }

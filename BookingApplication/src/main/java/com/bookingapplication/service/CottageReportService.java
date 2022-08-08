@@ -7,6 +7,8 @@ import com.bookingapplication.repository.CottageReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class CottageReportService {
     @Autowired
@@ -25,7 +27,7 @@ public class CottageReportService {
         }
         Cottage cottage = cottageService.findById(report.getCottageId());
         CottageReport cottageReport = new CottageReport(cottageOwnerService.findById(cottage.getCottageOwner().getId()), clientService.findById(report.getClientId()),
-                report.getDescription(), report.isReportClient(), cottage);
+                report.getDescription(), LocalDateTime.now(), report.isReportClient(), report.isDidNotShowUp(), cottage);
         CottageReport saveCottage = save(cottageReport);
         return saveCottage;
     }

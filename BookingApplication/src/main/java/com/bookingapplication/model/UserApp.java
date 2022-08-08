@@ -42,6 +42,9 @@ public class UserApp implements UserDetails {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Role role;
 
+	@OneToMany
+			(mappedBy = "owner", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	public Set<Report> reports = new HashSet<>();
 	
 	public UserApp(long id, String username, String name, String surname, String email, String password, String phoneNumber,
 				   Role role) {

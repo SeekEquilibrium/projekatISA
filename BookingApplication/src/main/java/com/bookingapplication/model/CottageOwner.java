@@ -14,10 +14,6 @@ public class CottageOwner extends UserApp {
 	(mappedBy = "cottageOwner", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
 	public Set<Cottage> cottages = new HashSet<Cottage>();
 
-	@OneToMany
-	(mappedBy = "cottageOwner", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
-	public Set<CottageReport> reports = new HashSet<>();
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	private UserApp owner;
 	@ManyToOne(fetch = FetchType.EAGER)
