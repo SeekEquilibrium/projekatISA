@@ -38,6 +38,10 @@ public class AuthenticationController {
         if(userService.UserExists(request.getUsername())){
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }
+        //Obican korisnik ne treba da pise obrazlozenje za registraciju, dok ostali moraju
+        if(!request.getRole().equals("CLIENT") && (request.getReasoning().equals("") || request.getReasoning()==null)){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
         UserApp user = userService.register(request);
         if(user==null){
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);

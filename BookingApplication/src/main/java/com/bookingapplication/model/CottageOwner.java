@@ -14,17 +14,25 @@ public class CottageOwner extends UserApp {
 	(mappedBy = "cottageOwner", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
 	public Set<Cottage> cottages = new HashSet<Cottage>();
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	private UserApp owner;
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Client client;
+	//Obrazlozenje za registraciju
+	@Column
+	private String reasoning;
 
 	public CottageOwner() {
 		super();
 	}
 	
-	public CottageOwner(UserApp userApp) {
+	public CottageOwner(UserApp userApp, String reasoning) {
 		super(userApp.getUsername(), userApp.getName(), userApp.getSurname(), userApp.getEmail(), userApp.getPassword(),
 				userApp.getPhoneNumber(), userApp.getRole());
+		this.reasoning = reasoning;
+	}
+
+	public String getReasoning() {
+		return reasoning;
+	}
+
+	public void setReasoning(String reasoning) {
+		this.reasoning = reasoning;
 	}
 }

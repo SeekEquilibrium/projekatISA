@@ -1,5 +1,10 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {
+    FormBuilder,
+    FormGroup,
+    ValidatorFn,
+    Validators,
+} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService, UserService } from "../../service";
 import { Subject } from "rxjs/Subject";
@@ -56,10 +61,6 @@ export class SignUpComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this._snackBar.open("Username is already taken.", "Close", {
-            duration: 5000,
-            panelClass: "notif-success",
-        });
         this.route.params
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe((params: DisplayMessage) => {
@@ -73,7 +74,7 @@ export class SignUpComponent implements OnInit {
                 Validators.compose([
                     Validators.required,
                     Validators.minLength(3),
-                    Validators.maxLength(20),
+                    Validators.maxLength(32),
                 ]),
             ],
             password: [
@@ -123,11 +124,21 @@ export class SignUpComponent implements OnInit {
                 ]),
             ],
             role: ["CLIENT"],
+            reasoning: [""],
         });
     }
 
     onChange() {
-        console.log(this.form.controls.role.value);
+        if (this.form.controls.role.value != "CLIENT") {
+            this.form.controls["reasoning"].setValidators([
+                Validators.required,
+                Validators.minLength(10),
+            ]);
+            this.form.controls["reasoning"].updateValueAndValidity();
+        } else {
+            this.form.controls.reasoning.clearValidators();
+            this.form.controls["reasoning"].updateValueAndValidity();
+        }
     }
 
     ngOnDestroy() {

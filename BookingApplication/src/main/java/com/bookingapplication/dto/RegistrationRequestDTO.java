@@ -19,6 +19,8 @@ public class RegistrationRequestDTO {
     private String phoneNumber;
     @NotBlank
     private String role;
+    //Moze biti prazno u slucaj da je u pitanju CLIENT
+    private String reasoning;
 
     public String getRole() {
         return role;
@@ -74,5 +76,13 @@ public class RegistrationRequestDTO {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getReasoning() {
+        return reasoning;
+    }
+
+    public void setReasoning(String reasoning) {
+        this.reasoning = reasoning;
     }
 }
