@@ -39,6 +39,9 @@ public class AuthenticationController {
             return new ResponseEntity<>(null, HttpStatus.CONFLICT);
         }
         UserApp user = userService.register(request);
+        if(user==null){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
