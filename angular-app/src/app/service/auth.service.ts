@@ -41,7 +41,7 @@ export class AuthService {
             );
     }
 
-    signup(user) {
+    signup(user): Observable<any> {
         delete user.repeatPassword;
         const signupHeaders = new HttpHeaders({
             Accept: "application/json",

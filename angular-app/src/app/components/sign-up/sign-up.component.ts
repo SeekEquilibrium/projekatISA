@@ -1,10 +1,14 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService, UserService } from "../service";
+import { AuthService, UserService } from "../../service";
 import { Subject } from "rxjs/Subject";
 import { takeUntil } from "rxjs/operators";
-
+import {
+    MatSnackBar,
+    MatSnackBarHorizontalPosition,
+    MatSnackBarVerticalPosition,
+} from "@angular/material/snack-bar";
 interface DisplayMessage {
     msgType: string;
     msgBody: string;
@@ -47,10 +51,15 @@ export class SignUpComponent implements OnInit {
         private authService: AuthService,
         private router: Router,
         private route: ActivatedRoute,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private _snackBar: MatSnackBar
     ) {}
 
     ngOnInit() {
+        this._snackBar.open("Username is already taken.", "Close", {
+            duration: 5000,
+            panelClass: "notif-success",
+        });
         this.route.params
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe((params: DisplayMessage) => {
@@ -155,10 +164,12 @@ export class SignUpComponent implements OnInit {
             (error) => {
                 this.submitted = false;
                 console.log("Sign up error");
-                this.notification = {
-                    msgType: "error",
-                    msgBody: error["error"].message,
-                };
+                if (error.status == 409) {
+                    this._snackBar.open("Username is already taken.", "Close", {
+                        duration: 5000,
+                        panelClass: "notif-success",
+                    });
+                }
             }
         );
     }
