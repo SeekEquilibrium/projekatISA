@@ -1,0 +1,92 @@
+<mat-card elevation="5" fxFlex class="content">
+    <mat-card-title>
+        <h2>{{ title }}</h2>
+    </mat-card-title>
+
+    <mat-card-content>
+        <p *ngIf="notification" [class]="notification.msgType">
+            {{ notification.msgBody }}
+        </p>
+        <form
+            class="form"
+            (ngSubmit)="onSubmit()"
+            *ngIf="!submitted"
+            [formGroup]="form"
+        >
+            <mat-form-field>
+                <mat-label>First Name: </mat-label>
+                <input formControlName="name" matInput />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Last Name: </mat-label>
+                <input formControlName="surname" matInput />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Email: </mat-label>
+                <input formControlName="email" matInput />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Username: </mat-label>
+                <input formControlName="username" matInput />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Password: </mat-label>
+                <input
+                    formControlName="password"
+                    matInput
+                    required
+                    type="password"
+                />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Repeat Password: </mat-label>
+                <input
+                    formControlName="repeatPassword"
+                    matInput
+                    required
+                    type="password"
+                />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Phone Number: </mat-label>
+                <input type="number" formControlName="phoneNumber" matInput />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>User Type:</mat-label>
+                <mat-select formControlName="role" (ngModelChange)="onChange()">
+                    <mat-option
+                        *ngFor="let type of typess | keyvalue"
+                        [value]="type.key"
+                    >
+                        {{ type.value }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field
+                *ngIf="form.controls.role.value != 'CLIENT'"
+                class="example-full-width"
+            >
+                <mat-label>Reason for registration</mat-label>
+                <textarea
+                    formControlName="reasoning"
+                    class="reasoning"
+                    matInput
+                    placeholder="Ex. I have a cottage I'd like to rent..."
+                ></textarea>
+            </mat-form-field>
+            <button
+                [disabled]="!form.valid || !passwordsMatch()"
+                color="primary"
+                mat-raised-button
+                type="submit"
+            >
+                Sign up
+            </button>
+            <br />
+            <button mat-stroked-button color="warn" routerLink="/">
+                Go Back
+            </button>
+        </form>
+        <mat-spinner *ngIf="submitted" mode="indeterminate"></mat-spinner>
+    </mat-card-content>
+</mat-card>

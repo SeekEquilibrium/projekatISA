@@ -4,36 +4,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 
 @Entity
 public class CottageReport extends Report {
     @ManyToOne(fetch = FetchType.EAGER)
     private Cottage cottage;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private CottageOwner cottageOwner;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Client client;
 
-    public CottageReport(CottageOwner cottageOwner, Client client, String description, Boolean reportClient, Cottage cottage) {
-        super(description, reportClient);
-        this.client = client;
-        this.cottageOwner = cottageOwner;
+    public CottageReport(UserApp owner, Client client, String description, LocalDateTime date, Boolean reportClient , Boolean didNotShowUp, Cottage cottage) {
+        super(description, date, reportClient, didNotShowUp, client, owner);
         this.cottage = cottage;
-    }
-    public CottageOwner getOwner() {
-        return cottageOwner;
-    }
-
-    public void setOwner(CottageOwner cottageOwner) {
-        this.cottageOwner = cottageOwner;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 
     public CottageReport(Cottage cottage) {

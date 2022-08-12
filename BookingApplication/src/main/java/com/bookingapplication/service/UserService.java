@@ -35,8 +35,9 @@ public class UserService implements UserDetailsService {
 
 		switch(request.getRole()){
 			case "COTTAGE_OWNER": {
+				//potrebno implementirati odobrenje za aktivaciju od strane admina (za sve osim za obicnog klijenta)
 				user.setRole(roleService.findRole(request.getRole()));
-				return save(new CottageOwner(user));
+				return save(new CottageOwner(user, request.getReasoning()));
 			}
 			default:
 				return null;
