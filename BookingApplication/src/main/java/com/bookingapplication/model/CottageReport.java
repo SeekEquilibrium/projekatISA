@@ -20,6 +20,10 @@ public class CottageReport extends Report {
         this.cottage = cottage;
     }
 
+    public CottageReport() {
+
+    }
+
     public Cottage getCottage() {
         return cottage;
     }

@@ -6,11 +6,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-public class CottageOwnerReservationResponseDTO {
+public class CottageClientReservationRequestDTO {
     @NotNull
     private long cottageId;
-    @NotNull
-    private long clientId;
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE_TIME)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -20,14 +18,13 @@ public class CottageOwnerReservationResponseDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 
-    public CottageOwnerReservationResponseDTO(long cottageId, long clientId, LocalDate startDate, LocalDate endDate) {
+    public CottageClientReservationRequestDTO(long cottageId, LocalDate startDate, LocalDate endDate) {
         this.cottageId = cottageId;
-        this.clientId = clientId;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public CottageOwnerReservationResponseDTO() {
+    public CottageClientReservationRequestDTO() {
     }
 
     public long getCottageId() {
@@ -36,14 +33,6 @@ public class CottageOwnerReservationResponseDTO {
 
     public void setCottageId(long cottageId) {
         this.cottageId = cottageId;
-    }
-
-    public long getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(long clientId) {
-        this.clientId = clientId;
     }
 
     public LocalDate getStartDate() {

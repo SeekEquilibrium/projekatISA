@@ -1,6 +1,7 @@
 package com.bookingapplication.service;
 
 import com.bookingapplication.dto.RegistrationRequestDTO;
+import com.bookingapplication.model.Client;
 import com.bookingapplication.model.CottageOwner;
 import com.bookingapplication.model.Role;
 import com.bookingapplication.model.UserApp;
@@ -38,6 +39,10 @@ public class UserService implements UserDetailsService {
 				//potrebno implementirati odobrenje za aktivaciju od strane admina (za sve osim za obicnog klijenta)
 				user.setRole(roleService.findRole(request.getRole()));
 				return save(new CottageOwner(user, request.getReasoning()));
+			}
+			case "CLIENT": {
+				user.setRole(roleService.findRole(request.getRole()));
+				return save(new Client(user));
 			}
 			default:
 				return null;

@@ -1,9 +1,6 @@
 package com.bookingapplication.service;
 
-import com.bookingapplication.dto.CottageOwnerReservationRequestDTO;
-import com.bookingapplication.dto.CottageOwnerReservationResponseDTO;
-import com.bookingapplication.dto.DefineCottageAvailabilityRequestDTO;
-import com.bookingapplication.dto.DefineCottageAvailabilityResponseDTO;
+import com.bookingapplication.dto.*;
 import com.bookingapplication.model.AppointmentCottage;
 import com.bookingapplication.model.AppointmentType;
 import com.bookingapplication.model.Client;
@@ -55,14 +52,14 @@ public class AppointmentCottageService {
         return new DefineCottageAvailabilityResponseDTO(cottage.getId(), request.getPricePerDay(), request.isHasAction(), request.getStartDate(), request.getEndDate());
     }
     //Vlasnik vikendice kreira rezervaciju za klijenta
-    public CottageOwnerReservationResponseDTO CreateReservationForClient (CottageOwnerReservationRequestDTO request){
+    public CottageReservationResponseDTO CreateReservationForClient (long clientId ,long cottageId,LocalDate startTime , LocalDate endTime){
         //Ako pokusa da rezervise u terminima kada nije definisana dostupnos vikendice
-        if(!existsByDate(request.getStartDate()) || !existsByDate(request.getEndDate())){
+        if(!existsByDate(startTime)|| !existsByDate(endTime)){
             return null;
         }
-        Cottage cottage = cottageService.findById(request.getCottageId());
-        Client client = clientService.findById(request.getClientId());
-        for(LocalDate date = request.getStartDate(); date.isBefore(request.getEndDate().plusDays(1)); date = date.plusDays(1)){
+        Cottage cottage = cottageService.findById(cottageId);
+        Client client = clientService.findById(clientId);
+        for(LocalDate date = startTime; date.isBefore(endTime.plusDays(1)); date = date.plusDays(1)){
             AppointmentCottage reservation = findByDate(date);
             if(reservation.getType() != AppointmentType.AVAILABLE){
                 return null;
@@ -71,7 +68,7 @@ public class AppointmentCottageService {
             reservation.setType(AppointmentType.RESERVED);
             save(reservation);
         }
-        return new CottageOwnerReservationResponseDTO(cottage.getId(), client.getId(), request.getStartDate(), request.getEndDate());
+        return new CottageReservationResponseDTO(cottageId, clientId, startTime, endTime);
     }
 
     public AppointmentCottage save(AppointmentCottage appointmentCottage){

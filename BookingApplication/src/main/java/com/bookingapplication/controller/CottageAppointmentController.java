@@ -1,9 +1,7 @@
 package com.bookingapplication.controller;
 
-import com.bookingapplication.dto.CottageOwnerReservationRequestDTO;
-import com.bookingapplication.dto.CottageOwnerReservationResponseDTO;
-import com.bookingapplication.dto.DefineCottageAvailabilityRequestDTO;
-import com.bookingapplication.dto.DefineCottageAvailabilityResponseDTO;
+import com.bookingapplication.dto.*;
+import com.bookingapplication.model.Client;
 import com.bookingapplication.model.Cottage;
 import com.bookingapplication.model.CottageOwner;
 import com.bookingapplication.model.UserApp;
@@ -67,7 +65,7 @@ public class CottageAppointmentController {
 
     @PostMapping("/ownerCreateReservation")
     @PreAuthorize("hasAuthority('COTTAGE_OWNER')")
-    public ResponseEntity<CottageOwnerReservationResponseDTO> cottageOwnerReservationRequest (@Valid @RequestBody CottageOwnerReservationRequestDTO request) {
+    public ResponseEntity<CottageReservationResponseDTO> cottageOwnerReservationRequest (@Valid @RequestBody CottageOwnerReservationRequestDTO request) {
         UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         CottageOwner cottageOwner = cottageOwnerService.findById(userApp.getId());
         //Da li vikendica postoji
@@ -87,7 +85,31 @@ public class CottageAppointmentController {
                 !dateValidation.isFirstBeforeSecondDate(request.getStartDate(), request.getEndDate())){
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-        CottageOwnerReservationResponseDTO response = appointmentCottageService.CreateReservationForClient(request);
+        CottageReservationResponseDTO response = appointmentCottageService.CreateReservationForClient(
+                request.getClientId(), request.getCottageId(),request.getStartDate(),request.getEndDate());
+        if(response == null) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/clientCreateReservation")
+    @PreAuthorize("hasAuthority('CLIENT')")
+    public ResponseEntity<CottageReservationResponseDTO> clientReservationRequest (@Valid @RequestBody CottageClientReservationRequestDTO request) {
+        UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        //Da li vikendica postoji
+        if(!cottageService.existsById(request.getCottageId())){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        //Da li je  datum u buducnosti, da li je pocetak pre kraja
+        if(dateValidation.isDateBeforeToday(request.getStartDate()) ||
+                !dateValidation.isFirstBeforeSecondDate(request.getStartDate(), request.getEndDate())){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        CottageReservationResponseDTO response = appointmentCottageService.CreateReservationForClient(
+                userApp.getId(),request.getCottageId(),request.getStartDate(),request.getEndDate()
+        );
         if(response == null) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }

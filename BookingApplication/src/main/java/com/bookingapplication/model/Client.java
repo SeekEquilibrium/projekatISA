@@ -16,4 +16,16 @@ public class Client extends UserApp {
     @OneToMany
     (mappedBy = "client", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
     public Set<Report> reports = new HashSet<>();
+
+    public Client(String username, String name, String surname, String email, String password, String phoneNumber, Role role) {
+        super(username, name, surname, email, password, phoneNumber, role);
+    }
+    public Client(UserApp userApp) {
+        super(userApp.getUsername(), userApp.getName(), userApp.getSurname(), userApp.getEmail(), userApp.getPassword(),
+                userApp.getPhoneNumber(), userApp.getRole());
+    }
+
+    public Client() {
+
+    }
 }

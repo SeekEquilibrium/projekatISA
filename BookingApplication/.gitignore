@@ -4,7 +4,8 @@ target/
 !**/src/main/**
 !**/src/test/**
 
-/BookingApplication/src/main/resources/application.properties
+.properties
+*.properties
 
 ### STS ###
 .apt_generated
