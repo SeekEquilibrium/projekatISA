@@ -2,44 +2,82 @@
     <div class="cottage-card">
         <mat-card>
             <mat-card-header>
-                <mat-card-title>{{cottageProfile.name}}</mat-card-title>
-                <mat-card-subtitle>{{cottageProfile.address}}</mat-card-subtitle>
-                <mat-card-actions id="edit-button">
-                    <a mat-stroked-button href="/cottage/{{cottageProfile.name}}/edit" mat-flat-button color="primary">Edit</a>
+                <mat-card-title>{{ cottageProfile.name }}</mat-card-title>
+                <mat-card-subtitle>{{
+                    cottageProfile.address
+                }}</mat-card-subtitle>
+                <mat-card-actions *ngIf="isMyCottage()" id="edit-button">
+                    <button
+                        (click)="openAvailabilityDialog()"
+                        mat-stroked-button
+                        mat-flat-button
+                        color="primary"
+                    >
+                        Define Availability
+                    </button>
+                    <a
+                        mat-stroked-button
+                        href="/cottage/{{ cottageProfile.name }}/edit"
+                        mat-flat-button
+                        color="primary"
+                        >Edit</a
+                    >
                 </mat-card-actions>
             </mat-card-header>
             <mat-card-content>
-                <br>
+                <br />
                 <ngb-carousel>
-                    <ng-template ngbSlide *ngFor="let path of cottageProfile.cottageImages.imagePaths; let i = index">
-                      <div class="picsum-img-wrapper">
-                        <img class="carousel-image" src="{{imagePath}}{{cottageProfile.cottageImages.imagePaths[i]}}" alt="Random first slide">
-                      </div>
-                      
+                    <ng-template
+                        ngbSlide
+                        *ngFor="
+                            let path of cottageProfile.cottageImages.imagePaths;
+                            let i = index
+                        "
+                    >
+                        <div class="picsum-img-wrapper">
+                            <img
+                                class="carousel-image"
+                                src="assets/images/cottages/{{
+                                    cottageProfile.cottageImages.imagePaths[i]
+                                }}"
+                                alt="Random first slide"
+                            />
+                        </div>
                     </ng-template>
                 </ngb-carousel>
-                <br>
-                {{cottageProfile.description}}
-                <br>
-                <br>
-                <b>Rules: </b>{{cottageProfile.rules}} <br>
-                <b>Rooms: </b>{{cottageProfile.roomNumber}} <br>
-                <b>Beds: </b>{{cottageProfile.bedNumber}} <br>
-                <b>Owner: </b><a href="https://www.google.com/" target="_blank">{{cottageOwner.name}} {{cottageOwner.surname}}</a>
-                <br>
-                <br>
+                <br />
+                {{ cottageProfile.description }}
+                <br />
+                <br />
+                <b>Rules: </b>{{ cottageProfile.rules }} <br />
+                <b>Rooms: </b>{{ cottageProfile.roomNumber }} <br />
+                <b>Beds: </b>{{ cottageProfile.bedNumber }} <br />
+                <b>Owner: </b
+                ><a href="https://www.google.com/" target="_blank"
+                    >{{ cottageOwner.name }} {{ cottageOwner.surname }}</a
+                >
+                <br />
+                <br />
                 <mat-accordion>
-                    <mat-expansion-panel hideToggle class="mat-elevation-z0" (opened)="panelOpenState = true"
-                                                                             (closed)="panelOpenState = false">
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            {{panelOpenState ? 'Hide map' : 'Show on a map'}}
-                        </mat-panel-title>
-                      </mat-expansion-panel-header>
-                      <h1>Map goes here</h1>
+                    <mat-expansion-panel
+                        hideToggle
+                        class="mat-elevation-z0"
+                        (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false"
+                    >
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{
+                                    panelOpenState
+                                        ? "Hide map"
+                                        : "Show on a map"
+                                }}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <h1>Map goes here</h1>
                     </mat-expansion-panel>
                 </mat-accordion>
-                <br>
+                <br />
             </mat-card-content>
             <mat-divider inset></mat-divider>
             <mat-card-actions>

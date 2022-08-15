@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NgbCarouselConfig } from "@ng-bootstrap/ng-bootstrap";
-import { ConfigService } from "../../service";
+import { ConfigService, UserService } from "../../service";
 import { CottageService } from "../../service/cottage.service";
 import { CottageProfile } from "../../shared/cottageProfile";
-
+import { MatDialog } from "@angular/material/dialog";
+import { CottageDefineAvailabilityComponent } from "../cottage-define-availability/cottage-define-availability.component";
 @Component({
     selector: "app-cottage-profile",
     templateUrl: "./cottage-profile.component.html",
@@ -23,7 +24,9 @@ export class CottageProfileComponent implements OnInit {
         private cottageService: CottageService,
         private configService: ConfigService,
         private router: Router,
-        config: NgbCarouselConfig
+        private userService: UserService,
+        config: NgbCarouselConfig,
+        public dialog: MatDialog
     ) {
         config.interval = 4000;
         config.keyboard = true;
@@ -33,6 +36,7 @@ export class CottageProfileComponent implements OnInit {
     ngOnInit() {
         this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
         this.imagePath = this.configService.image_path();
+
         this.cottageService
             .getCottageProfile(this.route.snapshot.paramMap.get("name"))
             .subscribe(
@@ -45,5 +49,18 @@ export class CottageProfileComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 }
             );
+    }
+
+    isMyCottage() {
+        if (this.userService.currentUser == undefined) {
+            return false;
+        }
+        return (
+            this.cottageOwner.username == this.userService.currentUser.username
+        );
+    }
+
+    openAvailabilityDialog() {
+        this.dialog.open(CottageDefineAvailabilityComponent);
     }
 }

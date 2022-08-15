@@ -25,6 +25,6 @@ public class FileUploadUtil {
     }
 
     public static String getImageFolder(String entity) {
-        return System.getProperty("user.dir") + "..\\..\\resources\\images\\" + entity;
+        return System.getProperty("user.dir") + "..\\..\\angular-app\\src\\assets\\images\\" + entity;
     }
 }

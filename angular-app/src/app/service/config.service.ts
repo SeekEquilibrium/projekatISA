@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
-
 @Injectable({
     providedIn: "root",
 })
 export class ConfigService {
-    private _image_path = "../../assets/images/";
+    private _image_path = "../../../../resources/images/cottages/";
     private _api_url = "http://localhost:8080";
     private _auth_url = "http://localhost:8080/auth";
     private _user_url = this._api_url + "/user";
@@ -43,5 +42,9 @@ export class ConfigService {
 
     public image_path(): string {
         return this._image_path;
+    }
+
+    get cottage_url(): string {
+        return this._cottage_url;
     }
 }

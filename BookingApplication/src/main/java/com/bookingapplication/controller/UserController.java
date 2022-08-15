@@ -19,6 +19,6 @@ public class UserController {
     @GetMapping("/whoami")
     public  MyInfoDTO getMyInfo(Principal user) {
         UserApp userApp = userService.FindUserByUsername(user.getName());
-        return new MyInfoDTO(userApp);
+        return new MyInfoDTO(userApp, userApp.getRole().getName());
     }
 }

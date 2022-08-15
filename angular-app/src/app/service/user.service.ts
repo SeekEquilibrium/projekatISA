@@ -20,6 +20,7 @@ export class UserService {
         return this.apiService.get(this.config.whoami_url).pipe(
             map((user) => {
                 this.currentUser = user;
+                console.log(user);
                 return user;
             })
         );

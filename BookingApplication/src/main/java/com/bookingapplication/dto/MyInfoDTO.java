@@ -7,25 +7,25 @@ public class MyInfoDTO {
     private String name;
     private String surname;
     private String username;
-    private String phoneNumber;
+    private String role;
 
-    public MyInfoDTO(Long id, String name, String surname, String username, String phoneNumber) {
+    public MyInfoDTO(Long id, String name, String surname, String username, String role) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.username = username;
-        this.phoneNumber = phoneNumber;
+        this.role = role;
     }
 
     public MyInfoDTO() {
     }
 
-    public MyInfoDTO(UserApp user) {
+    public MyInfoDTO(UserApp user, String role) {
         this.id = user.getId();
         this.name = user.getName();
         this.surname = user.getSurname();
         this.username = user.getUsername();
-        this.phoneNumber = user.getPhoneNumber();
+        this.role = role;
     }
 
     public Long getId() {
@@ -60,11 +60,11 @@ public class MyInfoDTO {
         this.username = username;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getRole() {
+        return role;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setRole(String phoneNumber) {
+        this.role = phoneNumber;
     }
 }

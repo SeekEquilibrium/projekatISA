@@ -28,7 +28,9 @@ import { CottageProfileComponent } from "./components/cottage-profile/cottage-pr
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CottageProfileEditComponent } from "./components/cottage-profile-edit/cottage-profile-edit.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
-
+import { CottageDefineAvailabilityComponent } from "./components/cottage-define-availability/cottage-define-availability.component";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
 @NgModule({
     declarations: [
         AppComponent,
@@ -40,6 +42,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
         SignUpComponent,
         CottageProfileComponent,
         CottageProfileEditComponent,
+        CottageDefineAvailabilityComponent,
     ],
     imports: [
         BrowserModule,
@@ -51,6 +54,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
         ReactiveFormsModule,
         NgbModule,
         FlexLayoutModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
     ],
     providers: [
         {
@@ -65,5 +70,6 @@ import { FlexLayoutModule } from "@angular/flex-layout";
         ConfigService,
     ],
     bootstrap: [AppComponent],
+    entryComponents: [CottageDefineAvailabilityComponent],
 })
 export class AppModule {}

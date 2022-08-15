@@ -65,6 +65,6 @@ export class CottageProfileEditComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.cottageProfile);
+        console.log(this.form);
     }
 }
