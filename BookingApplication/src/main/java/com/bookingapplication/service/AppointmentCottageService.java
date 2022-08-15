@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class AppointmentCottageService {
@@ -86,6 +87,15 @@ public class AppointmentCottageService {
         }
         return  true;
     }
+    public void cancelAppointment(LocalDate startDate, LocalDate endDate){
+        for(LocalDate date = startDate; date.isBefore(endDate.plusDays(1)); date = date.plusDays(1)){
+            AppointmentCottage reservation = findByDate(date);
+            reservation.setClient(null);
+            reservation.setType(AppointmentType.AVAILABLE);
+            appointmentCottageRepository.save(reservation);
+        }
+
+    }
 
     public AppointmentCottage save(AppointmentCottage appointmentCottage){
         return appointmentCottageRepository.save(appointmentCottage);
@@ -98,4 +108,5 @@ public class AppointmentCottageService {
     public AppointmentCottage findByDate(LocalDate date){
         return appointmentCottageRepository.findByDate(date);
     }
+    public Optional<AppointmentCottage> findById(long id ){return appointmentCottageRepository.findById(id);}
 }

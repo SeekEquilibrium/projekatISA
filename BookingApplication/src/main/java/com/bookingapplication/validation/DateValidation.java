@@ -13,4 +13,10 @@ public class DateValidation {
     public boolean isFirstBeforeSecondDate (LocalDate first, LocalDate second){
         return first.isBefore(second) || first.isEqual(second);
     }
+    public boolean isDateThreeDaysBeforeToday(LocalDate date){
+        int compareValue = LocalDate.now().compareTo(date);
+        if(compareValue <= 3) {
+            return false;}
+        return  true;
+    }
 }

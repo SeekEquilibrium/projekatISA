@@ -1,10 +1,7 @@
 package com.bookingapplication.controller;
 
 import com.bookingapplication.dto.*;
-import com.bookingapplication.model.Client;
-import com.bookingapplication.model.Cottage;
-import com.bookingapplication.model.CottageOwner;
-import com.bookingapplication.model.UserApp;
+import com.bookingapplication.model.*;
 import com.bookingapplication.service.*;
 import com.bookingapplication.validation.DateValidation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/appointment/cottage")
@@ -142,5 +137,15 @@ public class CottageAppointmentController {
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/cancelAppointment")
+    @PreAuthorize("hasAuthority('CLIENT')")
+    public boolean cancelAppointment(@Valid @RequestBody DateDTO request){
+        //provera da li je termin tri dana pre vremena otkazivanja
+        if (dateValidation.isDateThreeDaysBeforeToday(request.getStartDate()))
+            return false;
+        appointmentCottageService.cancelAppointment(request.getStartDate(), request.getEndDate());
+        return true;
     }
 }
