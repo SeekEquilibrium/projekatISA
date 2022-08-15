@@ -9,7 +9,9 @@ import { UserService } from "../../service/user.service";
 export class HeaderComponent implements OnInit {
     constructor(private userService: UserService) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.userService.getMyInfo().subscribe();
+    }
 
     hasSignedIn() {
         return !!this.userService.currentUser;
@@ -17,6 +19,6 @@ export class HeaderComponent implements OnInit {
 
     userName() {
         const user = this.userService.currentUser;
-        return user.firstName + " " + user.lastName;
+        return user.name + " " + user.surname;
     }
 }
