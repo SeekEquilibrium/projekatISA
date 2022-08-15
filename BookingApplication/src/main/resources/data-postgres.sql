@@ -39,6 +39,6 @@ insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day,
 insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2023-08-04', false, 1, 10, 'AVAILABLE');
 insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2023-08-05', false, 1, 10, 'AVAILABLE');
 insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2023-08-06', false, 1, 10, 'AVAILABLE');
-insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2023-08-07', false, 1, 10, 'AVAILABLE');
-insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2023-08-08', false, 1, 10, 'AVAILABLE');
-insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2023-08-09', false, 1, 10, 'AVAILABLE');
+insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2023-08-07', true, 1, 10, 'AVAILABLE');
+insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2023-08-08', true, 1, 10, 'AVAILABLE');
+insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2023-08-09', true, 1, 10, 'AVAILABLE');
