@@ -6,6 +6,7 @@ import com.bookingapplication.model.AppointmentType;
 import com.bookingapplication.model.Client;
 import com.bookingapplication.model.Cottage;
 import com.bookingapplication.repository.AppointmentCottageRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +70,21 @@ public class AppointmentCottageService {
             save(reservation);
         }
         return new CottageReservationResponseDTO(cottageId, clientId, startTime, endTime);
+    }
+    public boolean CheckActionAvailability (long cottageId, LocalDate startTime , LocalDate endTime){
+        if(!existsByDate(startTime)|| !existsByDate(endTime)){
+            return false;
+        }
+        Cottage cottage = cottageService.findById(cottageId);
+        for(LocalDate date = startTime; date.isBefore(endTime.plusDays(1)); date = date.plusDays(1)){
+            AppointmentCottage reservation = findByDate(date);
+            if(reservation.getType() != AppointmentType.AVAILABLE){
+               if(reservation.isHasAction() != true){
+                   return false;
+               }
+            }
+        }
+        return  true;
     }
 
     public AppointmentCottage save(AppointmentCottage appointmentCottage){
