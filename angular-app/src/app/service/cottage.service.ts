@@ -34,4 +34,18 @@ export class CottageService {
                 })
             );
     }
+
+    public getCottageAvailability(cottageId) {
+        return this.apiService
+            .get(
+                this.config.appointment_url +
+                    "/cottage/getCottageAvailability/" +
+                    cottageId
+            )
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
 }

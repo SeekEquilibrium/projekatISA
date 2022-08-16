@@ -1,10 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import {
     NgbDate,
     NgbCalendar,
     NgbDateStruct,
 } from "@ng-bootstrap/ng-bootstrap";
+import { CottageService } from "src/app/service/cottage.service";
+import { MAT_DIALOG_DATA } from "@angular/material";
+import { Inject } from "@angular/core";
 
 @Component({
     selector: "app-cottage-define-availability",
@@ -19,14 +22,19 @@ export class CottageDefineAvailabilityComponent implements OnInit {
         month: this.now.getMonth() + 1,
         day: this.now.getDate(),
     };
-    fromDate: NgbDate;
+    availability: [];
+    availability_dates: any = [];
+    fromDate: NgbDate | null = null;
     toDate: NgbDate | null = null;
     existingAvailabilityStart: NgbDate;
     existingAvailabilityEnd: NgbDate;
 
-    constructor(calendar: NgbCalendar) {
-        this.fromDate = calendar.getToday();
-        this.toDate = calendar.getNext(calendar.getToday(), "d", 10);
+    constructor(
+        calendar: NgbCalendar,
+        private cottageService: CottageService,
+        @Inject(MAT_DIALOG_DATA) public data: any
+    ) {
+        // this.toDate = calendar.getNext(calendar.getToday(), "d", 10);
         this.existingAvailabilityStart = new NgbDate(2022, 8, 3);
         this.existingAvailabilityEnd = new NgbDate(2022, 9, 3);
     }
@@ -43,10 +51,13 @@ export class CottageDefineAvailabilityComponent implements OnInit {
     }
 
     markDate(date: NgbDate) {
-        return (
-            date.before(this.existingAvailabilityEnd) &&
-            date.after(this.existingAvailabilityStart)
-        );
+        // this.availability_dates.forEach((day: any) => {
+        for (let i = 0; i <= this.availability_dates.length; i++) {
+            if (date.equals(this.availability_dates[i])) {
+                return true;
+            }
+        }
+        return false;
     }
 
     isHovered(date: NgbDate) {
@@ -74,5 +85,26 @@ export class CottageDefineAvailabilityComponent implements OnInit {
         );
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        console.log(this.data.cottageId);
+        this.cottageService
+            .getCottageAvailability(this.data.cottageId)
+            .subscribe(
+                (response) => {
+                    this.availability = response;
+                    this.availability.forEach((element: any) => {
+                        let date = new NgbDate(
+                            element.date[0],
+                            element.date[1],
+                            element.date[2]
+                        );
+                        this.availability_dates.push(date);
+                    });
+                    console.log(response);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+    }
 }

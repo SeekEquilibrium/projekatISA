@@ -5,6 +5,9 @@ import { ConfigService, UserService } from "../../service";
 import { CottageService } from "../../service/cottage.service";
 import { CottageProfile } from "../../shared/cottageProfile";
 import { MatDialog } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA } from "@angular/material";
+import { Inject } from "@angular/core";
+
 import { CottageDefineAvailabilityComponent } from "../cottage-define-availability/cottage-define-availability.component";
 @Component({
     selector: "app-cottage-profile",
@@ -61,6 +64,8 @@ export class CottageProfileComponent implements OnInit {
     }
 
     openAvailabilityDialog() {
-        this.dialog.open(CottageDefineAvailabilityComponent);
+        this.dialog.open(CottageDefineAvailabilityComponent, {
+            data: { cottageId: 1 },
+        });
     }
 }

@@ -17,6 +17,6 @@
     background-color: rgba(2, 117, 216, 0.5);
 }
 
-.xy {
-    background: red;
+.red {
+    background: rgb(223, 189, 0);
 }

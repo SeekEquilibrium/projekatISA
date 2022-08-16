@@ -8,6 +8,7 @@ export class ConfigService {
     private _auth_url = "http://localhost:8080/auth";
     private _user_url = this._api_url + "/user";
     private _cottage_url = this._api_url + "/cottage";
+    private _appointment_url = this._api_url + "/appointment";
     private _login_url = this._auth_url + "/login";
     private _signup_url = this._auth_url + "/signup";
     private _whoami_url = this._user_url + "/whoami";
@@ -34,6 +35,10 @@ export class ConfigService {
 
     get signup_url(): string {
         return this._signup_url;
+    }
+
+    get appointment_url(): string {
+        return this._appointment_url;
     }
 
     public get_cottage_profile_url(name: string): string {
