@@ -1,37 +1,29 @@
-<!-- <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>First campaign</mat-label>
-    <mat-date-range-input
-        [formGroup]="campaignOne"
-        [rangePicker]="campaignOnePicker"
-        [comparisonStart]="campaignTwo.value.start"
-        [comparisonEnd]="campaignTwo.value.end"
-    >
-        <input matStartDate placeholder="Start date" formControlName="start" />
-        <input matEndDate placeholder="End date" formControlName="end" />
-    </mat-date-range-input>
-    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle
-        matSuffix
-        [for]="campaignOnePicker"
-    ></mat-datepicker-toggle>
-    <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
-</mat-form-field>
+<p>Example of the range selection</p>
 
-<mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>Second campaign</mat-label>
-    <mat-date-range-input
-        [formGroup]="campaignTwo"
-        [rangePicker]="campaignTwoPicker"
-        [comparisonStart]="campaignOne.value.start"
-        [comparisonEnd]="campaignOne.value.end"
+<ngb-datepicker
+    #dp
+    (dateSelect)="onDateSelection($event)"
+    [displayMonths]="2"
+    [dayTemplate]="t"
+    outsideDays="hidden"
+    [minDate]="minDate"
+>
+</ngb-datepicker>
+
+<ng-template #t let-date let-focused="focused">
+    <span
+        class="custom-day"
+        [class.focused]="focused"
+        [class.range]="isRange(date)"
+        [class.faded]="isInside(date) || markDate(date)"
+        (mouseenter)="hoveredDate = date"
+        (mouseleave)="hoveredDate = null"
     >
-        <input matStartDate placeholder="Start date" formControlName="start" />
-        <input matEndDate placeholder="End date" formControlName="end" />
-    </mat-date-range-input>
-    <mat-datepicker-toggle
-        matSuffix
-        [for]="campaignTwoPicker"
-    ></mat-datepicker-toggle>
-    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-    <mat-date-range-picker #campaignTwoPicker></mat-date-range-picker>
-</mat-form-field> -->
+        {{ date.day }}
+    </span>
+</ng-template>
+
+<hr />
+
+<pre>From: {{ fromDate | json }} </pre>
+<pre>To: {{ toDate | json }} </pre>

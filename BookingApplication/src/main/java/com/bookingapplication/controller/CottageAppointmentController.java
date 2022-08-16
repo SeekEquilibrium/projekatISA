@@ -1,10 +1,7 @@
 package com.bookingapplication.controller;
 
 import com.bookingapplication.dto.*;
-import com.bookingapplication.model.Client;
-import com.bookingapplication.model.Cottage;
-import com.bookingapplication.model.CottageOwner;
-import com.bookingapplication.model.UserApp;
+import com.bookingapplication.model.*;
 import com.bookingapplication.service.*;
 import com.bookingapplication.validation.DateValidation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/appointment/cottage")
@@ -61,6 +57,20 @@ public class CottageAppointmentController {
             response = appointmentCottageService.DefineCottageAvailability(request);
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/getCottageAvailability/{cottageId}")
+    public ResponseEntity<ArrayList<CottageAvailabilityDTO>> getCottageAvailability(@PathVariable long cottageId){
+        if(!cottageService.existsById(cottageId)){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        ArrayList<AppointmentCottage> list = appointmentCottageService.GetCottageAvailability(cottageId);
+        ArrayList<CottageAvailabilityDTO> listDTO = new ArrayList<>();
+        for(AppointmentCottage a : list){
+            CottageAvailabilityDTO cottageAvailabilityDTO = new CottageAvailabilityDTO(a);
+            listDTO.add(cottageAvailabilityDTO);
+        }
+        return new ResponseEntity<ArrayList<CottageAvailabilityDTO>>(listDTO, HttpStatus.OK);
     }
 
     @PostMapping("/ownerCreateReservation")
