@@ -1,5 +1,5 @@
 <div *ngIf="!!availability_dates">
-    <p>Example of the range selection</p>
+    <p class="title">Define Availability</p>
 
     <ngb-datepicker
         #dp
@@ -26,7 +26,19 @@
     </ng-template>
 
     <hr />
-
-    <pre>From: {{ fromDate | json }} </pre>
-    <pre>To: {{ toDate | json }} </pre>
+    <div class="flex-row">
+        <!-- prettier-ignore -->
+        <pre class="from">From: <pre class="no_margin" *ngIf="!!fromDate">{{ fromDate?.day }}.{{ fromDate?.month }}.{{ fromDate?.year }} </pre></pre>
+        <pre
+            class="to"
+        >To: <pre class="no_margin" *ngIf="!!toDate">{{ toDate?.day }}.{{ toDate?.month }}.{{ toDate?.year }} </pre></pre>
+    </div>
+    <button
+        [disabled]="saveButtonValidation()"
+        mat-flat-button
+        color="primary"
+        class="save_button"
+    >
+        Save Changes
+    </button>
 </div>

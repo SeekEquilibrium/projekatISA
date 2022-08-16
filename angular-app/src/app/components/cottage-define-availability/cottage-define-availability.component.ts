@@ -107,4 +107,8 @@ export class CottageDefineAvailabilityComponent implements OnInit {
                 }
             );
     }
+
+    saveButtonValidation() {
+        return !this.fromDate || !this.toDate;
+    }
 }

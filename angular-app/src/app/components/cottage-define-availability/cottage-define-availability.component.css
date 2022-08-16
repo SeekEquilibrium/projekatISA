@@ -10,13 +10,61 @@
 }
 .custom-day.range,
 .custom-day:hover {
-    background-color: rgb(2, 117, 216);
+    background-color: rgb(120, 2, 216);
     color: white;
 }
 .custom-day.faded {
-    background-color: rgba(2, 117, 216, 0.5);
+    background-color: rgba(202, 149, 233, 0.5);
 }
 
 .red {
-    background: rgb(223, 189, 0);
+    background: rgb(197, 126, 255);
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.flex-row {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+
+.from {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-right: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-size: 15px;
+    width: 50%;
+}
+
+.to {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-right: 20px;
+    margin-bottom: 0px;
+    font-size: 15px;
+}
+
+.no_margin {
+    margin-bottom: 0px;
+    font-size: 15px;
+
+    font-style: bold;
+}
+
+.save_button {
+    margin-top: 20px;
+    float: right;
 }
