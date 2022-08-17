@@ -7,6 +7,7 @@ import { CottageProfile } from "../../shared/cottageProfile";
 import { MatDialog } from "@angular/material/dialog";
 
 import { CottageDefineAvailabilityComponent } from "../cottage-define-availability/cottage-define-availability.component";
+import { CottageDefineActionsComponent } from "../cottage-define-actions/cottage-define-actions.component";
 @Component({
     selector: "app-cottage-profile",
     templateUrl: "./cottage-profile.component.html",
@@ -62,7 +63,13 @@ export class CottageProfileComponent implements OnInit {
     }
 
     openAvailabilityDialog() {
-        const dialogRef = this.dialog.open(CottageDefineAvailabilityComponent, {
+        this.dialog.open(CottageDefineAvailabilityComponent, {
+            data: { cottageId: 1 },
+        });
+    }
+
+    openActionsDialog() {
+        this.dialog.open(CottageDefineActionsComponent, {
             data: { cottageId: 1 },
         });
     }

@@ -49,13 +49,27 @@ export class CottageService {
             );
     }
 
+    public getCottageActions(cottageId) {
+        return this.apiService
+            .get(
+                this.config.appointment_url +
+                    "/cottage/getCottageActions/" +
+                    cottageId
+            )
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
+
     public defineCottageAvailability(
         cottageId,
         startDate,
         endDate,
-        pricePerDay
+        pricePerDay,
+        hasAction
     ) {
-        const hasAction = false;
         return this.apiService
             .post(this.config.appointment_url + "/cottage/defineAvailability", {
                 cottageId,

@@ -1,15 +1,14 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { NgbDate, NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
 import { CottageService } from "src/app/service/cottage.service";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { Inject } from "@angular/core";
 
 @Component({
-    selector: "app-cottage-define-availability",
-    templateUrl: "./cottage-define-availability.component.html",
-    styleUrls: ["./cottage-define-availability.component.css"],
+    selector: "app-cottage-define-actions",
+    templateUrl: "./cottage-define-actions.component.html",
+    styleUrls: ["./cottage-define-actions.component.css"],
 })
-export class CottageDefineAvailabilityComponent implements OnInit {
+export class CottageDefineActionsComponent implements OnInit {
     hoveredDate: NgbDate | null = null;
     now = new Date();
     //minDate sluzi kao referenca danasnjeg dana, disabluj selektovanje svih dana pre danasnjeg
@@ -25,25 +24,14 @@ export class CottageDefineAvailabilityComponent implements OnInit {
     fromDate: NgbDate | null = null;
     toDate: NgbDate | null = null;
     price: number;
-
     constructor(
-        public dialogRef: MatDialogRef<CottageDefineAvailabilityComponent>,
+        public dialogRef: MatDialogRef<CottageDefineActionsComponent>,
         private cottageService: CottageService,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {}
 
-    //==================== Metoda za oznacavenje zauzetih termina ====================
     markDate(date: NgbDate) {
         for (let i = 0; i <= this.availability_dates.length; i++) {
-            if (date.equals(this.availability_dates[i])) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    hasAction(date: NgbDate) {
-        for (let i = 0; i <= this.availability.length; i++) {
             if (date.equals(this.availability_dates[i])) {
                 return true;
             }
@@ -90,40 +78,13 @@ export class CottageDefineAvailabilityComponent implements OnInit {
 
     //====================================================================================
 
-    ngOnInit() {
-        console.log(this.data.cottageId);
-        this.cottageService
-            .getCottageAvailability(this.data.cottageId)
-            .subscribe(
-                (response) => {
-                    this.availability = response;
-                    //pravim pomocnu listu koja ce sadrzati samo datume
-                    this.availability.forEach((element: any) => {
-                        let date = new NgbDate(
-                            element.date[0],
-                            element.date[1],
-                            element.date[2]
-                        );
-                        this.availability_dates.push(date);
-                    });
-                },
-                (error) => {
-                    console.log(error);
-                }
-            );
-    }
-
     saveButtonValidation() {
         console.log(this.price);
         return !this.fromDate || !this.toDate || !this.price;
     }
 
-    closeButton() {
-        this.dialogRef.close();
-    }
-
     saveChanges() {
-        const hasAction = false;
+        const hasAction = true;
         this.cottageService
             .defineCottageAvailability(
                 this.data.cottageId,
@@ -142,12 +103,35 @@ export class CottageDefineAvailabilityComponent implements OnInit {
             );
     }
 
-    //NgbDate je u json formatu, pretvaram ga u listu
+    closeButton() {
+        this.dialogRef.close();
+    }
+
     transformDate(date: NgbDate) {
         let newDate = [];
         newDate.push(date.year);
         newDate.push(date.month);
         newDate.push(date.day);
         return newDate;
+    }
+    ngOnInit() {
+        this.cottageService.getCottageActions(this.data.cottageId).subscribe(
+            (response) => {
+                this.availability = response;
+                //pravim pomocnu listu koja ce sadrzati samo datume
+                this.availability.forEach((element: any) => {
+                    let date = new NgbDate(
+                        element.date[0],
+                        element.date[1],
+                        element.date[2]
+                    );
+                    this.availability_dates.push(date);
+                });
+                console.log(response);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 }
