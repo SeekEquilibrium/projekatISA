@@ -26,6 +26,19 @@
     </ng-template>
 
     <hr />
+    <div class="price-div">
+        <mat-form-field class="price">
+            <mat-label>Price Per Day: </mat-label>
+            <span matSuffix>€ &nbsp;</span>
+            <input
+                class="price-input"
+                type="number"
+                [(ngModel)]="price"
+                min="0"
+                matInput
+            />
+        </mat-form-field>
+    </div>
     <div class="flex-row">
         <!-- prettier-ignore -->
         <pre class="from">From: <pre class="no_margin" *ngIf="!!fromDate">{{ fromDate?.day }}.{{ fromDate?.month }}.{{ fromDate?.year }} </pre></pre>
@@ -33,12 +46,17 @@
             class="to"
         >To: <pre class="no_margin" *ngIf="!!toDate">{{ toDate?.day }}.{{ toDate?.month }}.{{ toDate?.year }} </pre></pre>
     </div>
-    <button
-        [disabled]="saveButtonValidation()"
-        mat-flat-button
-        color="primary"
-        class="save_button"
-    >
-        Save Changes
-    </button>
+    <div class="buttons">
+        <button mat-stroked-button color="primary" (click)="closeButton()">
+            Cancel
+        </button>
+        <button
+            [disabled]="saveButtonValidation()"
+            mat-flat-button
+            color="primary"
+            (click)="saveChanges()"
+        >
+            Save Changes
+        </button>
+    </div>
 </div>

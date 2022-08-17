@@ -48,4 +48,26 @@ export class CottageService {
                 })
             );
     }
+
+    public defineCottageAvailability(
+        cottageId,
+        startDate,
+        endDate,
+        pricePerDay
+    ) {
+        const hasAction = false;
+        return this.apiService
+            .post(this.config.appointment_url + "/cottage/defineAvailability", {
+                cottageId,
+                startDate,
+                endDate,
+                pricePerDay,
+                hasAction,
+            })
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
 }

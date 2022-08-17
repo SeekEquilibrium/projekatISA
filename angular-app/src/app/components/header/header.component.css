@@ -2,31 +2,39 @@
     position: relative;
     z-index: 10;
     color: #fff;
-  }
-  
-  .app-navbar {
+}
+
+.app-navbar {
     width: 100%;
-    z-index:1;
+    z-index: 1;
     display: flex;
     flex-wrap: wrap;
     position: sticky;
     top: 0;
-  }
-  
-  .app-navbar span {
+}
+
+.app-navbar span {
     text-transform: uppercase !important;
-  }
-  
-  .right {
+}
+
+.right {
     margin-left: auto;
     float: right;
-  }
-  
-  .app-angular-logo {
+}
+
+.app-angular-logo {
     margin: 0 4px 3px 0;
     height: 26px;
-  }
-  
-  .greeting-hamburger {
+}
+
+.greeting-hamburger {
     display: none;
-  }
+}
+
+.company-name {
+    user-select: none;
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+    margin-left: 20px;
+}

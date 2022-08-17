@@ -6,7 +6,7 @@ import {
     NgbDateStruct,
 } from "@ng-bootstrap/ng-bootstrap";
 import { CottageService } from "src/app/service/cottage.service";
-import { MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { Inject } from "@angular/core";
 
 @Component({
@@ -26,10 +26,12 @@ export class CottageDefineAvailabilityComponent implements OnInit {
     availability_dates: any = [];
     fromDate: NgbDate | null = null;
     toDate: NgbDate | null = null;
+    price: number;
     existingAvailabilityStart: NgbDate;
     existingAvailabilityEnd: NgbDate;
 
     constructor(
+        public dialogRef: MatDialogRef<CottageDefineAvailabilityComponent>,
         calendar: NgbCalendar,
         private cottageService: CottageService,
         @Inject(MAT_DIALOG_DATA) public data: any
@@ -109,6 +111,37 @@ export class CottageDefineAvailabilityComponent implements OnInit {
     }
 
     saveButtonValidation() {
-        return !this.fromDate || !this.toDate;
+        console.log(this.price);
+        return !this.fromDate || !this.toDate || !this.price;
+    }
+
+    closeButton() {
+        this.dialogRef.close();
+    }
+
+    saveChanges() {
+        this.cottageService
+            .defineCottageAvailability(
+                this.data.cottageId,
+                this.transformDate(this.fromDate),
+                this.transformDate(this.toDate),
+                this.price
+            )
+            .subscribe(
+                (response) => {
+                    this.dialogRef.close();
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+    }
+
+    transformDate(date: NgbDate) {
+        let newDate = [];
+        newDate.push(date.year);
+        newDate.push(date.month);
+        newDate.push(date.day);
+        return newDate;
     }
 }
