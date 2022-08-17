@@ -59,8 +59,8 @@ public class CottageAppointmentController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/getCottageAvailability/{cottageId}")
-    public ResponseEntity<ArrayList<CottageAvailabilityDTO>> getCottageAvailability(@PathVariable long cottageId){
+    @GetMapping("/getCottageAvailabilityAndReservations/{cottageId}")
+    public ResponseEntity<ArrayList<CottageAvailabilityDTO>> getCottageAvailabilityAndReservations(@PathVariable long cottageId){
         if(!cottageService.existsById(cottageId)){
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }

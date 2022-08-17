@@ -20,8 +20,8 @@ insert into cottage(id, name, address, description, room_number, bed_number, rul
 
 --Available appointments
 insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-07-17', false, 1, 10, 'AVAILABLE');
-
-insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type, client_id) values (nextval('free_appointment_seq_gen'), '2022-07-18', false, 1, 10, 'RESERVED', 2);
+insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type, client_id) values (nextval('free_appointment_seq_gen'), '2022-08-17', false, 1, 10, 'RESERVED', 2);
+insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type, client_id) values (nextval('free_appointment_seq_gen'), '2022-08-18', false, 1, 10, 'RESERVED', 2);
 insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-19', false, 1, 10, 'AVAILABLE');
 insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-20', false, 1, 10, 'AVAILABLE');
 insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-21', false, 1, 10, 'AVAILABLE');

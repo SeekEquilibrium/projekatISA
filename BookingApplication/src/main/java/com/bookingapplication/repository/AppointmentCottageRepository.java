@@ -14,6 +14,8 @@ import java.util.List;
 public interface AppointmentCottageRepository extends JpaRepository<AppointmentCottage, Long> {
     public Boolean existsByDate(LocalDate date);
     public AppointmentCottage findByDate(LocalDate date);
-    @Query("select a from AppointmentCottage a where a.cottage.id=:cottageId and a.type='AVAILABLE' and a.date >= CURRENT_DATE")
-    public ArrayList<AppointmentCottage> getAvailabeAppointments(@Param("cottageId") long cottageId);
+
+    //Koristi se za prikaz definisanih termina za vlasnika vikendice
+    @Query("select a from AppointmentCottage a where a.cottage.id=:cottageId and (a.type='AVAILABLE' or a.type='RESERVED')")
+    public ArrayList<AppointmentCottage> getAvailabeAppointmentsAndReservations(@Param("cottageId") long cottageId);
 }

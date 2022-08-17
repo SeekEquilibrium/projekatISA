@@ -39,7 +39,7 @@ export class CottageService {
         return this.apiService
             .get(
                 this.config.appointment_url +
-                    "/cottage/getCottageAvailability/" +
+                    "/cottage/getCottageAvailabilityAndReservations/" +
                     cottageId
             )
             .pipe(
