@@ -18,4 +18,7 @@ public interface AppointmentCottageRepository extends JpaRepository<AppointmentC
     //Koristi se za prikaz definisanih termina za vlasnika vikendice
     @Query("select a from AppointmentCottage a where a.cottage.id=:cottageId and (a.type='AVAILABLE' or a.type='RESERVED')")
     public ArrayList<AppointmentCottage> getAvailabeAppointmentsAndReservations(@Param("cottageId") long cottageId);
+
+    @Query("select a from AppointmentCottage a where a.cottage.id=:cottageId and a.hasAction=true")
+    public ArrayList<AppointmentCottage> getActionAppointments(@Param("cottageId") long cottageId);
 }

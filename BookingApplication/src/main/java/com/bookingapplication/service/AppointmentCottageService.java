@@ -93,6 +93,10 @@ public class AppointmentCottageService {
         return appointmentCottageRepository.getAvailabeAppointmentsAndReservations(cottageId);
     }
 
+    public ArrayList<AppointmentCottage> GetCottageActions(long cottageId){
+        return appointmentCottageRepository.getActionAppointments(cottageId);
+    }
+
     public AppointmentCottage save(AppointmentCottage appointmentCottage){
         return appointmentCottageRepository.save(appointmentCottage);
     }

@@ -1,10 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
-import {
-    NgbDate,
-    NgbCalendar,
-    NgbDateStruct,
-} from "@ng-bootstrap/ng-bootstrap";
+import { NgbDate, NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
 import { CottageService } from "src/app/service/cottage.service";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { Inject } from "@angular/core";
@@ -17,29 +12,25 @@ import { Inject } from "@angular/core";
 export class CottageDefineAvailabilityComponent implements OnInit {
     hoveredDate: NgbDate | null = null;
     now = new Date();
+    //minDate sluzi kao referenca danasnjeg dana, disabluj selektovanje svih dana pre danasnjeg
     minDate: NgbDateStruct = {
         year: this.now.getFullYear(),
         month: this.now.getMonth() + 1,
         day: this.now.getDate(),
     };
+
     availability: [];
     availability_dates: any = [];
+
     fromDate: NgbDate | null = null;
     toDate: NgbDate | null = null;
     price: number;
-    existingAvailabilityStart: NgbDate;
-    existingAvailabilityEnd: NgbDate;
 
     constructor(
         public dialogRef: MatDialogRef<CottageDefineAvailabilityComponent>,
-        calendar: NgbCalendar,
         private cottageService: CottageService,
         @Inject(MAT_DIALOG_DATA) public data: any
-    ) {
-        // this.toDate = calendar.getNext(calendar.getToday(), "d", 10);
-        this.existingAvailabilityStart = new NgbDate(2022, 8, 3);
-        this.existingAvailabilityEnd = new NgbDate(2022, 9, 3);
-    }
+    ) {}
 
     onDateSelection(date: NgbDate) {
         if (!this.fromDate && !this.toDate) {
@@ -52,8 +43,8 @@ export class CottageDefineAvailabilityComponent implements OnInit {
         }
     }
 
+    //==================== Metoda za oznacavenje zauzetih termina ====================
     markDate(date: NgbDate) {
-        // this.availability_dates.forEach((day: any) => {
         for (let i = 0; i <= this.availability_dates.length; i++) {
             if (date.equals(this.availability_dates[i])) {
                 return true;
@@ -62,6 +53,7 @@ export class CottageDefineAvailabilityComponent implements OnInit {
         return false;
     }
 
+    //==================== Angular bootstrap datepicker default methods ====================
     isHovered(date: NgbDate) {
         return (
             this.fromDate &&
@@ -87,6 +79,8 @@ export class CottageDefineAvailabilityComponent implements OnInit {
         );
     }
 
+    //====================================================================================
+
     ngOnInit() {
         console.log(this.data.cottageId);
         this.cottageService
@@ -94,6 +88,7 @@ export class CottageDefineAvailabilityComponent implements OnInit {
             .subscribe(
                 (response) => {
                     this.availability = response;
+                    //pravim pomocnu listu koja ce sadrzati samo datume
                     this.availability.forEach((element: any) => {
                         let date = new NgbDate(
                             element.date[0],
@@ -137,6 +132,7 @@ export class CottageDefineAvailabilityComponent implements OnInit {
             );
     }
 
+    //NgbDate je u json formatu, pretvaram ga u listu
     transformDate(date: NgbDate) {
         let newDate = [];
         newDate.push(date.year);
