@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
 import { UserService } from "src/app/service";
 
 @Component({
@@ -7,10 +8,11 @@ import { UserService } from "src/app/service";
     styleUrls: ["./business-menu.component.css"],
 })
 export class BusinessMenuComponent implements OnInit {
-    userRole: any;
-
-    constructor(private userService: UserService) {}
-    ngOnInit() {
-        console.log(this.userService.currentUser.role);
+    currentUser: Observable<any>;
+    constructor(private userService: UserService) {
+        this.userService.currentUserSubject.subscribe((value) => {
+            this.currentUser = value;
+        });
     }
+    ngOnInit() {}
 }

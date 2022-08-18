@@ -33,6 +33,9 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { CottageDefineActionsComponent } from "./components/cottage-define-actions/cottage-define-actions.component";
 import { BusinessMenuComponent } from "./components/business-menu/business-menu.component";
+import { CottagesListComponent } from "./components/cottages-list/cottages-list.component";
+import { CottageHorizontalCardComponent } from "./components/cottage-horizontal-card/cottage-horizontal-card.component";
+import { AuthGuardService } from "./service/auth-guard.service";
 @NgModule({
     declarations: [
         AppComponent,
@@ -47,6 +50,8 @@ import { BusinessMenuComponent } from "./components/business-menu/business-menu.
         CottageDefineAvailabilityComponent,
         CottageDefineActionsComponent,
         BusinessMenuComponent,
+        CottagesListComponent,
+        CottageHorizontalCardComponent,
     ],
     imports: [
         BrowserModule,
@@ -72,6 +77,7 @@ import { BusinessMenuComponent } from "./components/business-menu/business-menu.
         ApiService,
         UserService,
         ConfigService,
+        AuthGuardService,
     ],
     bootstrap: [AppComponent],
     entryComponents: [
