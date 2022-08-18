@@ -8,7 +8,7 @@ import { HttpHeaders } from "@angular/common/http";
     providedIn: "root",
 })
 export class UserService {
-    currentUser;
+    currentUser = null;
 
     constructor(
         private apiService: ApiService,

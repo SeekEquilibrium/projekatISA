@@ -20,21 +20,21 @@
             </button>
             <button
                 *ngIf="hasSignedIn()"
+                [matMenuTriggerFor]="businessMenu"
+                class="greeting-button"
+                mat-button
+                mat-ripple
+            >
+                <span>Business</span>
+            </button>
+            <button
+                *ngIf="hasSignedIn()"
                 [matMenuTriggerFor]="userMenu"
                 class="greeting-button"
                 mat-button
                 mat-ripple
             >
                 <span>{{ userName() }}</span>
-            </button>
-            <button
-                *ngIf="hasSignedIn()"
-                [matMenuTriggerFor]="userMenu"
-                class="greeting-hamburger"
-                mat-icon-button
-                mat-ripple
-            >
-                <mat-icon>menu</mat-icon>
             </button>
             <mat-menu
                 #userMenu
@@ -43,6 +43,14 @@
                 yposition="below"
             >
                 <app-user-menu></app-user-menu>
+            </mat-menu>
+            <mat-menu
+                #businessMenu
+                [overlapTrigger]="false"
+                class="app-header-userMenu"
+                yposition="below"
+            >
+                <app-business-menu></app-business-menu>
             </mat-menu>
         </div>
     </div>

@@ -8,7 +8,7 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { CardComponent } from "./card/card.component";
 import { HomeComponent } from "./components/home/home.component";
 import { HeaderComponent } from "./components/header/header.component";
-import { UserMenuComponent } from "./user-menu/user-menu.component";
+import { UserMenuComponent } from "./components/user-menu/user-menu.component";
 import { LoginComponent } from "./components/login/login.component";
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
 
@@ -32,6 +32,7 @@ import { CottageDefineAvailabilityComponent } from "./components/cottage-define-
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 import { CottageDefineActionsComponent } from "./components/cottage-define-actions/cottage-define-actions.component";
+import { BusinessMenuComponent } from "./components/business-menu/business-menu.component";
 @NgModule({
     declarations: [
         AppComponent,
@@ -45,6 +46,7 @@ import { CottageDefineActionsComponent } from "./components/cottage-define-actio
         CottageProfileEditComponent,
         CottageDefineAvailabilityComponent,
         CottageDefineActionsComponent,
+        BusinessMenuComponent,
     ],
     imports: [
         BrowserModule,
