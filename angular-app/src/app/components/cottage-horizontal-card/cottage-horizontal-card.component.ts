@@ -17,4 +17,8 @@ export class CottageHorizontalCardComponent implements OnInit {
     editClick() {
         this.router.navigate(["/cottage/" + this.cottage.name + "/edit"]);
     }
+
+    navigateToCottage() {
+        this.router.navigate(["/cottage/" + this.cottage.name]);
+    }
 }

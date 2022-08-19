@@ -6,6 +6,10 @@
     background-color: rgb(245, 245, 245);
 }
 
+.cottage-horizontal-card:hover {
+    transform: scale(1.006);
+}
+
 .cottage-horizontal-buttons {
     display: flex;
     flex-direction: row;
