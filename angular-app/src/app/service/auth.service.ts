@@ -60,6 +60,7 @@ export class AuthService {
     logout() {
         this.userService.currentUser = null;
         this.access_token = null;
+        localStorage.removeItem("jwt");
         this.router.navigate(["/login"]);
     }
 

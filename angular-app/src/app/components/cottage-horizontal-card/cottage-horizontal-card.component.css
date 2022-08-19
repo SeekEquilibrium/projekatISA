@@ -1,0 +1,13 @@
+.cottage-horizontal-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(245, 245, 245);
+}
+
+.cottage-horizontal-buttons {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}

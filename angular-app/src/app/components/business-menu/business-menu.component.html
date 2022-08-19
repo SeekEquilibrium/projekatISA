@@ -1,4 +1,4 @@
 <div *ngIf="currentUser?.role == 'COTTAGE_OWNER'">
-    <button mat-menu-item>COTTAGES</button>
+    <button (click)="goToCottages()" mat-menu-item>COTTAGES</button>
 </div>
 <!-- <button (click)="logout()" mat-menu-item>SIGN OUT</button> -->

@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { ApiService } from "./api.service";
 import { ConfigService } from "./config.service";
-import { map } from "rxjs/operators";
+import { catchError, map } from "rxjs/operators";
 import { HttpHeaders } from "@angular/common/http";
-import { Subject } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 
 @Injectable({
     providedIn: "root",
@@ -11,7 +11,7 @@ import { Subject } from "rxjs";
 export class UserService {
     currentUser = null;
 
-    currentUserSubject: Subject<any> = new Subject<any>();
+    currentUserSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
     constructor(
         private apiService: ApiService,
@@ -22,13 +22,18 @@ export class UserService {
         this.currentUserSubject.next(data);
     }
 
-    getMyInfo() {
+    getMyInfo(): Observable<any> {
         console.log(localStorage.getItem("jwt"));
         return this.apiService.get(this.config.whoami_url).pipe(
             map((user) => {
                 this.currentUser = user;
                 this.setCurrentUserSubject(user);
+                console.log(this.currentUserSubject.value);
                 return user;
+            }),
+            catchError((err) => {
+                localStorage.removeItem("jwt");
+                return err;
             })
         );
     }
