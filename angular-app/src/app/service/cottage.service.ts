@@ -25,6 +25,17 @@ export class CottageService {
             );
     }
 
+    public getOwnerCottages() {
+        return this.apiService
+            .get(this.config.cottage_url + "/ownersCottages")
+            .pipe(
+                map((res) => {
+                    console.log(res);
+                    return res;
+                })
+            );
+    }
+
     public editCottageProfile(cottage) {
         return this.apiService
             .put(this.config.cottage_url + "/edit", cottage)

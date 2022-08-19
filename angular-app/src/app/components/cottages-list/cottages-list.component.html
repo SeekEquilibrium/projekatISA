@@ -1,5 +1,7 @@
 <div class="cottage-list">
-    <app-cottage-horizontal-card></app-cottage-horizontal-card>
-    <app-cottage-horizontal-card></app-cottage-horizontal-card>
-    <app-cottage-horizontal-card></app-cottage-horizontal-card>
+    <div *ngFor="let cottage of cottages">
+        <app-cottage-horizontal-card
+            [cottage]="cottage"
+        ></app-cottage-horizontal-card>
+    </div>
 </div>

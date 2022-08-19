@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { CottageService } from "src/app/service/cottage.service";
 
 @Component({
     selector: "app-cottages-list",
@@ -6,7 +7,13 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./cottages-list.component.css"],
 })
 export class CottagesListComponent implements OnInit {
-    constructor() {}
+    cottages: [];
 
-    ngOnInit() {}
+    constructor(private cottageService: CottageService) {}
+
+    ngOnInit() {
+        this.cottageService.getOwnerCottages().subscribe((response) => {
+            this.cottages = response;
+        });
+    }
 }

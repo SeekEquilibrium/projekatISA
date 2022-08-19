@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-cottage-horizontal-card',
-  templateUrl: './cottage-horizontal-card.component.html',
-  styleUrls: ['./cottage-horizontal-card.component.css']
+    selector: "app-cottage-horizontal-card",
+    templateUrl: "./cottage-horizontal-card.component.html",
+    styleUrls: ["./cottage-horizontal-card.component.css"],
 })
 export class CottageHorizontalCardComponent implements OnInit {
+    @Input() cottage;
+    constructor(private router: Router) {}
 
-  constructor() { }
+    ngOnInit() {
+        console.log(this.cottage);
+    }
 
-  ngOnInit() {
-  }
-
+    editClick() {
+        this.router.navigate(["/cottage/" + this.cottage.name + "/edit"]);
+    }
 }

@@ -1,6 +1,7 @@
 package com.bookingapplication.controller;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.bookingapplication.dto.*;
@@ -84,6 +85,23 @@ public class CottageController {
 		ArrayList<String> images = cottageImageService.findImagePathsByCottageId(cottage.getId());
 		ImagesDTO imagesDto = new ImagesDTO(images);
 		return new ResponseEntity<>(new RegisterCottageResponseDTO(cottage, imagesDto), HttpStatus.OK);
+	}
+
+	@GetMapping("/ownersCottages")
+	@PreAuthorize("hasAuthority('COTTAGE_OWNER')")
+	public ResponseEntity<ArrayList<CottageInfoDTO>> getCottage(){
+		UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		CottageOwner cottageOwner = cottageOwnerService.findById(userApp.getId());
+		ArrayList<Cottage> cottageList = cottageService.getOwnerCottages(userApp.getId());
+		ArrayList<CottageInfoDTO> cottageInfoDTOS = new ArrayList<>();
+		for (Cottage c : cottageList){
+			ArrayList<String> images = cottageImageService.findImagePathsByCottageId(c.getId());
+			ImagesDTO imagesDto = new ImagesDTO(images);
+			CottageInfoDTO cottageInfoDTO = new CottageInfoDTO(c, imagesDto);
+			cottageInfoDTOS.add(cottageInfoDTO);
+		}
+		return new ResponseEntity<>(cottageInfoDTOS, HttpStatus.OK);
+
 	}
 
 

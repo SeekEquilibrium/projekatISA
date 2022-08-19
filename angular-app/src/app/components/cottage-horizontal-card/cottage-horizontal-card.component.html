@@ -1,11 +1,21 @@
 <mat-card class="cottage-horizontal-card example-card">
-    <div>
-        <mat-card-title>Fruskac</mat-card-title>
-        <mat-card-subtitle>Adresa 123, Novi sad</mat-card-subtitle>
+    <div class="image-title">
+        <img
+            class="cottage-small-image"
+            src="assets/images/cottages/{{
+                cottage.cottageImages.imagePaths[0]
+            }}"
+        />
+        <div>
+            <mat-card-title>{{ cottage.name }}</mat-card-title>
+            <mat-card-subtitle>{{ cottage.address }}</mat-card-subtitle>
+        </div>
     </div>
     <div class="cottage-horizontal-buttons">
-        <button mat-raised-button color="primary">Stats</button>
-        <button mat-raised-button color="accent">Edit</button>
-        <button mat-raised-button color="warn">Delete</button>
+        <button mat-flat-button color="primary">Stats</button>
+        <button (click)="editClick()" mat-flat-button color="accent">
+            Edit
+        </button>
+        <button mat-flat-button color="warn">Delete</button>
     </div>
 </mat-card>

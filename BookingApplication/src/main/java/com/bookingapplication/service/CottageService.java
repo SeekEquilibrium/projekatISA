@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -73,5 +74,9 @@ public class CottageService {
 	public boolean ownerOwnsCottage(long cottageOwnerId, long cottageId){
 		//odraditi ovaj deo preko query
 		return findById(cottageId).getCottageOwner().equals(cottageOwnerId);
+	}
+
+	public ArrayList<Cottage> getOwnerCottages(long cottageOwnerId){
+		return cottageReposiotry.findByCottageOwnerId(cottageOwnerId);
 	}
 }

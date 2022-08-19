@@ -11,3 +11,16 @@
     flex-direction: row;
     column-gap: 10px;
 }
+
+.cottage-small-image {
+    object-fit: cover;
+    width: 100px;
+    border-radius: 5px;
+}
+
+.image-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 20px;
+}
