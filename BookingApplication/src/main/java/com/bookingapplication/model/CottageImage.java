@@ -1,5 +1,6 @@
 package com.bookingapplication.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -9,7 +10,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 public class CottageImage extends ImageApp {
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Cottage cottage;
 

@@ -1,5 +1,7 @@
 package com.bookingapplication.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -17,6 +19,8 @@ public class EditCottageRequestDTO {
     @NotNull
     private Integer bedNumber;
     private String rules;
+    private String[] deletedImages;
+    private MultipartFile[] files;
 
     public EditCottageRequestDTO(long id, String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules) {
         this.id = id;
@@ -85,5 +89,21 @@ public class EditCottageRequestDTO {
 
     public void setRules(String rules) {
         this.rules = rules;
+    }
+
+    public String[] getDeletedImages() {
+        return deletedImages;
+    }
+
+    public void setDeletedImages(String[] deletedImages) {
+        this.deletedImages = deletedImages;
+    }
+
+    public MultipartFile[] getFiles() {
+        return files;
+    }
+
+    public void setFiles(MultipartFile[] files) {
+        this.files = files;
     }
 }

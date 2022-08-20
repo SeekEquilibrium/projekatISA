@@ -52,7 +52,7 @@ public class CottageController {
 
 	@PutMapping(path="/edit")
 	@PreAuthorize("hasAuthority('COTTAGE_OWNER')")
-	public ResponseEntity<EditCottageResponseDTO> updateCottage(@RequestBody EditCottageRequestDTO requestDTO){
+	public ResponseEntity<EditCottageResponseDTO> updateCottage(@RequestBody @ModelAttribute EditCottageRequestDTO requestDTO) throws IOException {
 		UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		CottageOwner cottageOwner = cottageOwnerService.findById(userApp.getId());
 		Cottage existingCottage = cottageService.findByName(requestDTO.getName());

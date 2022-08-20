@@ -36,7 +36,7 @@ public class CottageService {
 
 	public Boolean existsById(long id) { return cottageReposiotry.existsById(id); }
 
-	public Cottage editCottage(EditCottageRequestDTO cottageDTO) {
+	public Cottage editCottage(EditCottageRequestDTO cottageDTO) throws IOException {
 		Cottage cottage = cottageReposiotry.findById(cottageDTO.getId());
 		cottage.setName(cottageDTO.getName());
 		cottage.setAddress(cottageDTO.getAddress());
@@ -44,6 +44,23 @@ public class CottageService {
 		cottage.setRules(cottageDTO.getRules());
 		cottage.setRoomNumber(cottageDTO.getRoomNumber());
 		cottage.setBedNumber(cottageDTO.getBedNumber());
+
+		Set<CottageImage> cottageImages = cottage.getCottageImages();
+		if(cottageDTO.getDeletedImages()!=null){
+			for(String path : cottageDTO.getDeletedImages()){
+				cottageImages.removeIf(image -> image.getPath().equals(path));
+			}
+		}
+
+		if(cottageDTO.getFiles() != null){
+			for(MultipartFile image : cottageDTO.getFiles()){
+				String fileName = cottage.getName() + "_" + UUID.randomUUID() + ".png";
+				FileUploadUtil.saveFile(FileUploadUtil.getImageFolder("cottages"), fileName, image);
+				CottageImage cottageImage = new CottageImage(fileName, cottage);
+				cottageImages.add(cottageImage);
+			}
+		}
+		cottage.setCottageImages(cottageImages);
 		return cottageReposiotry.save(cottage);
 	}
 

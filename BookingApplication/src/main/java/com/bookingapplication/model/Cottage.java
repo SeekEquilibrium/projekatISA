@@ -42,7 +42,7 @@ public class Cottage {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private CottageOwner cottageOwner;
 	@OneToMany
-	(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval=true)
 	public Set<CottageImage> cottageImages = new HashSet<CottageImage>();
 
 	@OneToMany
