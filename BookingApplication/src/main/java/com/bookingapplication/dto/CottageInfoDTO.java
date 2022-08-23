@@ -12,6 +12,8 @@ public class CottageInfoDTO {
 	private String rules;
 	private UserDTO cottageOwner;
 	private ImagesDTO cottageImages;
+	private Double latitude;
+	private Double longitude;
 	
 	
 	
@@ -45,7 +47,7 @@ public class CottageInfoDTO {
 	}
 	
 	public CottageInfoDTO(long id, String name, String address, String description, Integer roomNumber,
-			Integer bedNumber, String rules, UserDTO cottageOwner) {
+			Integer bedNumber, String rules, UserDTO cottageOwner, Double longitude, Double latitude) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -55,16 +57,13 @@ public class CottageInfoDTO {
 		this.bedNumber = bedNumber;
 		this.rules = rules;
 		this.cottageOwner = cottageOwner;
-	}
-
-	public CottageInfoDTO(Cottage cottage) {
-		this(cottage.getId(), cottage.getName(), cottage.getAddress(), cottage.getDescription(), cottage.getRoomNumber(),
-				cottage.getBedNumber(), cottage.getRules(), new UserDTO(cottage.getCottageOwner()));
+		this.longitude = longitude;
+		this.latitude = latitude;
 	}
 	
 	public CottageInfoDTO(Cottage cottage, ImagesDTO cottageImages) {
 		this(cottage.getId(), cottage.getName(), cottage.getAddress(), cottage.getDescription(),  cottage.getRoomNumber(),
-				cottage.getBedNumber(), cottage.getRules(), new UserDTO(cottage.getCottageOwner()));
+				cottage.getBedNumber(), cottage.getRules(), new UserDTO(cottage.getCottageOwner()), cottage.getLongitude(), cottage.getLatitude());
 		this.cottageImages = cottageImages;
 	}
 	
@@ -132,6 +131,20 @@ public class CottageInfoDTO {
 	public void setRules(String rules) {
 		this.rules = rules;
 	}
-	
-	
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
 }

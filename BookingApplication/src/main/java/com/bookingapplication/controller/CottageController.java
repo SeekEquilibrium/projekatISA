@@ -59,6 +59,14 @@ public class CottageController {
 		if(!existingCottage.getCottageOwner().getUsername().equals(cottageOwner.getUsername())){
 			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
 		}
+		Cottage cottageWithSameName = cottageService.findByName(requestDTO.getName());
+		if(cottageWithSameName!=null){
+			if(requestDTO.getName().equals(cottageWithSameName.getName())){
+				if(requestDTO.getId()!=cottageWithSameName.getId()){
+					return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+				}
+			}
+		}
 		Cottage cottage = cottageService.editCottage(requestDTO);
 		ArrayList<String> images = cottageImageService.findImagePathsByCottageId(cottage.getId());
 		ImagesDTO imagesDto = new ImagesDTO(images);

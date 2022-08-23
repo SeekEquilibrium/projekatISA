@@ -44,6 +44,8 @@ public class CottageService {
 		cottage.setRules(cottageDTO.getRules());
 		cottage.setRoomNumber(cottageDTO.getRoomNumber());
 		cottage.setBedNumber(cottageDTO.getBedNumber());
+		cottage.setLatitude(cottageDTO.getLatitude());
+		cottage.setLongitude(cottageDTO.getLongitude());
 
 		Set<CottageImage> cottageImages = cottage.getCottageImages();
 		if(cottageDTO.getDeletedImages()!=null){
@@ -72,7 +74,9 @@ public class CottageService {
 				requestDTO.getRoomNumber(),
 				requestDTO.getBedNumber(),
 				requestDTO.getRules(),
-				cottageOwner
+				cottageOwner,
+				requestDTO.getLongitude(),
+				requestDTO.getLatitude()
 		);
 		Set<CottageImage> cottageImages = new HashSet<>();
 		if(requestDTO.getFiles() != null){

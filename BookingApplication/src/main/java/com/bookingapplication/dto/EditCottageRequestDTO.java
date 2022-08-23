@@ -21,6 +21,10 @@ public class EditCottageRequestDTO {
     private String rules;
     private String[] deletedImages;
     private MultipartFile[] files;
+    @NotNull
+    private Double latitude;
+    @NotNull
+    private Double longitude;
 
     public EditCottageRequestDTO(long id, String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules) {
         this.id = id;
@@ -35,7 +39,7 @@ public class EditCottageRequestDTO {
     public EditCottageRequestDTO() {
     }
 
-    public EditCottageRequestDTO(long id, String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules, String[] deletedImages, MultipartFile[] files) {
+    public EditCottageRequestDTO(long id, String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules, String[] deletedImages, MultipartFile[] files, Double latitude, Double longitude) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -45,6 +49,8 @@ public class EditCottageRequestDTO {
         this.rules = rules;
         this.deletedImages = deletedImages;
         this.files = files;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public long getId() {
@@ -117,5 +123,21 @@ public class EditCottageRequestDTO {
 
     public void setFiles(MultipartFile[] files) {
         this.files = files;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

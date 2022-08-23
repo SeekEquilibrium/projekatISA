@@ -12,7 +12,7 @@ import { CottageProfile } from "../../shared/cottageProfile";
 })
 export class CottageProfileEditComponent implements OnInit {
     form: FormGroup;
-    cottageProfile: CottageProfile;
+    cottageProfile: any;
     cottageOwner: any;
     imagePath: string;
     imageNames: string[];
@@ -56,6 +56,9 @@ export class CottageProfileEditComponent implements OnInit {
             rules: [""],
             roomNumber: [Validators.min(1), Validators.required],
             bedNumber: [Validators.min(1), Validators.required],
+            address: ["", Validators.required],
+            longitude: ["", Validators.required],
+            latitude: ["", Validators.required],
         });
     }
 

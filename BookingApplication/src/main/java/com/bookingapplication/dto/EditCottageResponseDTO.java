@@ -14,8 +14,10 @@ public class EditCottageResponseDTO {
     private Integer bedNumber;
     private String rules;
     private ImagesDTO cottageImages;
+    private Double latitude;
+    private Double longitude;
 
-    public EditCottageResponseDTO(long id, String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules, ImagesDTO cottageImages) {
+    public EditCottageResponseDTO(long id, String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules, ImagesDTO cottageImages, Double latitude, Double longitude) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -24,11 +26,13 @@ public class EditCottageResponseDTO {
         this.bedNumber = bedNumber;
         this.rules = rules;
         this.cottageImages = cottageImages;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public EditCottageResponseDTO(Cottage cottage, ImagesDTO cottageImages) {
         this(cottage.getId(), cottage.getName(), cottage.getAddress(), cottage.getDescription(),  cottage.getRoomNumber(),
-                cottage.getBedNumber(), cottage.getRules(), cottageImages);
+                cottage.getBedNumber(), cottage.getRules(), cottageImages, cottage.getLatitude(), cottage.getLongitude());
     }
     public long getId() {
         return id;
@@ -92,5 +96,21 @@ public class EditCottageResponseDTO {
 
     public void setCottageImages(ImagesDTO cottageImages) {
         this.cottageImages = cottageImages;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

@@ -10,8 +10,8 @@
             <mat-card-content fxLayout="column" fxLayoutAlign="start start">
                 <div style="width: 100%">
                     <div fxLayout="column" fxLayoutAlign="center start">
-                        <mat-label>Cottage name: </mat-label>
                         <mat-form-field appearance="outline">
+                            <mat-label>Cottage name: </mat-label>
                             <input
                                 formControlName="name"
                                 [(ngModel)]="cottageProfile.name"
@@ -19,12 +19,43 @@
                             />
                         </mat-form-field>
                     </div>
+                    <div class="full-address-div">
+                        <mat-form-field
+                            class="address-div"
+                            appearance="outline"
+                        >
+                            <mat-label>Address: </mat-label>
+                            <input
+                                formControlName="address"
+                                matInput
+                                [(ngModel)]="cottageProfile.address"
+                            />
+                        </mat-form-field>
+                        <mat-form-field class="lonlat" appearance="outline">
+                            <mat-label>Longitude: </mat-label>
+                            <input
+                                formControlName="longitude"
+                                matInput
+                                [(ngModel)]="cottageProfile.longitude"
+                                [readonly]="true"
+                            />
+                        </mat-form-field>
+                        <mat-form-field class="lonlat" appearance="outline">
+                            <mat-label>Latitude: </mat-label>
+                            <input
+                                formControlName="latitude"
+                                matInput
+                                [(ngModel)]="cottageProfile.latitude"
+                                [readonly]="true"
+                            />
+                        </mat-form-field>
+                    </div>
                     <div fxLayout="column" fxLayoutAlign="center start">
-                        <mat-label>Description: </mat-label>
                         <mat-form-field
                             appearance="outline"
                             id="description-div"
                         >
+                            <mat-label>Description: </mat-label>
                             <textarea
                                 formControlName="description"
                                 id="description-textarea"
@@ -34,11 +65,11 @@
                         </mat-form-field>
                     </div>
                     <div fxLayout="column" fxLayoutAlign="center start">
-                        <mat-label>Rules: </mat-label>
                         <mat-form-field
                             id="description-div"
                             appearance="outline"
                         >
+                            <mat-label>Rules: </mat-label>
                             <textarea
                                 formControlName="rules"
                                 id="rules-textarea"
@@ -53,11 +84,11 @@
                         fxLayoutAlign="space-evenly start"
                     >
                         <div fxLayout="column" fxLayoutAlign="start center">
-                            <mat-label>Number of rooms: </mat-label>
                             <mat-form-field
                                 id="number-input"
                                 appearance="outline"
                             >
+                                <mat-label>Number of rooms: </mat-label>
                                 <input
                                     type="number"
                                     matInput
@@ -68,11 +99,11 @@
                             </mat-form-field>
                         </div>
                         <div fxLayout="column" fxLayoutAlign="start center">
-                            <mat-label>Number of beds: </mat-label>
                             <mat-form-field
                                 id="number-input"
                                 appearance="outline"
                             >
+                                <mat-label>Number of beds: </mat-label>
                                 <input
                                     type="number"
                                     matInput
@@ -86,11 +117,11 @@
 
                     <br />
 
-                    <div fxLayout="row" fxLayoutAlign="space-between start">
+                    <div>
                         <table class="table table-hover table-width">
                             <thead>
                                 <tr>
-                                    <th scope="col">Existing Images</th>
+                                    <th scope="col">Images</th>
                                 </tr>
                             </thead>
                             <tbody>

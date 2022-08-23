@@ -37,6 +37,10 @@ public class Cottage {
 	private Integer bedNumber;
 	@Column
 	private String rules;
+	@Column
+	private Double longitude;
+	@Column
+	private Double latitude;
 	@JsonIgnore
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -77,6 +81,20 @@ public class Cottage {
 		this.rules = rules;
 		this.cottageOwner = cottageOwner;
 	}
+
+	public Cottage(String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules, CottageOwner cottageOwner, Double longitude, Double latitude) {
+		this.name = name;
+		this.address = address;
+		this.description = description;
+		this.roomNumber = roomNumber;
+		this.bedNumber = bedNumber;
+		this.rules = rules;
+		this.longitude = longitude;
+		this.latitude = latitude;
+		this.cottageOwner = cottageOwner;
+	}
+
+
 
 	public long getId() {
 		return id;
@@ -150,5 +168,19 @@ public class Cottage {
 		this.rules = rules;
 	}
 
-	
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
 }

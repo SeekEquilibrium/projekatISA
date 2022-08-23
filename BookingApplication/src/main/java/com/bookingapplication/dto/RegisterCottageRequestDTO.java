@@ -19,14 +19,20 @@ public class RegisterCottageRequestDTO {
     private Integer bedNumber;
     private String rules;
     private MultipartFile[] files;
+    @NotNull
+    private Double latitude;
+    @NotNull
+    private Double longitude;
 
-    public RegisterCottageRequestDTO(String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules) {
+    public RegisterCottageRequestDTO(String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules, Double latitude, Double longitude) {
         this.name = name;
         this.address = address;
         this.description = description;
         this.roomNumber = roomNumber;
         this.bedNumber = bedNumber;
         this.rules = rules;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public RegisterCottageRequestDTO() {
@@ -86,5 +92,21 @@ public class RegisterCottageRequestDTO {
 
     public void setFiles(MultipartFile[] files) {
         this.files = files;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

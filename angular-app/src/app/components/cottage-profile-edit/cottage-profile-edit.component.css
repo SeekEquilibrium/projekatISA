@@ -27,11 +27,11 @@
 }
 
 #number-input {
-    max-width: 100px;
+    max-width: 150px;
 }
 
 .table-width {
-    max-width: 45%;
+    max-width: 100%;
 }
 
 .image-width {
@@ -58,4 +58,18 @@ mat-divider {
 
 .file-name {
     margin-left: 1rem;
+}
+
+.full-address-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.address-div {
+    width: 40%;
+}
+
+.lonlat {
+    width: 20%;
 }

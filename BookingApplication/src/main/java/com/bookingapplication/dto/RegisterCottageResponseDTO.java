@@ -2,6 +2,8 @@ package com.bookingapplication.dto;
 
 import com.bookingapplication.model.Cottage;
 
+import javax.validation.constraints.NotNull;
+
 public class RegisterCottageResponseDTO {
     private long id;
     private String name;
@@ -11,8 +13,10 @@ public class RegisterCottageResponseDTO {
     private Integer bedNumber;
     private String rules;
     private ImagesDTO cottageImages;
+    private Double latitude;
+    private Double longitude;
 
-    public RegisterCottageResponseDTO(long id, String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules, ImagesDTO cottageImages) {
+    public RegisterCottageResponseDTO(long id, String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules, ImagesDTO cottageImages, Double latitude, Double longitude) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -21,11 +25,13 @@ public class RegisterCottageResponseDTO {
         this.bedNumber = bedNumber;
         this.rules = rules;
         this.cottageImages = cottageImages;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public RegisterCottageResponseDTO(Cottage cottage, ImagesDTO cottageImages) {
         this(cottage.getId(), cottage.getName(), cottage.getAddress(), cottage.getDescription(),  cottage.getRoomNumber(),
-                cottage.getBedNumber(), cottage.getRules(), cottageImages);
+                cottage.getBedNumber(), cottage.getRules(), cottageImages, cottage.getLatitude(), cottage.getLongitude());
     }
     public long getId() {
         return id;
@@ -89,5 +95,21 @@ public class RegisterCottageResponseDTO {
 
     public void setCottageImages(ImagesDTO cottageImages) {
         this.cottageImages = cottageImages;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 }
