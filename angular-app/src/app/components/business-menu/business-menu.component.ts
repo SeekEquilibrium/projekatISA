@@ -20,4 +20,8 @@ export class BusinessMenuComponent implements OnInit {
     goToCottages() {
         this.router.navigate(["my-cottages"]);
     }
+
+    goToRegisterCottage() {
+        this.router.navigate(["register/cottage"]);
+    }
 }

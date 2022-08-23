@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { CottageService } from "src/app/service/cottage.service";
 
 @Component({
@@ -9,11 +10,18 @@ import { CottageService } from "src/app/service/cottage.service";
 export class CottagesListComponent implements OnInit {
     cottages: [];
 
-    constructor(private cottageService: CottageService) {}
+    constructor(
+        private cottageService: CottageService,
+        private router: Router
+    ) {}
 
     ngOnInit() {
         this.cottageService.getOwnerCottages().subscribe((response) => {
             this.cottages = response;
         });
+    }
+
+    goToRegisterCottage() {
+        this.router.navigate(["register/cottage"]);
     }
 }

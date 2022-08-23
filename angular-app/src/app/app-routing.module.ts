@@ -10,6 +10,7 @@ import { Observable } from "rxjs";
 import { UserService } from "./service";
 import { AuthGuardService } from "./service/auth-guard.service";
 import { CottagesListComponent } from "./components/cottages-list/cottages-list.component";
+import { RegisterCottageComponent } from "./components/register-cottage/register-cottage.component";
 
 const routes: Routes = [
     {
@@ -37,6 +38,11 @@ const routes: Routes = [
     {
         path: "my-cottages",
         component: CottagesListComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: "register/cottage",
+        component: RegisterCottageComponent,
         canActivate: [AuthGuardService],
     },
 ];

@@ -76,8 +76,6 @@ export class CottageProfileEditComponent implements OnInit {
         for (let i = 0; i < event.target.files.length; i++) {
             this.addedImages.push(event.target.files[i]);
         }
-        // this.imageNames.push();
-        // const file = event.target.files[0];
     }
 
     onSubmit() {
@@ -94,7 +92,7 @@ export class CottageProfileEditComponent implements OnInit {
         };
         this.cottageService.editCottageProfile(editCottage).subscribe(
             (response) => {
-                this.router.navigate(["/"]);
+                this.router.navigate(["/cottage/" + response.name]);
             },
             (error) => {
                 console.log("error");
