@@ -23,3 +23,8 @@ img {
     flex-direction: row;
     justify-content: space-between;
 }
+
+.img-size {
+    object-fit: cover;
+    height: 400px;
+}

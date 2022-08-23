@@ -36,6 +36,7 @@ import { BusinessMenuComponent } from "./components/business-menu/business-menu.
 import { CottagesListComponent } from "./components/cottages-list/cottages-list.component";
 import { CottageHorizontalCardComponent } from "./components/cottage-horizontal-card/cottage-horizontal-card.component";
 import { AuthGuardService } from "./service/auth-guard.service";
+import { CottageService } from "./service/cottage.service";
 @NgModule({
     declarations: [
         AppComponent,
@@ -78,6 +79,7 @@ import { AuthGuardService } from "./service/auth-guard.service";
         UserService,
         ConfigService,
         AuthGuardService,
+        CottageService,
     ],
     bootstrap: [AppComponent],
     entryComponents: [

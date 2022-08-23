@@ -1,15 +1,15 @@
 .cottage-card {
     width: 700px;
     display: block;
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 20px;
-    vertical-align:middle;
+    vertical-align: middle;
     padding-bottom: 50px;
 }
 
 .row-content {
-    display:flex;
+    display: flex;
     flex-direction: row;
 }
 
@@ -19,7 +19,7 @@
 }
 
 #description-div {
-    width:100%;
+    width: 100%;
 }
 
 #rules-textarea {
@@ -51,8 +51,11 @@ mat-card-content {
     margin-bottom: 40px;
 }
 
-
 mat-divider {
     margin-top: 200px;
     margin-bottom: 20px;
+}
+
+.file-name {
+    margin-left: 1rem;
 }

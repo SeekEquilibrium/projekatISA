@@ -17,7 +17,8 @@ export class CottageProfileEditComponent implements OnInit {
     imagePath: string;
     imageNames: string[];
     displayImage: string;
-
+    deletedImages: string[] = [];
+    addedImages: any[] = [];
     returnUrl: string;
     panelOpenState = false;
 
@@ -40,8 +41,6 @@ export class CottageProfileEditComponent implements OnInit {
                     this.cottageProfile = response;
                     this.cottageOwner = this.cottageProfile.cottageOwner;
                     this.imageNames = response.cottageImages.imagePaths;
-                    console.log(this.cottageProfile);
-                    console.log(this.imageNames);
                     if (this.imageNames != null) {
                         this.displayImage = this.imageNames[0];
                     }
@@ -64,7 +63,42 @@ export class CottageProfileEditComponent implements OnInit {
         this.displayImage = image;
     }
 
+    deleteImage(image: string) {
+        this.deletedImages.push(image);
+        this.imageNames = this.imageNames.filter((name) => name != image);
+    }
+
+    deleteAddedImage(file) {
+        this.addedImages = this.addedImages.filter((item) => file != item);
+    }
+
+    onFileSelected(event) {
+        for (let i = 0; i < event.target.files.length; i++) {
+            this.addedImages.push(event.target.files[i]);
+        }
+        // this.imageNames.push();
+        // const file = event.target.files[0];
+    }
+
     onSubmit() {
-        console.log(this.form);
+        const editCottage = {
+            id: this.cottageProfile.id,
+            name: this.form.value.name,
+            address: this.cottageProfile.address,
+            description: this.form.value.description,
+            roomNumber: this.form.value.roomNumber,
+            bedNumber: this.form.value.bedNumber,
+            rules: this.form.value.rules,
+            deletedImages: this.deletedImages,
+            files: this.addedImages,
+        };
+        this.cottageService.editCottageProfile(editCottage).subscribe(
+            (response) => {
+                this.router.navigate(["/"]);
+            },
+            (error) => {
+                console.log("error");
+            }
+        );
     }
 }

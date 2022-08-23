@@ -13,24 +13,6 @@ import { UserService } from "./user.service";
 export class AuthGuardService implements CanActivate {
     constructor(private router: Router, private userService: UserService) {}
 
-    // canActivate(
-    //     route: ActivatedRouteSnapshot,
-    //     state: RouterStateSnapshot
-    // ): boolean {
-    //     this.userService.currentUserSubject.subscribe((value) => {
-    //         console.log(value);
-    //         this.currentUser = value;
-    //     });
-    //     console.log(this.currentUser);
-    //     if (!!this.currentUser) {
-    //         return true;
-    //     } else {
-    //         alert("Please log in");
-    //         this.router.navigate(["/login"]);
-    //         return false;
-    //     }
-    // }
-
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot

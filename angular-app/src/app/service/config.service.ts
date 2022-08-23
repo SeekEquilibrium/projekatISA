@@ -42,7 +42,7 @@ export class ConfigService {
     }
 
     public get_cottage_profile_url(name: string): string {
-        return (this._cottage_url = this._cottage_url + "/" + name);
+        return this._cottage_url + "/" + name;
     }
 
     public image_path(): string {

@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class EditCottageRequestDTO {
-    @NotBlank
+    @NotNull
     private long id;
     @NotBlank
     private String name;
@@ -33,6 +33,18 @@ public class EditCottageRequestDTO {
     }
 
     public EditCottageRequestDTO() {
+    }
+
+    public EditCottageRequestDTO(long id, String name, String address, String description, Integer roomNumber, Integer bedNumber, String rules, String[] deletedImages, MultipartFile[] files) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.description = description;
+        this.roomNumber = roomNumber;
+        this.bedNumber = bedNumber;
+        this.rules = rules;
+        this.deletedImages = deletedImages;
+        this.files = files;
     }
 
     public long getId() {

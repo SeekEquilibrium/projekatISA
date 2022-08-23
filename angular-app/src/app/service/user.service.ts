@@ -23,12 +23,10 @@ export class UserService {
     }
 
     getMyInfo(): Observable<any> {
-        console.log(localStorage.getItem("jwt"));
         return this.apiService.get(this.config.whoami_url).pipe(
             map((user) => {
                 this.currentUser = user;
                 this.setCurrentUserSubject(user);
-                console.log(this.currentUserSubject.value);
                 return user;
             }),
             catchError((err) => {

@@ -36,9 +36,24 @@ export class CottageService {
             );
     }
 
-    public editCottageProfile(cottage) {
+    public editCottageProfile(editCottage) {
+        console.log(editCottage);
+        console.log(editCottage.files);
+        let formData = new FormData();
+        formData.append("id", editCottage.id);
+        formData.append("name", editCottage.name);
+        formData.append("address", editCottage.address);
+        formData.append("description", editCottage.description);
+        formData.append("roomNumber", editCottage.roomNumber);
+        formData.append("bedNumber", editCottage.bedNumber);
+        formData.append("rules", editCottage.rules);
+        formData.append("deletedImages", editCottage.deletedImages);
+        for (let i = 0; i < editCottage.files.length; i++) {
+            formData.append("files", editCottage.files[i]);
+        }
+        // formData.append("files", editCottage.files);
         return this.apiService
-            .put(this.config.cottage_url + "/edit", cottage)
+            .put(this.config.cottage_url + "/edit", formData)
             .pipe(
                 map((res) => {
                     return res;
