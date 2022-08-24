@@ -36,6 +36,32 @@ export class CottageService {
             );
     }
 
+    public registerCottage(cottage) {
+        console.log(cottage);
+        console.log(cottage.files);
+        let formData = new FormData();
+        formData.append("name", cottage.name);
+        formData.append("address", cottage.address);
+        formData.append("description", cottage.description);
+        formData.append("roomNumber", cottage.roomNumber);
+        formData.append("bedNumber", cottage.bedNumber);
+        formData.append("rules", cottage.rules);
+        formData.append("longitude", cottage.longitude);
+        formData.append("latitude", cottage.latitude);
+
+        for (let i = 0; i < cottage.files.length; i++) {
+            formData.append("files", cottage.files[i]);
+        }
+        // formData.append("files", editCottage.files);
+        return this.apiService
+            .post(this.config.cottage_url + "/register", formData)
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
+
     public editCottageProfile(editCottage) {
         console.log(editCottage);
         console.log(editCottage.files);
@@ -48,6 +74,8 @@ export class CottageService {
         formData.append("bedNumber", editCottage.bedNumber);
         formData.append("rules", editCottage.rules);
         formData.append("deletedImages", editCottage.deletedImages);
+        formData.append("longitude", editCottage.longitude);
+        formData.append("latitude", editCottage.latitude);
         for (let i = 0; i < editCottage.files.length; i++) {
             formData.append("files", editCottage.files[i]);
         }

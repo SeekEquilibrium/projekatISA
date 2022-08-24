@@ -52,8 +52,8 @@ export class CottageProfileEditComponent implements OnInit {
 
         this.form = this.formBuilder.group({
             name: ["", Validators.required],
-            description: [""],
-            rules: [""],
+            description: ["", Validators.required],
+            rules: ["", Validators.required],
             roomNumber: [Validators.min(1), Validators.required],
             bedNumber: [Validators.min(1), Validators.required],
             address: ["", Validators.required],
@@ -92,6 +92,8 @@ export class CottageProfileEditComponent implements OnInit {
             rules: this.form.value.rules,
             deletedImages: this.deletedImages,
             files: this.addedImages,
+            longitude: this.form.value.longitude,
+            latitude: this.form.value.latitude,
         };
         this.cottageService.editCottageProfile(editCottage).subscribe(
             (response) => {
