@@ -11,6 +11,7 @@ import { UserService } from "./service";
 import { AuthGuardService } from "./service/auth-guard.service";
 import { CottagesListComponent } from "./components/cottages-list/cottages-list.component";
 import { RegisterCottageComponent } from "./components/register-cottage/register-cottage.component";
+import { CottagesReservationsComponent } from "./components/cottages-reservations/cottages-reservations.component";
 
 const routes: Routes = [
     {
@@ -43,6 +44,11 @@ const routes: Routes = [
     {
         path: "register/cottage",
         component: RegisterCottageComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: "reservations/:cottageId",
+        component: CottagesReservationsComponent,
         canActivate: [AuthGuardService],
     },
 ];

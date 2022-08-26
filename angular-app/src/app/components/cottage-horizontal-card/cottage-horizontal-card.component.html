@@ -15,7 +15,9 @@
         </div>
     </div>
     <div class="cottage-horizontal-buttons">
-        <button mat-flat-button color="primary">Stats</button>
+        <button (click)="statsClick()" mat-flat-button color="primary">
+            Stats
+        </button>
         <button (click)="editClick()" mat-flat-button color="accent">
             Edit
         </button>

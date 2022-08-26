@@ -18,6 +18,10 @@ export class CottageHorizontalCardComponent implements OnInit {
         this.router.navigate(["/cottage/" + this.cottage.name + "/edit"]);
     }
 
+    statsClick() {
+        this.router.navigate(["reservations/" + this.cottage.id]);
+    }
+
     navigateToCottage() {
         this.router.navigate(["/cottage/" + this.cottage.name]);
     }

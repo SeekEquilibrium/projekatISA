@@ -1,6 +1,7 @@
 package com.bookingapplication.controller;
 
 import com.bookingapplication.dto.*;
+import com.bookingapplication.dto.reservationInfo.ReservationDTO;
 import com.bookingapplication.model.*;
 import com.bookingapplication.service.*;
 import com.bookingapplication.validation.DateValidation;
@@ -168,5 +169,29 @@ public class CottageAppointmentController {
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/cottageReservations/{cottageId}")
+    @PreAuthorize("hasAuthority('COTTAGE_OWNER')")
+    public ResponseEntity<ArrayList<ReservationDTO>> cottageReservations(@PathVariable long cottageId){
+        UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        //Da li vikendica postoji
+        if(!cottageService.existsById(cottageId)){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        //Da li vikendica pripada gazdi koji salje zahtev
+        if(cottageService.ownerOwnsCottage(userApp.getId(), cottageId)){
+            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+        }
+        ArrayList<AppointmentCottage> appointments = appointmentCottageService.getCottageReservations(cottageId);
+        appointments.sort((o1,o2) -> o1.getDate().compareTo(o2.getDate()));
+        ArrayList<ReservationDTO> reservations = new ArrayList<>();
+        for(AppointmentCottage a : appointments){
+            UserDTO user = new UserDTO(a.getClient());
+            ReservationDTO reservationDTO = new ReservationDTO(a.getId(), user, a.getDate(), a.getPricePerDay(), a.isHasAction());
+            reservations.add(reservationDTO);
+        }
+
+        return new ResponseEntity<>(reservations, HttpStatus.OK);
     }
 }

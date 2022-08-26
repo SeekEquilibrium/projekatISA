@@ -103,6 +103,20 @@ export class CottageService {
             );
     }
 
+    public getCottageReservations(cottageId) {
+        return this.apiService
+            .get(
+                this.config.appointment_url +
+                    "/cottage/cottageReservations/" +
+                    cottageId
+            )
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
+
     public getCottageActions(cottageId) {
         return this.apiService
             .get(
