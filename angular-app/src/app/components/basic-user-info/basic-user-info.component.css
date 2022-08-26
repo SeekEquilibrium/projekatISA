@@ -1,0 +1,17 @@
+.about-user-title {
+    font-size: 20px;
+}
+
+.about-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.about-content {
+    font-weight: 500;
+}
+
+.about-label {
+    font-weight: 200;
+}

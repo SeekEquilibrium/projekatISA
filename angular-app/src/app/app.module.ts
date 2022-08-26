@@ -39,6 +39,7 @@ import { AuthGuardService } from "./service/auth-guard.service";
 import { CottageService } from "./service/cottage.service";
 import { RegisterCottageComponent } from "./components/register-cottage/register-cottage.component";
 import { CottagesReservationsComponent } from "./components/cottages-reservations/cottages-reservations.component";
+import { BasicUserInfoComponent } from "./components/basic-user-info/basic-user-info.component";
 @NgModule({
     declarations: [
         AppComponent,
@@ -57,6 +58,7 @@ import { CottagesReservationsComponent } from "./components/cottages-reservation
         CottageHorizontalCardComponent,
         RegisterCottageComponent,
         CottagesReservationsComponent,
+        BasicUserInfoComponent,
     ],
     imports: [
         BrowserModule,
@@ -89,6 +91,7 @@ import { CottagesReservationsComponent } from "./components/cottages-reservation
     entryComponents: [
         CottageDefineAvailabilityComponent,
         CottageDefineActionsComponent,
+        BasicUserInfoComponent,
     ],
 })
 export class AppModule {}
