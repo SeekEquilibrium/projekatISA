@@ -1,5 +1,6 @@
 package com.bookingapplication.service;
 
+import com.bookingapplication.dto.EditProfileRequestDTO;
 import com.bookingapplication.dto.RegistrationRequestDTO;
 import com.bookingapplication.model.Client;
 import com.bookingapplication.model.CottageOwner;
@@ -47,6 +48,16 @@ public class UserService implements UserDetailsService {
 			default:
 				return null;
 		}
+	}
+
+	public UserApp edit(EditProfileRequestDTO editProfile, long userId){
+		UserApp user = userRepository.findById(userId);
+		user.setName(editProfile.getName());
+		user.setSurname(editProfile.getSurname());
+		user.setUsername(editProfile.getUsername());
+		user.setEmail(editProfile.getEmail());
+		user.setPassword(passwordEncoder.encode(editProfile.getNewPassword()));
+		return save(user);
 	}
 
 	public UserApp save(UserApp user) {
