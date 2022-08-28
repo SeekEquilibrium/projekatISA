@@ -41,6 +41,7 @@ import { RegisterCottageComponent } from "./components/register-cottage/register
 import { CottagesReservationsComponent } from "./components/cottages-reservations/cottages-reservations.component";
 import { BasicUserInfoComponent } from "./components/basic-user-info/basic-user-info.component";
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { OpenlayersMapComponent } from './components/openlayers-map/openlayers-map.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -61,6 +62,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
         CottagesReservationsComponent,
         BasicUserInfoComponent,
         EditProfileComponent,
+        OpenlayersMapComponent,
     ],
     imports: [
         BrowserModule,

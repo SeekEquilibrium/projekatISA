@@ -66,25 +66,10 @@
                 >
                 <br />
                 <br />
-                <mat-accordion>
-                    <mat-expansion-panel
-                        hideToggle
-                        class="mat-elevation-z0"
-                        (opened)="panelOpenState = true"
-                        (closed)="panelOpenState = false"
-                    >
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                {{
-                                    panelOpenState
-                                        ? "Hide map"
-                                        : "Show on a map"
-                                }}
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <h1>Map goes here</h1>
-                    </mat-expansion-panel>
-                </mat-accordion>
+                <app-openlayers-map
+                    [lon]="cottageProfile.longitude"
+                    [lat]="cottageProfile.latitude"
+                ></app-openlayers-map>
                 <br />
             </mat-card-content>
             <mat-divider inset></mat-divider>

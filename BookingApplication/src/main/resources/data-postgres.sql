@@ -16,7 +16,7 @@ insert into cottage(id, name, address, description, room_number, bed_number, rul
     'Fruskac je jedan od najlepsih apartmana, bla bla...', 2, 4, 'Zabranjeno pusenje u zatvorenom prostoru.', 1, 45.2063777680445, 19.809699206259737);
 insert into cottage(id, name, address, description, room_number, bed_number, rules, cottage_owner_id, latitude, longitude) values
     (nextval('cottage_seq_gen'), 'Fruskac 2', 'Fruskogorska 24',
-    'Fruskac je jedan od najlepsih apartmana, bla bla...', 2, 4, 'Zabranjeno pusenje u zatvorenom prostoru.', 1, 45.2063777680445, 19.809699206259737);
+    'Fruskac je jedan od najlepsih apartmana, bla bla...', 2, 4, 'Zabranjeno pusenje u zatvorenom prostoru.', 1, 45.45414088121907, 19.618685337374817);
     --Adding images of cottage to cottage
     insert into cottage_image(id, path, cottage_id) values (nextval('image_seq_gen'), 'Fruskac_7c131505-1f1d-4536-8719-c3dad38a091d.png', 1);
     insert into cottage_image(id, path, cottage_id) values (nextval('image_seq_gen'), 'Fruskac_1053c4e8-edb2-4b6e-8ff2-960aadd93113.png', 1);
