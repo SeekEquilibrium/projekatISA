@@ -52,6 +52,15 @@ export class RegisterCottageComponent implements OnInit {
         }
     }
 
+    setLongitude(lon) {
+        console.log(lon);
+        this.form.controls.longitude.setValue(lon);
+    }
+
+    setLatitude(lat) {
+        this.form.controls.latitude.setValue(lat);
+    }
+
     onSubmit() {
         const cottage = {
             name: this.form.value.name,

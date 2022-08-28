@@ -25,13 +25,27 @@
                         </mat-form-field>
                         <mat-form-field class="lonlat" appearance="outline">
                             <mat-label>Longitude: </mat-label>
-                            <input formControlName="longitude" matInput />
+                            <input
+                                formControlName="longitude"
+                                matInput
+                                readonly="true"
+                            />
                         </mat-form-field>
-                        <mat-form-field class="lonlat" appearance="outline">
+                        <mat-form-field
+                            class="lonlat"
+                            appearance="outline"
+                            readonly="true"
+                        >
                             <mat-label>Latitude: </mat-label>
                             <input formControlName="latitude" matInput />
                         </mat-form-field>
                     </div>
+                    <app-openlayers-map
+                        [readonly]="false"
+                        (longitude)="setLongitude($event)"
+                        (latitude)="setLatitude($event)"
+                    ></app-openlayers-map>
+                    <br />
                     <div fxLayout="column" fxLayoutAlign="center start">
                         <mat-form-field
                             appearance="outline"

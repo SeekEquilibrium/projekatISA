@@ -31,9 +31,15 @@ export class OpenlayersMapComponent implements OnInit {
     }
 
     initializeMap() {
-        if (!this.lat || !this.lon) {
-            this.lon = 0;
-            this.lat = 0;
+        let zoom = 14;
+        console.log(this.lon);
+        if (
+            !this.readonly &&
+            (this.lon == undefined || this.lat == undefined)
+        ) {
+            this.lon = 20.45317912629857;
+            this.lat = 44.873014333113275;
+            zoom = 5;
         }
         const markers = new VectorLayer({
             source: new VectorSource(),
@@ -47,14 +53,19 @@ export class OpenlayersMapComponent implements OnInit {
             ],
             view: new View({
                 center: fromLonLat([this.lon, this.lat]),
-                zoom: 14,
+                zoom: zoom,
                 maxZoom: 18,
-                minZoom: 10,
+                minZoom: 5,
             }),
         });
         this.map.addLayer(markers);
 
         if (this.readonly == false) {
+            const marker = new Feature(
+                new Point(fromLonLat([this.lon, this.lat]))
+            );
+            markers.getSource().addFeature(marker);
+
             this.map.on("click", (e) => {
                 let lonlat = transform(e.coordinate, "EPSG:3857", "EPSG:4326");
                 console.log(lonlat);
