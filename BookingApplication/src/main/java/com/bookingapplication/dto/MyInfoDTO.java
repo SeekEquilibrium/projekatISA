@@ -7,6 +7,8 @@ public class MyInfoDTO {
     private String name;
     private String surname;
     private String username;
+    private String email;
+    private String phoneNumber;
     private String role;
 
     public MyInfoDTO(Long id, String name, String surname, String username, String role) {
@@ -25,6 +27,8 @@ public class MyInfoDTO {
         this.name = user.getName();
         this.surname = user.getSurname();
         this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.phoneNumber = user.getPhoneNumber();
         this.role = role;
     }
 
@@ -66,5 +70,21 @@ public class MyInfoDTO {
 
     public void setRole(String phoneNumber) {
         this.role = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

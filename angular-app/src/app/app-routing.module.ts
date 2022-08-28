@@ -12,6 +12,7 @@ import { AuthGuardService } from "./service/auth-guard.service";
 import { CottagesListComponent } from "./components/cottages-list/cottages-list.component";
 import { RegisterCottageComponent } from "./components/register-cottage/register-cottage.component";
 import { CottagesReservationsComponent } from "./components/cottages-reservations/cottages-reservations.component";
+import { EditProfileComponent } from "./components/edit-profile/edit-profile.component";
 
 const routes: Routes = [
     {
@@ -34,6 +35,11 @@ const routes: Routes = [
     {
         path: "cottage/:name/edit",
         component: CottageProfileEditComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: "edit-profile",
+        component: EditProfileComponent,
         canActivate: [AuthGuardService],
     },
     {

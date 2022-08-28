@@ -1,0 +1,91 @@
+<mat-card elevation="5" fxFlex class="content">
+    <mat-card-title>
+        <h2>Edit profile</h2>
+    </mat-card-title>
+
+    <mat-card-content>
+        <form
+            class="form"
+            (ngSubmit)="onSubmit()"
+            *ngIf="!submitted"
+            [formGroup]="form"
+        >
+            <mat-form-field>
+                <mat-label>First Name: </mat-label>
+                <input formControlName="name" matInput [ngModel]="user?.name" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Last Name: </mat-label>
+                <input
+                    formControlName="surname"
+                    matInput
+                    [ngModel]="user?.surname"
+                />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Email: </mat-label>
+                <input
+                    formControlName="email"
+                    matInput
+                    [ngModel]="user?.email"
+                />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Username: </mat-label>
+                <input
+                    formControlName="username"
+                    matInput
+                    [ngModel]="user?.username"
+                />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Phone Number: </mat-label>
+                <input
+                    type="number"
+                    formControlName="phoneNumber"
+                    matInput
+                    [ngModel]="user?.phoneNumber"
+                />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Password: </mat-label>
+                <input
+                    formControlName="password"
+                    matInput
+                    required
+                    type="password"
+                />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>New Password: </mat-label>
+                <input
+                    formControlName="newPassword"
+                    matInput
+                    type="password"
+                    (ngModelChange)="onChange()"
+                />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Repeat New Password: </mat-label>
+                <input
+                    formControlName="repeatNewPassword"
+                    matInput
+                    type="password"
+                />
+            </mat-form-field>
+            <button
+                [disabled]="!form.valid || !passwordsMatch()"
+                color="primary"
+                mat-raised-button
+                type="submit"
+            >
+                Save Changes
+            </button>
+            <br />
+            <button mat-stroked-button color="warn" routerLink="/">
+                Go Back
+            </button>
+        </form>
+        <mat-spinner *ngIf="submitted" mode="indeterminate"></mat-spinner>
+    </mat-card-content>
+</mat-card>

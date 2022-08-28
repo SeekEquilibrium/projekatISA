@@ -57,6 +57,17 @@ export class AuthService {
             );
     }
 
+    editProfile(user): Observable<any> {
+        delete user.repeatNewPassword;
+        return this.apiService
+            .post("http://localhost:8080/user/editProfile", user)
+            .pipe(
+                map(() => {
+                    console.log("ok");
+                })
+            );
+    }
+
     logout() {
         this.userService.currentUser = null;
         this.access_token = null;
