@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import Map from "ol/Map";
 import View from "ol/View";
 import Tile from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
-import { fromLonLat, Projection } from "ol/proj";
+import { fromLonLat, Projection, transform } from "ol/proj";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import { Feature } from "ol";
+import Feature from "ol/Feature";
 import { Point } from "ol/geom";
 
 @Component({
@@ -17,6 +17,10 @@ import { Point } from "ol/geom";
 export class OpenlayersMapComponent implements OnInit {
     @Input() lon;
     @Input() lat;
+    @Input() readonly;
+    @Output() latitude = new EventEmitter<any>();
+    @Output() longitude = new EventEmitter<any>();
+
     map;
     // lat = 45.2063777680445;
     // lon = 19.809699206259737;
@@ -27,6 +31,10 @@ export class OpenlayersMapComponent implements OnInit {
     }
 
     initializeMap() {
+        if (!this.lat || !this.lon) {
+            this.lon = 0;
+            this.lat = 0;
+        }
         const markers = new VectorLayer({
             source: new VectorSource(),
         });
@@ -45,7 +53,27 @@ export class OpenlayersMapComponent implements OnInit {
             }),
         });
         this.map.addLayer(markers);
-        const marker = new Feature(new Point(fromLonLat([this.lon, this.lat])));
-        markers.getSource().addFeature(marker);
+
+        if (this.readonly == false) {
+            this.map.on("click", (e) => {
+                let lonlat = transform(e.coordinate, "EPSG:3857", "EPSG:4326");
+                console.log(lonlat);
+                this.lat = lonlat[1];
+                this.lon = lonlat[0];
+                this.latitude.emit(this.lat);
+                this.longitude.emit(this.lon);
+                console.log(this.lat, this.lon);
+                const marker = new Feature(
+                    new Point(fromLonLat([this.lon, this.lat]))
+                );
+                markers.getSource().refresh();
+                markers.getSource().addFeature(marker);
+            });
+        } else {
+            const marker = new Feature(
+                new Point(fromLonLat([this.lon, this.lat]))
+            );
+            markers.getSource().addFeature(marker);
+        }
     }
 }

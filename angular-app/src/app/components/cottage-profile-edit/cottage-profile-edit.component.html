@@ -50,6 +50,14 @@
                             />
                         </mat-form-field>
                     </div>
+                    <app-openlayers-map
+                        [lon]="cottageProfile.longitude"
+                        [lat]="cottageProfile.latitude"
+                        [readonly]="false"
+                        (longitude)="setLongitude($event)"
+                        (latitude)="setLatitude($event)"
+                    ></app-openlayers-map>
+                    <br />
                     <div fxLayout="column" fxLayoutAlign="center start">
                         <mat-form-field
                             appearance="outline"

@@ -81,6 +81,14 @@ export class CottageProfileEditComponent implements OnInit {
         }
     }
 
+    setLongitude(lon) {
+        this.cottageProfile.longitude = lon;
+    }
+
+    setLatitude(lat) {
+        this.cottageProfile.latitude = lat;
+    }
+
     onSubmit() {
         const editCottage = {
             id: this.cottageProfile.id,
