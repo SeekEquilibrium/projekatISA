@@ -1,22 +1,28 @@
 package com.bookingapplication.dto;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 public class EditProfileRequestDTO {
-    private String oldPassword;
+    @NotEmpty
+    private String password;
     private String newPassword;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String surname;
     @Email
+    @NotEmpty
     private String email;
+    @NotEmpty
     private String username;
 
-    public String getOldPassword() {
-        return oldPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setOldPassword(String oldPassword) {
-        this.oldPassword = oldPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getNewPassword() {

@@ -56,7 +56,11 @@ public class UserService implements UserDetailsService {
 		user.setSurname(editProfile.getSurname());
 		user.setUsername(editProfile.getUsername());
 		user.setEmail(editProfile.getEmail());
-		user.setPassword(passwordEncoder.encode(editProfile.getNewPassword()));
+		if(editProfile.getNewPassword()!=null){
+			if(!editProfile.getNewPassword().isEmpty() && editProfile.getNewPassword().trim().length()!=0){
+				user.setPassword(passwordEncoder.encode(editProfile.getNewPassword()));
+			}
+		}
 		return save(user);
 	}
 

@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 
 @RestController
@@ -33,14 +34,18 @@ public class UserController {
     }
 
     @PostMapping("/editProfile")
-    public ResponseEntity<?> editProfile(@RequestBody EditProfileRequestDTO editProfileRequestDTO) {
+    public ResponseEntity<?> editProfile(@Valid @RequestBody EditProfileRequestDTO editProfileRequestDTO) {
         UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
         // Ukoliko kredencijali nisu ispravni, logovanje nece biti uspesno, desice se
         // AuthenticationException
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                userApp.getUsername(), editProfileRequestDTO.getOldPassword()));
+                userApp.getUsername(), editProfileRequestDTO.getPassword()));
 
+        UserApp existingUsername = userService.FindUserByUsername(editProfileRequestDTO.getUsername());
+        if(existingUsername!=null && existingUsername.getId()!=userApp.getId()){
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        }
 
         return new ResponseEntity<>(userService.edit(editProfileRequestDTO, userApp.getId()), HttpStatus.OK);
     }
