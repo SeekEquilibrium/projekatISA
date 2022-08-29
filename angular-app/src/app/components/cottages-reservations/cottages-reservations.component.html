@@ -3,10 +3,12 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
-        <ng-container matColumnDef="Id">
-            <th class="centerHeader" mat-header-cell *matHeaderCellDef>Id</th>
+        <ng-container matColumnDef="Cottage">
+            <th class="centerHeader" mat-header-cell *matHeaderCellDef>
+                Cottage
+            </th>
             <td class="centerHeader" mat-cell *matCellDef="let element">
-                {{ element.id }}
+                {{ element.cottageName }}
             </td>
         </ng-container>
 
@@ -25,15 +27,6 @@
             </th>
             <td class="centerHeader" mat-cell *matCellDef="let element">
                 {{ element.endDate | date: "shortDate" }}
-            </td>
-        </ng-container>
-
-        <ng-container matColumnDef="Cottage">
-            <th class="centerHeader" mat-header-cell *matHeaderCellDef>
-                Cottage
-            </th>
-            <td class="centerHeader" mat-cell *matCellDef="let element">
-                {{ element.cottageName }}
             </td>
         </ng-container>
 
@@ -66,7 +59,14 @@
                 Review
             </th>
             <td class="centerHeader" mat-cell *matCellDef="let element">
-                <button mat-button color="warn">Review</button>
+                <button
+                    *ngIf="showReviewButton(element)"
+                    (click)="reviewClick(element)"
+                    mat-button
+                    color="warn"
+                >
+                    Review
+                </button>
             </td>
         </ng-container>
     </table>

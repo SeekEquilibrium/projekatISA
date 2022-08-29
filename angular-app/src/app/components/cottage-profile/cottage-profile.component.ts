@@ -64,13 +64,13 @@ export class CottageProfileComponent implements OnInit {
 
     openAvailabilityDialog() {
         this.dialog.open(CottageDefineAvailabilityComponent, {
-            data: { cottageId: 1 },
+            data: { cottageId: this.cottageProfile.id },
         });
     }
 
     openActionsDialog() {
         this.dialog.open(CottageDefineActionsComponent, {
-            data: { cottageId: 1 },
+            data: { cottageId: this.cottageProfile.id },
         });
     }
 }

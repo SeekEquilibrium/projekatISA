@@ -23,6 +23,9 @@ public class CottageReportDTO {
         this.didNotShowUp = didNotShowUp;
     }
 
+    public CottageReportDTO() {
+    }
+
     public long getCottageId() {
         return cottageId;
     }

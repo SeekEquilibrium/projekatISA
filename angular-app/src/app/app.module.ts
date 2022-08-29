@@ -40,8 +40,9 @@ import { CottageService } from "./service/cottage.service";
 import { RegisterCottageComponent } from "./components/register-cottage/register-cottage.component";
 import { CottagesReservationsComponent } from "./components/cottages-reservations/cottages-reservations.component";
 import { BasicUserInfoComponent } from "./components/basic-user-info/basic-user-info.component";
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
-import { OpenlayersMapComponent } from './components/openlayers-map/openlayers-map.component';
+import { EditProfileComponent } from "./components/edit-profile/edit-profile.component";
+import { OpenlayersMapComponent } from "./components/openlayers-map/openlayers-map.component";
+import { OwnerReviewComponent } from "./components/owner-review/owner-review.component";
 @NgModule({
     declarations: [
         AppComponent,
@@ -63,6 +64,7 @@ import { OpenlayersMapComponent } from './components/openlayers-map/openlayers-m
         BasicUserInfoComponent,
         EditProfileComponent,
         OpenlayersMapComponent,
+        OwnerReviewComponent,
     ],
     imports: [
         BrowserModule,
@@ -96,6 +98,7 @@ import { OpenlayersMapComponent } from './components/openlayers-map/openlayers-m
         CottageDefineAvailabilityComponent,
         CottageDefineActionsComponent,
         BasicUserInfoComponent,
+        OwnerReviewComponent,
     ],
 })
 export class AppModule {}

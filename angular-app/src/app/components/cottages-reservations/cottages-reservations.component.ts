@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { MatDialog } from "@angular/material";
+import { MatDialog, MatDialogRef } from "@angular/material";
 import { ActivatedRoute } from "@angular/router";
+import { NgbDate, NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
 import { CottageService } from "src/app/service/cottage.service";
 import { BasicUserInfoComponent } from "../basic-user-info/basic-user-info.component";
+import { OwnerReviewComponent } from "../owner-review/owner-review.component";
 
 @Component({
     selector: "app-cottages-reservations",
@@ -10,13 +12,18 @@ import { BasicUserInfoComponent } from "../basic-user-info/basic-user-info.compo
     styleUrls: ["./cottages-reservations.component.css"],
 })
 export class CottagesReservationsComponent implements OnInit {
+    now = new Date();
+    today: NgbDateStruct = {
+        year: this.now.getFullYear(),
+        month: this.now.getMonth() + 1,
+        day: this.now.getDate(),
+    };
     reservations: any[];
     dataSource: any;
     displayedColumns: String[] = [
-        "Id",
+        "Cottage",
         "Date Start",
         "Date End",
-        "Cottage",
         "Customer",
         "Status",
         "Review",
@@ -41,6 +48,25 @@ export class CottagesReservationsComponent implements OnInit {
         const dialogRef = this.dialog.open(BasicUserInfoComponent, {
             width: "300px",
             data: { user: user },
+        });
+    }
+
+    showReviewButton(element) {
+        let date = new NgbDate(
+            element.startDate[0],
+            element.startDate[1],
+            element.startDate[2]
+        );
+        if (date.before(this.today)) {
+            return true;
+        }
+        return false;
+    }
+
+    reviewClick(element) {
+        console.log(element);
+        this.dialog.open(OwnerReviewComponent, {
+            data: { element: element },
         });
     }
 

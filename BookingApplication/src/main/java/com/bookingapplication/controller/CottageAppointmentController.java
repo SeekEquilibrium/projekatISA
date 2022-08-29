@@ -189,7 +189,7 @@ public class CottageAppointmentController {
         ArrayList<ReservationDTO> reservationsDTO = new ArrayList<>();
         for(CottageReservations c : reservations){
             UserDTO user = new UserDTO(c.getClient());
-            ReservationDTO reservationDTO = new ReservationDTO(c.getId(), user, c.getDateStart(), c.getDateEnd(), c.getCottage().getName(), c.getStatus().toString());
+            ReservationDTO reservationDTO = new ReservationDTO(c.getId(), user, c.getDateStart(), c.getDateEnd(), c.getCottage().getName(), c.getCottage().getId(), c.getStatus().toString());
             reservationsDTO.add(reservationDTO);
         }
 //        ArrayList<AppointmentCottage> appointments = appointmentCottageService.getCottageReservations(cottageId);

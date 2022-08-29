@@ -152,4 +152,14 @@ export class CottageService {
                 })
             );
     }
+
+    public submitReport(report) {
+        return this.apiService
+            .post("http://localhost:8080/report/cottage/report", report)
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
 }

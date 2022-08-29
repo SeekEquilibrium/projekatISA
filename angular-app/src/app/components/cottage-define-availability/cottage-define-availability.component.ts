@@ -91,7 +91,6 @@ export class CottageDefineAvailabilityComponent implements OnInit {
     //====================================================================================
 
     ngOnInit() {
-        console.log(this.data.cottageId);
         this.cottageService
             .getCottageAvailability(this.data.cottageId)
             .subscribe(
@@ -114,7 +113,6 @@ export class CottageDefineAvailabilityComponent implements OnInit {
     }
 
     saveButtonValidation() {
-        console.log(this.price);
         return !this.fromDate || !this.toDate || !this.price;
     }
 

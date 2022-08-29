@@ -33,7 +33,7 @@ public class CottageReportController {
 
     @PostMapping("/report")
     @PreAuthorize("hasAuthority('COTTAGE_OWNER')")
-    public ResponseEntity<?> createReport(@Valid @RequestBody CottageReportDTO report){
+    public ResponseEntity<CottageReportDTO> createReport(@Valid @RequestBody CottageReportDTO report){
         UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         CottageOwner cottageOwner = cottageOwnerService.findById(userApp.getId());
         //Da li vikendica pripada gazdi koji salje zahtev
@@ -46,8 +46,8 @@ public class CottageReportController {
         }
         CottageReport response = cottageReportService.createReport(report);
         if(response == null){
-            return new ResponseEntity<String>("Client has never reserved this cottage.", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<String>("You have submitted report successfully.", HttpStatus.OK);
+        return new ResponseEntity<CottageReportDTO>(report, HttpStatus.OK);
     }
 }

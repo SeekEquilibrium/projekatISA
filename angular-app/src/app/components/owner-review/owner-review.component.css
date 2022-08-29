@@ -1,0 +1,38 @@
+.review-div {
+    width: 300px;
+    height: 300px;
+}
+
+.description-div {
+    width: 100%;
+}
+
+.description-textarea {
+    height: 70px;
+}
+
+.example-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    column-gap: 10px;
+}
+
+.title {
+    font-size: large;
+    margin-bottom: 20px;
+}
+
+.user-fullname {
+    font-weight: 500;
+}

@@ -7,6 +7,7 @@ import com.bookingapplication.model.Role;
 import com.bookingapplication.model.UserApp;
 
 public class UserDTO {
+	private long id;
 	private String name;
 	private String surname;
 	private String username;
@@ -14,10 +15,11 @@ public class UserDTO {
 	private String phoneNumber;
 
 	public UserDTO(UserApp userApp) {
-		this(userApp.getName(), userApp.getSurname(), userApp.getUsername(), userApp.getEmail(), userApp.getPhoneNumber());
+		this(userApp.getId(), userApp.getName(), userApp.getSurname(), userApp.getUsername(), userApp.getEmail(), userApp.getPhoneNumber());
 	}
 
-	public UserDTO(String name, String surname, String username, String email, String phoneNumber) {
+	public UserDTO(long id, String name, String surname, String username, String email, String phoneNumber) {
+		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.username = username;
@@ -26,6 +28,14 @@ public class UserDTO {
 	}
 
 	public UserDTO() {
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {

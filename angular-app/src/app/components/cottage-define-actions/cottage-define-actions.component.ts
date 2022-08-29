@@ -79,7 +79,6 @@ export class CottageDefineActionsComponent implements OnInit {
     //====================================================================================
 
     saveButtonValidation() {
-        console.log(this.price);
         return !this.fromDate || !this.toDate || !this.price;
     }
 
@@ -127,7 +126,6 @@ export class CottageDefineActionsComponent implements OnInit {
                     );
                     this.availability_dates.push(date);
                 });
-                console.log(response);
             },
             (error) => {
                 console.log(error);
