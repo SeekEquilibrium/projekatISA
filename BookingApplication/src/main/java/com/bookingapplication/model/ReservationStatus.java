@@ -1,7 +1,6 @@
 package com.bookingapplication.model;
 
-public enum AppointmentType {
-    AVAILABLE,
+public enum ReservationStatus {
     RESERVED,
     CANCELED
 }

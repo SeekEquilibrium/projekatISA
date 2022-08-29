@@ -1,10 +1,7 @@
 package com.bookingapplication.service;
 
 import com.bookingapplication.dto.*;
-import com.bookingapplication.model.AppointmentCottage;
-import com.bookingapplication.model.AppointmentType;
-import com.bookingapplication.model.Client;
-import com.bookingapplication.model.Cottage;
+import com.bookingapplication.model.*;
 import com.bookingapplication.repository.AppointmentCottageRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +19,8 @@ public class AppointmentCottageService {
     private ClientService clientService;
     @Autowired
     private CottageService cottageService;
+    @Autowired
+    private CottageReservationsService cottageReservationsService;
 
     public DefineCottageAvailabilityResponseDTO DefineCottageAvailability (DefineCottageAvailabilityRequestDTO request){
         Cottage cottage = cottageService.findById(request.getCottageId());
@@ -71,6 +70,7 @@ public class AppointmentCottageService {
             reservation.setType(AppointmentType.RESERVED);
             save(reservation);
         }
+        cottageReservationsService.save(new CottageReservations(startTime, endTime, ReservationStatus.RESERVED, cottage, client));
         return new CottageReservationResponseDTO(cottageId, clientId, startTime, endTime);
     }
     public boolean CheckActionAvailability (long cottageId, LocalDate startTime , LocalDate endTime){

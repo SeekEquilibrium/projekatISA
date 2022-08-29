@@ -17,6 +17,9 @@ public class Client extends UserApp {
     (mappedBy = "client", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
     public Set<Report> reports = new HashSet<>();
 
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+    public Set<CottageReservations> reservations = new HashSet<>();
+
     public Client(String username, String name, String surname, String email, String password, String phoneNumber, Role role) {
         super(username, name, surname, email, password, phoneNumber, role);
     }

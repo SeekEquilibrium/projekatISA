@@ -3,16 +3,7 @@ package com.bookingapplication.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -29,13 +20,13 @@ public class Cottage {
 	private String name;
 	@Column
 	private String address;
-	@Column
+	@Column(columnDefinition="TEXT")
 	private String description;
 	@Column
 	private Integer roomNumber;
 	@Column
 	private Integer bedNumber;
-	@Column
+	@Column(columnDefinition="TEXT")
 	private String rules;
 	@Column
 	private Double longitude;
@@ -56,6 +47,11 @@ public class Cottage {
 	@OneToMany
 			(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
 	public Set<CottageReport> cottageReports = new HashSet<CottageReport>();
+
+	@OneToMany
+			(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	public Set<CottageReservations> cottageReservations = new HashSet<>();
+
 
 	public Cottage() {}
 
