@@ -12,7 +12,15 @@ import { BasicUserInfoComponent } from "../basic-user-info/basic-user-info.compo
 export class CottagesReservationsComponent implements OnInit {
     reservations: any[];
     dataSource: any;
-    displayedColumns: String[] = ["Id", "Date", "Price", "Customer", "Action"];
+    displayedColumns: String[] = [
+        "Id",
+        "Date Start",
+        "Date End",
+        "Cottage",
+        "Customer",
+        "Status",
+        "Review",
+    ];
     changeColor = false;
     constructor(
         private cottageService: CottageService,
