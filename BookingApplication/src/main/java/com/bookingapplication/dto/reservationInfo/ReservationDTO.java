@@ -7,16 +7,21 @@ import java.time.LocalDate;
 public class ReservationDTO {
     private long id;
     private UserDTO user;
-    private LocalDate date;
-    private double pricePerNight;
-    private boolean hasAction;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private String cottageName;
+    private String status;
 
-    public ReservationDTO(long id, UserDTO user, LocalDate date, double pricePerNight, boolean hasAction) {
+    public ReservationDTO(long id, UserDTO user, LocalDate startDate, LocalDate endDate, String cottageName, String status) {
         this.id = id;
         this.user = user;
-        this.date = date;
-        this.pricePerNight = pricePerNight;
-        this.hasAction = hasAction;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.cottageName = cottageName;
+        this.status = status;
+    }
+
+    public ReservationDTO() {
     }
 
     public long getId() {
@@ -35,27 +40,35 @@ public class ReservationDTO {
         this.user = user;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public double getPricePerNight() {
-        return pricePerNight;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setPricePerNight(double pricePerNight) {
-        this.pricePerNight = pricePerNight;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
-    public boolean isHasAction() {
-        return hasAction;
+    public String getCottageName() {
+        return cottageName;
     }
 
-    public void setHasAction(boolean hasAction) {
-        this.hasAction = hasAction;
+    public void setCottageName(String cottageName) {
+        this.cottageName = cottageName;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

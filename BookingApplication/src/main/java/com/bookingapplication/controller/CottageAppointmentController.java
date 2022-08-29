@@ -31,6 +31,8 @@ public class CottageAppointmentController {
     private AppointmentCottageService appointmentCottageService;
     @Autowired
     private ClientService clientService;
+    @Autowired
+    private CottageReservationsService cottageReservationsService;
 
     @PostMapping("/defineAvailability")
     @PreAuthorize("hasAuthority('COTTAGE_OWNER')")
@@ -183,15 +185,22 @@ public class CottageAppointmentController {
         if(cottageService.ownerOwnsCottage(userApp.getId(), cottageId)){
             return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
         }
-        ArrayList<AppointmentCottage> appointments = appointmentCottageService.getCottageReservations(cottageId);
-        appointments.sort((o1,o2) -> o1.getDate().compareTo(o2.getDate()));
-        ArrayList<ReservationDTO> reservations = new ArrayList<>();
-        for(AppointmentCottage a : appointments){
-            UserDTO user = new UserDTO(a.getClient());
-            ReservationDTO reservationDTO = new ReservationDTO(a.getId(), user, a.getDate(), a.getPricePerDay(), a.isHasAction());
-            reservations.add(reservationDTO);
+        ArrayList<CottageReservations> reservations = cottageReservationsService.getCottageReservations(cottageId);
+        ArrayList<ReservationDTO> reservationsDTO = new ArrayList<>();
+        for(CottageReservations c : reservations){
+            UserDTO user = new UserDTO(c.getClient());
+            ReservationDTO reservationDTO = new ReservationDTO(c.getId(), user, c.getDateStart(), c.getDateEnd(), c.getCottage().getName(), c.getStatus().toString());
+            reservationsDTO.add(reservationDTO);
         }
+//        ArrayList<AppointmentCottage> appointments = appointmentCottageService.getCottageReservations(cottageId);
+//        appointments.sort((o1,o2) -> o1.getDate().compareTo(o2.getDate()));
+//        ArrayList<ReservationDTO> reservations = new ArrayList<>();
+//        for(AppointmentCottage a : appointments){
+//            UserDTO user = new UserDTO(a.getClient());
+//            ReservationDTO reservationDTO = new ReservationDTO(a.getId(), user, a.getDate(), a.getPricePerDay(), a.isHasAction());
+//            reservations.add(reservationDTO);
+//        }
 
-        return new ResponseEntity<>(reservations, HttpStatus.OK);
+        return new ResponseEntity<>(reservationsDTO, HttpStatus.OK);
     }
 }
