@@ -69,5 +69,21 @@
                 </button>
             </td>
         </ng-container>
+
+        <ng-container matColumnDef="New Reservation">
+            <th class="centerHeader" mat-header-cell *matHeaderCellDef>
+                New Reservation
+            </th>
+            <td class="centerHeader" mat-cell *matCellDef="let element">
+                <button
+                    *ngIf="showReviewButton(element)"
+                    (click)="newReservationClick(element)"
+                    mat-button
+                    color="primary"
+                >
+                    New Reservation
+                </button>
+            </td>
+        </ng-container>
     </table>
 </div>

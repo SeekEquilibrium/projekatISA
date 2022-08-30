@@ -94,6 +94,9 @@ public class AppointmentCottageService {
     }
 
     public ArrayList<AppointmentCottage> GetCottageAvailability(long cottageId){
+        return appointmentCottageRepository.getAvailabeAppointments(cottageId);
+    }
+    public ArrayList<AppointmentCottage> GetCottageAvailabilityAndReservations(long cottageId){
         return appointmentCottageRepository.getAvailabeAppointmentsAndReservations(cottageId);
     }
 

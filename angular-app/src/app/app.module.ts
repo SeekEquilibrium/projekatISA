@@ -43,6 +43,7 @@ import { BasicUserInfoComponent } from "./components/basic-user-info/basic-user-
 import { EditProfileComponent } from "./components/edit-profile/edit-profile.component";
 import { OpenlayersMapComponent } from "./components/openlayers-map/openlayers-map.component";
 import { OwnerReviewComponent } from "./components/owner-review/owner-review.component";
+import { CreateReservationOwnerComponent } from "./components/create-reservation-owner/create-reservation-owner.component";
 @NgModule({
     declarations: [
         AppComponent,
@@ -65,6 +66,7 @@ import { OwnerReviewComponent } from "./components/owner-review/owner-review.com
         EditProfileComponent,
         OpenlayersMapComponent,
         OwnerReviewComponent,
+        CreateReservationOwnerComponent,
     ],
     imports: [
         BrowserModule,
@@ -99,6 +101,7 @@ import { OwnerReviewComponent } from "./components/owner-review/owner-review.com
         CottageDefineActionsComponent,
         BasicUserInfoComponent,
         OwnerReviewComponent,
+        CreateReservationOwnerComponent,
     ],
 })
 export class AppModule {}

@@ -24,4 +24,7 @@ public interface AppointmentCottageRepository extends JpaRepository<AppointmentC
 
     @Query("select a from AppointmentCottage a where a.cottage.id=:cottageId and a.type!='AVAILABLE'")
     public ArrayList<AppointmentCottage> getCottageReservations(@Param("cottageId") long cottageId);
+
+    @Query("select a from AppointmentCottage a where a.cottage.id=:cottageId and a.type='AVAILABLE' and a.date >= CURRENT_DATE")
+    public ArrayList<AppointmentCottage> getAvailabeAppointments(@Param("cottageId") long cottageId);
 }

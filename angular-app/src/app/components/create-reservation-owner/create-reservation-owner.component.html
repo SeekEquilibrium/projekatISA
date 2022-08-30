@@ -1,0 +1,44 @@
+<div class="reservation-div" fxLayout="column" fxLayoutAlign="start center">
+    <div fxLayout="row">
+        <div>Create reservation for:</div>
+        <div>{{ user_fullname }}</div>
+    </div>
+    <ngb-datepicker
+        #dp
+        (dateSelect)="onDateSelection($event)"
+        [displayMonths]="2"
+        [dayTemplate]="t"
+        outsideDays="hidden"
+        [minDate]="minDate"
+        [markDisabled]="isDisabled"
+    >
+    </ngb-datepicker>
+
+    <ng-template #t let-date let-focused="focused">
+        <span
+            class="custom-day"
+            [class.focused]="focused"
+            [class.range]="isRange(date)"
+            [class.faded]="isHovered(date) || isInside(date)"
+            [class.red]="markDate(date)"
+            [class.disable]="!markDate(date)"
+            (mouseenter)="hoveredDate = date"
+            (mouseleave)="hoveredDate = null"
+        >
+            {{ date.day }}
+        </span>
+    </ng-template>
+    <div class="buttons">
+        <button mat-stroked-button color="primary" (click)="closeButton()">
+            Cancel
+        </button>
+        <button
+            [disabled]="submitValidation()"
+            mat-flat-button
+            color="primary"
+            (click)="submit()"
+        >
+            Submit
+        </button>
+    </div>
+</div>

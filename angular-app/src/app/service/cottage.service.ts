@@ -162,4 +162,31 @@ export class CottageService {
                 })
             );
     }
+
+    public getAvailability(cottageId) {
+        return this.apiService
+            .get(
+                this.config.appointment_url +
+                    "/cottage/getCottageAvailability/" +
+                    cottageId
+            )
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
+
+    public createReservationForClient(reservation) {
+        return this.apiService
+            .post(
+                this.config.appointment_url + "/cottage/ownerCreateReservation",
+                reservation
+            )
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
 }

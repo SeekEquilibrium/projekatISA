@@ -4,6 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 import { NgbDate, NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
 import { CottageService } from "src/app/service/cottage.service";
 import { BasicUserInfoComponent } from "../basic-user-info/basic-user-info.component";
+import { CreateReservationOwnerComponent } from "../create-reservation-owner/create-reservation-owner.component";
 import { OwnerReviewComponent } from "../owner-review/owner-review.component";
 
 @Component({
@@ -27,6 +28,7 @@ export class CottagesReservationsComponent implements OnInit {
         "Customer",
         "Status",
         "Review",
+        "New Reservation",
     ];
     changeColor = false;
     constructor(
@@ -53,9 +55,9 @@ export class CottagesReservationsComponent implements OnInit {
 
     showReviewButton(element) {
         let date = new NgbDate(
-            element.startDate[0],
-            element.startDate[1],
-            element.startDate[2]
+            element.endDate[0],
+            element.endDate[1],
+            element.endDate[2]
         );
         if (date.before(this.today)) {
             return true;
@@ -66,6 +68,12 @@ export class CottagesReservationsComponent implements OnInit {
     reviewClick(element) {
         console.log(element);
         this.dialog.open(OwnerReviewComponent, {
+            data: { element: element },
+        });
+    }
+
+    newReservationClick(element) {
+        this.dialog.open(CreateReservationOwnerComponent, {
             data: { element: element },
         });
     }

@@ -68,6 +68,20 @@ public class CottageAppointmentController {
         if(!cottageService.existsById(cottageId)){
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
+        ArrayList<AppointmentCottage> list = appointmentCottageService.GetCottageAvailabilityAndReservations(cottageId);
+        ArrayList<CottageAvailabilityDTO> listDTO = new ArrayList<>();
+        for(AppointmentCottage a : list){
+            CottageAvailabilityDTO cottageAvailabilityDTO = new CottageAvailabilityDTO(a);
+            listDTO.add(cottageAvailabilityDTO);
+        }
+        return new ResponseEntity<ArrayList<CottageAvailabilityDTO>>(listDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/getCottageAvailability/{cottageId}")
+    public ResponseEntity<ArrayList<CottageAvailabilityDTO>> getCottageAvailability(@PathVariable long cottageId){
+        if(!cottageService.existsById(cottageId)){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
         ArrayList<AppointmentCottage> list = appointmentCottageService.GetCottageAvailability(cottageId);
         ArrayList<CottageAvailabilityDTO> listDTO = new ArrayList<>();
         for(AppointmentCottage a : list){

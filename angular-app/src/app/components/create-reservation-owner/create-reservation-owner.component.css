@@ -1,0 +1,104 @@
+.reservation-div {
+    height: 500px;
+    width: 600px;
+}
+
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+}
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+.custom-day.range,
+.custom-day:hover {
+    background-color: rgb(120, 2, 216);
+    color: white;
+}
+.custom-day.faded {
+    background-color: rgba(202, 149, 233, 0.5);
+}
+
+.red {
+    background: rgb(197, 126, 255);
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.flex-row {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+
+.from {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-right: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-size: 15px;
+    width: 50%;
+}
+
+.to {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-right: 20px;
+    margin-bottom: 0px;
+    font-size: 15px;
+}
+
+.no_margin {
+    margin-bottom: 0px;
+    font-size: 15px;
+
+    font-style: bold;
+}
+
+.save_button {
+    margin-top: 20px;
+    float: right;
+}
+
+.price-div {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.price {
+    margin: auto;
+    width: 30%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    justify-content: right;
+}
+
+.disable {
+    color: rgb(199, 199, 199);
+}
