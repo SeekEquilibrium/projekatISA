@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BoatRepository extends JpaRepository<Boat, Long> {
     public Boolean existsByName(String name);
+    public Boat findByName(String name);
+    public Boat findById(long id);
 }

@@ -1,5 +1,6 @@
 package com.bookingapplication.service;
 
+import com.bookingapplication.dto.EditBoatRequestDTO;
 import com.bookingapplication.dto.RegisterBoatRequestDTO;
 import com.bookingapplication.model.Boat;
 import com.bookingapplication.model.BoatImage;
@@ -22,6 +23,8 @@ public class BoatService {
     private BoatRepository boatRepository;
 
     public Boolean existsByName(String name) { return boatRepository.existsByName(name); }
+    public Boat findByName(String name) { return boatRepository.findByName(name); }
+    public Boat findById(long id) { return boatRepository.findById(id); }
 
     public Boat registerBoat(RegisterBoatRequestDTO requestDTO, BoatOwner boatOwner) throws IOException {
         Boat boat = new Boat(
@@ -45,5 +48,33 @@ public class BoatService {
         boat.setBoatImages(boatImages);
         boatRepository.save(boat);
         return boat;
+    }
+
+    public Boat editBoat(EditBoatRequestDTO requestDTO) throws IOException {
+        Boat boat = boatRepository.findById(requestDTO.getId());
+        boat.setName(requestDTO.getName());
+        boat.setAddress(requestDTO.getAddress());
+        boat.setLongitude(requestDTO.getLongitude());
+        boat.setLatitude(requestDTO.getLatitude());
+        boat.setDescription(requestDTO.getDescription());
+        boat.setRules(requestDTO.getRules());
+
+        Set<BoatImage> boatImages = boat.getBoatImages();
+        if(requestDTO.getDeletedImages()!=null){
+            for(String path : requestDTO.getDeletedImages()){
+                boatImages.removeIf(image->image.getPath().equals(path));
+            }
+        }
+
+        if(requestDTO.getFiles()!=null){
+            for(MultipartFile image : requestDTO.getFiles()){
+                String fileName = boat.getName() + "-" + UUID.randomUUID() + ".png";
+                FileUploadUtil.saveFile(FileUploadUtil.getImageFolder("boats"), fileName, image);
+                BoatImage boatImage = new BoatImage(fileName, boat);
+                boatImages.add(boatImage);
+            }
+        }
+        boat.setBoatImages(boatImages);
+        return boatRepository.save(boat);
     }
 }
