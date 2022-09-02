@@ -5,6 +5,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Boat {
@@ -21,17 +23,38 @@ public class Boat {
     @Column
     private Double latitude;
     @Column(columnDefinition="TEXT")
+    private String description;
+    @Column(columnDefinition="TEXT")
     private String rules;
     @JsonIgnore
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(fetch = FetchType.EAGER)
     private BoatOwner boatOwner;
+    @OneToMany
+            (mappedBy = "boat", fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval=true)
+    public Set<BoatImage> boatImages = new HashSet<BoatImage>();
 
-    public Boat(String name, String address, Double longitude, Double latitude, String rules, BoatOwner boatOwner) {
+    public Boat(){
+
+    }
+
+    public Boat(String name, String address, Double longitude, Double latitude, String description, String rules, BoatOwner boatOwner) {
         this.name = name;
         this.address = address;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.description = description;
+        this.rules = rules;
+        this.boatOwner = boatOwner;
+    }
+
+    public Boat(long id, String name, String address, Double longitude, Double latitude, String description, String rules, BoatOwner boatOwner) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.description = description;
         this.rules = rules;
         this.boatOwner = boatOwner;
     }
@@ -76,6 +99,14 @@ public class Boat {
         this.latitude = latitude;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getRules() {
         return rules;
     }
@@ -90,5 +121,13 @@ public class Boat {
 
     public void setBoatOwner(BoatOwner boatOwner) {
         this.boatOwner = boatOwner;
+    }
+
+    public Set<BoatImage> getBoatImages() {
+        return boatImages;
+    }
+
+    public void setBoatImages(Set<BoatImage> boatImages) {
+        this.boatImages = boatImages;
     }
 }

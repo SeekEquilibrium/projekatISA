@@ -30,6 +30,13 @@ insert into cottage(id, name, address, description, room_number, bed_number, rul
     insert into cottage_image(id, path, cottage_id) values (nextval('image_seq_gen'), 'Fruskac 2_16274272-8dbd-4113-95ca-5ffc23c7e872.png', 2);
     insert into cottage_image(id, path, cottage_id) values (nextval('image_seq_gen'), 'Fruskac 2_bce314e6-d30b-466a-9f16-d2377f11289a.png', 2);
 
+--Boats
+insert into boat(id, name, address, latitude, longitude, description, rules, boat_owner_id) values
+    (nextval('boat_seq_gen'), 'Posejdon', 'Ribarsko ostrvo', 45.233220, 19.838043, 'Sportski gliser najbolji izbor za vase malisane...', 'Zabaranjeno skakanje sa glisera', 3);
+    insert into boat_image(id, path, boat_id) values (nextval('image_seq_gen'), 'Posejdon_5514913a-4d40-4164-90e2-516222b93571', 1);
+    insert into boat_image(id, path, boat_id) values (nextval('image_seq_gen'), 'Posejdon_a6f12b5d-2099-4945-8976-28eae5e29e50', 1);
+
+
 --Create Reservation
 insert into cottage_reservations(id, date_start, date_end, status, cottage_id, client_id) values (nextval('reservation_seq_gen'), '2022-05-16', '2022-05-18', 'RESERVED', 1, 2);
 insert into cottage_reservations(id, date_start, date_end, status, cottage_id, client_id) values (nextval('reservation_seq_gen'), '2020-08-16', '2020-08-18', 'RESERVED', 1, 2);
