@@ -4,6 +4,7 @@ import com.bookingapplication.dto.*;
 import com.bookingapplication.model.*;
 import com.bookingapplication.repository.AppointmentCottageRepository;
 
+import com.google.common.collect.ArrayListMultimap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -87,6 +88,22 @@ public class AppointmentCottageService {
             }
         }
         return  true;
+    }
+
+    public List<?> getRevanueByYears(long cottageId){
+        return appointmentCottageRepository.getRevanueByYears(cottageId);
+    }
+
+    public List<?> getRevanueForLastYear(long cottageId){
+        return appointmentCottageRepository.getRevanueForLastYear(cottageId);
+    }
+
+    public List<?> getReservationDaysByYears(long cottageId){
+        return appointmentCottageRepository.getReservationDaysByYears(cottageId);
+    }
+
+    public List<?> getReservationDaysForLastYear(long cottageId){
+        return appointmentCottageRepository.getReservationDaysForLastYear(cottageId);
     }
 
     public ArrayList<AppointmentCottage> getCottageReservations(long cottageId){

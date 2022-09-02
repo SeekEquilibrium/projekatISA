@@ -44,6 +44,7 @@ import { EditProfileComponent } from "./components/edit-profile/edit-profile.com
 import { OpenlayersMapComponent } from "./components/openlayers-map/openlayers-map.component";
 import { OwnerReviewComponent } from "./components/owner-review/owner-review.component";
 import { CreateReservationOwnerComponent } from "./components/create-reservation-owner/create-reservation-owner.component";
+import { ChartStatisticsComponent } from './components/chart-statistics/chart-statistics.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -67,6 +68,7 @@ import { CreateReservationOwnerComponent } from "./components/create-reservation
         OpenlayersMapComponent,
         OwnerReviewComponent,
         CreateReservationOwnerComponent,
+        ChartStatisticsComponent,
     ],
     imports: [
         BrowserModule,

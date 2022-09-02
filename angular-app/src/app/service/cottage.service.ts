@@ -189,4 +189,14 @@ export class CottageService {
                 })
             );
     }
+
+    public getCottageStats(cottageId) {
+        return this.apiService
+            .get(this.config.appointment_url + "/cottage/stats/" + cottageId)
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
 }

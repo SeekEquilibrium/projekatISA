@@ -13,6 +13,7 @@ import { OwnerReviewComponent } from "../owner-review/owner-review.component";
     styleUrls: ["./cottages-reservations.component.css"],
 })
 export class CottagesReservationsComponent implements OnInit {
+    stats;
     now = new Date();
     today: NgbDateStruct = {
         year: this.now.getFullYear(),
@@ -87,6 +88,12 @@ export class CottagesReservationsComponent implements OnInit {
                 console.log(response);
                 this.reservations = response;
                 this.dataSource = this.reservations;
+            });
+
+        this.cottageService
+            .getCottageStats(this.route.snapshot.paramMap.get("cottageId"))
+            .subscribe((response) => {
+                this.stats = response;
             });
     }
 }

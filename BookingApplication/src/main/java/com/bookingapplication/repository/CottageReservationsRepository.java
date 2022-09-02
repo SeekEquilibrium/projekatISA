@@ -11,6 +11,6 @@ import java.util.ArrayList;
 @Repository
 public interface CottageReservationsRepository extends JpaRepository<CottageReservations, Long> {
 
-    @Query("select c from CottageReservations c where c.cottage.id=:cottageId")
+    @Query("select c from CottageReservations c where c.cottage.id=:cottageId order by c.dateStart desc")
     public ArrayList<CottageReservations> getCottageReservations(@Param("cottageId") long cottageId);
 }

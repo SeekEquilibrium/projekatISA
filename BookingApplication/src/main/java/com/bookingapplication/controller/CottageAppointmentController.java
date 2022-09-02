@@ -1,10 +1,12 @@
 package com.bookingapplication.controller;
 
 import com.bookingapplication.dto.*;
+import com.bookingapplication.dto.RevanueAndVisists.StatisticsDTO;
 import com.bookingapplication.dto.reservationInfo.ReservationDTO;
 import com.bookingapplication.model.*;
 import com.bookingapplication.service.*;
 import com.bookingapplication.validation.DateValidation;
+import com.google.common.collect.ArrayListMultimap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/appointment/cottage")
@@ -216,5 +219,28 @@ public class CottageAppointmentController {
 //        }
 
         return new ResponseEntity<>(reservationsDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/stats/{cottageId}")
+    @PreAuthorize("hasAuthority('COTTAGE_OWNER')")
+    public ResponseEntity<StatisticsDTO> cottageStats(@PathVariable long cottageId){
+        UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        //Da li vikendica postoji
+        if(!cottageService.existsById(cottageId)){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        //Da li vikendica pripada gazdi koji salje zahtev
+        if(cottageService.ownerOwnsCottage(userApp.getId(), cottageId)){
+            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+        }
+
+        List<?> revenueByYears =  appointmentCottageService.getRevanueByYears(cottageId);
+        List<?> revenueByMonths =  appointmentCottageService.getRevanueForLastYear(cottageId);
+
+        List<?> reservationDaysByYears =  appointmentCottageService.getReservationDaysByYears(cottageId);
+        List<?> reservationDaysForLastYear =  appointmentCottageService.getReservationDaysForLastYear(cottageId);
+
+        StatisticsDTO statisticsDTO = new StatisticsDTO(revenueByYears, revenueByMonths, reservationDaysByYears, reservationDaysForLastYear);
+        return new ResponseEntity<>(statisticsDTO, HttpStatus.OK);
     }
 }
