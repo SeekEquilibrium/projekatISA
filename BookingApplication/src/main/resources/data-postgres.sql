@@ -1,6 +1,7 @@
 --ROLES
 insert into role(id, name) values (nextval('role_id_seq'), 'COTTAGE_OWNER');
 insert into role(id, name) values (nextval('role_id_seq'), 'CLIENT');
+insert into role(id, name) values (nextval('role_id_seq'), 'BOAT_OWNER');
 
 --Users (password123 for everyone)
 insert into user_app(id, email, name, password, phone_number, role_id, surname, username) values
@@ -10,6 +11,11 @@ insert into user_app(id, email, name, password, phone_number, role_id, surname, 
 insert into user_app(id, email, name, password, phone_number, role_id, surname, username) values
     (nextval('user_app_seq'), 'boban@gmail.com', 'Boban', '$2a$10$SFp508WvAPKDbemvKcYdd.wLahgUcoBDOPjBRXgNMzDBe3ot/ElwG', '2131231', 2, 'Rajovic', 'boban');
     insert into client(id) values (2);
+
+insert into user_app(id, email, name, password, phone_number, role_id, surname, username) values
+    (nextval('user_app_seq'), 'pavle@gmail.com', 'Pavle', '$2a$10$SFp508WvAPKDbemvKcYdd.wLahgUcoBDOPjBRXgNMzDBe3ot/ElwG', '2131231', 3, 'Pavlovic', 'pavle');
+    insert into boat_owner(id) values (3);
+
 --Cottages
 insert into cottage(id, name, address, description, room_number, bed_number, rules, cottage_owner_id, latitude, longitude) values
     (nextval('cottage_seq_gen'), 'Fruskac', 'Fruskogorska 23',

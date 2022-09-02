@@ -2,10 +2,7 @@ package com.bookingapplication.service;
 
 import com.bookingapplication.dto.EditProfileRequestDTO;
 import com.bookingapplication.dto.RegistrationRequestDTO;
-import com.bookingapplication.model.Client;
-import com.bookingapplication.model.CottageOwner;
-import com.bookingapplication.model.Role;
-import com.bookingapplication.model.UserApp;
+import com.bookingapplication.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,6 +37,11 @@ public class UserService implements UserDetailsService {
 				//potrebno implementirati odobrenje za aktivaciju od strane admina (za sve osim za obicnog klijenta)
 				user.setRole(roleService.findRole(request.getRole()));
 				return save(new CottageOwner(user, request.getReasoning()));
+			}
+			case "BOAT_OWNER": {
+				//potrebno implementirati odobrenje za aktivaciju od strane admina (za sve osim za obicnog klijenta)
+				user.setRole(roleService.findRole(request.getRole()));
+				return save(new BoatOwner(user, request.getReasoning()));
 			}
 			case "CLIENT": {
 				user.setRole(roleService.findRole(request.getRole()));
