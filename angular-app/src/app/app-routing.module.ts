@@ -15,6 +15,7 @@ import { CottagesReservationsComponent } from "./components/cottages-reservation
 import { EditProfileComponent } from "./components/edit-profile/edit-profile.component";
 import { BoatProfileComponent } from "./components/boat-profile/boat-profile.component";
 import { BoatProfileEditComponent } from "./components/boat-profile-edit/boat-profile-edit.component";
+import { RegisterBoatComponent } from "./components/register-boat/register-boat.component";
 
 const routes: Routes = [
     {
@@ -61,6 +62,11 @@ const routes: Routes = [
     {
         path: "register/cottage",
         component: RegisterCottageComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: "register/boat",
+        component: RegisterBoatComponent,
         canActivate: [AuthGuardService],
     },
     {

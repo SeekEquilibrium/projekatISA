@@ -23,6 +23,30 @@ export class BoatService {
         );
     }
 
+    public registerBoat(boat) {
+        console.log(boat);
+        console.log(boat.files);
+        let formData = new FormData();
+        formData.append("name", boat.name);
+        formData.append("address", boat.address);
+        formData.append("description", boat.description);
+        formData.append("rules", boat.rules);
+        formData.append("longitude", boat.longitude);
+        formData.append("latitude", boat.latitude);
+
+        for (let i = 0; i < boat.files.length; i++) {
+            formData.append("files", boat.files[i]);
+        }
+        // formData.append("files", editCottage.files);
+        return this.apiService
+            .post("http://localhost:8080/boat/register", formData)
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
+
     public editBoatProfile(editBoat) {
         console.log(editBoat);
         console.log(editBoat.files);
