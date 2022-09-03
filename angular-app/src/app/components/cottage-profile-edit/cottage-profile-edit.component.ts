@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ConfigService } from "../../service";
+import { ConfigService, UserService } from "../../service";
 import { CottageService } from "../../service/cottage.service";
 import { CottageProfile } from "../../shared/cottageProfile";
 
@@ -27,7 +27,8 @@ export class CottageProfileEditComponent implements OnInit {
         private cottageService: CottageService,
         private configService: ConfigService,
         private router: Router,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private userService: UserService
     ) {
         this.imagePath = this.configService.image_path();
     }
@@ -41,6 +42,9 @@ export class CottageProfileEditComponent implements OnInit {
                     this.cottageProfile = response;
                     this.cottageOwner = this.cottageProfile.cottageOwner;
                     this.imageNames = response.cottageImages.imagePaths;
+                    if (!this.isMyCottage()) {
+                        this.router.navigate(["/"]);
+                    }
                     if (this.imageNames != null) {
                         this.displayImage = this.imageNames[0];
                     }
@@ -60,6 +64,15 @@ export class CottageProfileEditComponent implements OnInit {
             longitude: ["", Validators.required],
             latitude: ["", Validators.required],
         });
+    }
+
+    isMyCottage() {
+        // if (this.userService.currentUser == undefined) {
+        //     return false;
+        // }
+        return (
+            this.cottageOwner.username == this.userService.currentUser.username
+        );
     }
 
     selectedImage(image: string) {

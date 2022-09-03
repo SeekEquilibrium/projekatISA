@@ -1,0 +1,30 @@
+.boat-horizontal-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(245, 245, 245);
+}
+
+.boat-horizontal-card:hover {
+    transform: scale(1.006);
+}
+
+.boat-horizontal-buttons {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+.boat-small-image {
+    object-fit: cover;
+    width: 100px;
+    border-radius: 5px;
+}
+
+.image-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 20px;
+}

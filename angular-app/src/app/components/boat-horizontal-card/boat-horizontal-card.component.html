@@ -1,0 +1,21 @@
+<mat-card (click)="navigateToBoat()" class="boat-horizontal-card example-card">
+    <div class="image-title">
+        <img
+            class="boat-small-image"
+            src="assets/images/boats/{{ boat.boatImages.imagePaths[0] }}"
+        />
+        <div>
+            <mat-card-title>{{ boat.name }}</mat-card-title>
+            <mat-card-subtitle>{{ boat.address }}</mat-card-subtitle>
+        </div>
+    </div>
+    <div class="boat-horizontal-buttons">
+        <button (click)="statsClick()" mat-flat-button color="primary">
+            Stats
+        </button>
+        <button (click)="editClick()" mat-flat-button color="accent">
+            Edit
+        </button>
+        <button mat-flat-button color="warn">Delete</button>
+    </div>
+</mat-card>

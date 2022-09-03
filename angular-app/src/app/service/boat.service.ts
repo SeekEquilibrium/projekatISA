@@ -71,4 +71,15 @@ export class BoatService {
                 })
             );
     }
+
+    public getOwnerBoats() {
+        return this.apiService
+            .get("http://localhost:8080/boat/ownerBoats")
+            .pipe(
+                map((res) => {
+                    console.log(res);
+                    return res;
+                })
+            );
+    }
 }

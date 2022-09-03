@@ -50,6 +50,7 @@ import { BoatService } from "./service/boat.service";
 import { BoatProfileEditComponent } from "./components/boat-profile-edit/boat-profile-edit.component";
 import { RegisterBoatComponent } from "./components/register-boat/register-boat.component";
 import { BoatsListComponent } from "./components/boats-list/boats-list.component";
+import { BoatHorizontalCardComponent } from './components/boat-horizontal-card/boat-horizontal-card.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -78,6 +79,7 @@ import { BoatsListComponent } from "./components/boats-list/boats-list.component
         BoatProfileEditComponent,
         RegisterBoatComponent,
         BoatsListComponent,
+        BoatHorizontalCardComponent,
     ],
     imports: [
         BrowserModule,

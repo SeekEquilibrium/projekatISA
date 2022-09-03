@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { BoatService } from "src/app/service/boat.service";
 
 @Component({
-  selector: 'app-boats-list',
-  templateUrl: './boats-list.component.html',
-  styleUrls: ['./boats-list.component.css']
+    selector: "app-boats-list",
+    templateUrl: "./boats-list.component.html",
+    styleUrls: ["./boats-list.component.css"],
 })
 export class BoatsListComponent implements OnInit {
+    boats: [];
+    constructor(private boatService: BoatService, private router: Router) {}
 
-  constructor() { }
+    ngOnInit() {
+        this.boatService.getOwnerBoats().subscribe((response) => {
+            this.boats = response;
+        });
+    }
 
-  ngOnInit() {
-  }
-
+    goToRegisterBoat() {
+        this.router.navigate(["register/boat"]);
+    }
 }

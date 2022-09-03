@@ -24,4 +24,12 @@ export class BusinessMenuComponent implements OnInit {
     goToRegisterCottage() {
         this.router.navigate(["register/cottage"]);
     }
+
+    goToBoats() {
+        this.router.navigate(["/my-boats"]);
+    }
+
+    goToRegisterBoat() {
+        this.router.navigate(["register/boat"]);
+    }
 }

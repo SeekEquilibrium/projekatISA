@@ -2,10 +2,7 @@ package com.bookingapplication.service;
 
 import com.bookingapplication.dto.EditBoatRequestDTO;
 import com.bookingapplication.dto.RegisterBoatRequestDTO;
-import com.bookingapplication.model.Boat;
-import com.bookingapplication.model.BoatImage;
-import com.bookingapplication.model.BoatOwner;
-import com.bookingapplication.model.CottageImage;
+import com.bookingapplication.model.*;
 import com.bookingapplication.repository.BoatRepository;
 import com.bookingapplication.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -76,5 +74,9 @@ public class BoatService {
         }
         boat.setBoatImages(boatImages);
         return boatRepository.save(boat);
+    }
+
+    public ArrayList<Boat> findByBoatOwnerId(long cottageOwnerId){
+        return boatRepository.findByBoatOwnerId(cottageOwnerId);
     }
 }

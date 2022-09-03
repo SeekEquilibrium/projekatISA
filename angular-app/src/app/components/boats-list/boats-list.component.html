@@ -1,1 +1,8 @@
-<p>boats-list works!</p>
+<div class="boat-list">
+    <div *ngFor="let boat of boats">
+        <app-boat-horizontal-card [boat]="boat"></app-boat-horizontal-card>
+    </div>
+    <button (click)="goToRegisterBoat()" mat-flat-button color="primary">
+        Register New Boat
+    </button>
+</div>

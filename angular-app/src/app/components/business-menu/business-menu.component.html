@@ -4,4 +4,8 @@
         REGISTER COTTAGE
     </button>
 </div>
+<div *ngIf="currentUser?.role == 'BOAT_OWNER'">
+    <button (click)="goToBoats()" mat-menu-item>BOATS</button>
+    <button (click)="goToRegisterBoat()" mat-menu-item>REGISTER BOAT</button>
+</div>
 <!-- <button (click)="logout()" mat-menu-item>SIGN OUT</button> -->

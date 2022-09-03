@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ConfigService } from "src/app/service";
+import { ConfigService, UserService } from "src/app/service";
 import { BoatService } from "src/app/service/boat.service";
 
 @Component({
@@ -26,7 +26,8 @@ export class BoatProfileEditComponent implements OnInit {
         private boatService: BoatService,
         private configService: ConfigService,
         private router: Router,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private userService: UserService
     ) {}
 
     ngOnInit() {
@@ -37,6 +38,9 @@ export class BoatProfileEditComponent implements OnInit {
                     this.boatProfile = response;
                     this.boatOwner = this.boatProfile.cottageOwner;
                     this.imageNames = response.boatImages.imagePaths;
+                    if (!this.isMyBoat()) {
+                        this.router.navigate(["/"]);
+                    }
                     if (this.imageNames != null) {
                         this.displayImage = this.imageNames[0];
                     }
@@ -54,6 +58,13 @@ export class BoatProfileEditComponent implements OnInit {
             longitude: ["", Validators.required],
             latitude: ["", Validators.required],
         });
+    }
+
+    isMyBoat() {
+        // if (this.userService.currentUser == undefined) {
+        //     return false;
+        // }
+        return this.boatOwner.username == this.userService.currentUser.username;
     }
 
     selectedImage(image: string) {

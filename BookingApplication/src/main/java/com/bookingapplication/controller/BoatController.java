@@ -89,4 +89,21 @@ public class BoatController {
         ImagesDTO imagesDTO = new ImagesDTO(images);
         return new ResponseEntity<>(new EditBoatResponseDTO(boat, imagesDTO), HttpStatus.OK);
     }
+
+    @GetMapping("/ownerBoats")
+    @PreAuthorize("hasAuthority('BOAT_OWNER')")
+    public ResponseEntity<ArrayList<BoatInfoDTO>> getBoats(){
+        UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        BoatOwner boatOwner = boatOwnerService.findById(userApp.getId());
+        ArrayList<Boat> boatList = boatService.findByBoatOwnerId(userApp.getId());
+        ArrayList<BoatInfoDTO> boatInfoDTOS = new ArrayList<>();
+        for (Boat b : boatList){
+            ArrayList<String> images = boatImageService.findImagePathsByBoatId(b.getId());
+            ImagesDTO imagesDto = new ImagesDTO(images);
+            BoatInfoDTO boatInfoDTO = new BoatInfoDTO(b, imagesDto);
+            boatInfoDTOS.add(boatInfoDTO);
+        }
+        return new ResponseEntity<>(boatInfoDTOS, HttpStatus.OK);
+
+    }
 }
