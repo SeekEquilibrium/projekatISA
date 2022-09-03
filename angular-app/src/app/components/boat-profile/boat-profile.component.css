@@ -1,0 +1,30 @@
+.boat-card {
+    width: 700px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    vertical-align: middle;
+    padding-bottom: 50px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.header-cottage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.img-size {
+    object-fit: cover;
+    height: 400px;
+}

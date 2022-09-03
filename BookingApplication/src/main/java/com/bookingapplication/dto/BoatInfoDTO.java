@@ -2,8 +2,6 @@ package com.bookingapplication.dto;
 
 import com.bookingapplication.model.Boat;
 
-import javax.persistence.Column;
-
 public class BoatInfoDTO {
     private long id;
     private String name;
@@ -13,7 +11,7 @@ public class BoatInfoDTO {
     private String description;
     private String rules;
     private UserDTO boatOwner;
-    private ImagesDTO cottageImages;
+    private ImagesDTO boatImages;
 
     public BoatInfoDTO(){}
 
@@ -30,7 +28,7 @@ public class BoatInfoDTO {
 
     public BoatInfoDTO(Boat boat, ImagesDTO imagesDTO){
         this(boat.getId(), boat.getName(), boat.getAddress(), boat.getLongitude(), boat.getLatitude(), boat.getDescription(), boat.getRules(), new UserDTO(boat.getBoatOwner()));
-        this.cottageImages = imagesDTO;
+        this.boatImages = imagesDTO;
     }
 
     public long getId() {
@@ -97,11 +95,11 @@ public class BoatInfoDTO {
         this.boatOwner = boatOwner;
     }
 
-    public ImagesDTO getCottageImages() {
-        return cottageImages;
+    public ImagesDTO getBoatImages() {
+        return boatImages;
     }
 
-    public void setCottageImages(ImagesDTO cottageImages) {
-        this.cottageImages = cottageImages;
+    public void setBoatImages(ImagesDTO boatImages) {
+        this.boatImages = boatImages;
     }
 }

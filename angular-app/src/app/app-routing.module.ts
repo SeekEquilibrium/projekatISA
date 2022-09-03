@@ -13,6 +13,7 @@ import { CottagesListComponent } from "./components/cottages-list/cottages-list.
 import { RegisterCottageComponent } from "./components/register-cottage/register-cottage.component";
 import { CottagesReservationsComponent } from "./components/cottages-reservations/cottages-reservations.component";
 import { EditProfileComponent } from "./components/edit-profile/edit-profile.component";
+import { BoatProfileComponent } from "./components/boat-profile/boat-profile.component";
 
 const routes: Routes = [
     {
@@ -31,6 +32,10 @@ const routes: Routes = [
     {
         path: "cottage/:name",
         component: CottageProfileComponent,
+    },
+    {
+        path: "boat/:name",
+        component: BoatProfileComponent,
     },
     {
         path: "cottage/:name/edit",

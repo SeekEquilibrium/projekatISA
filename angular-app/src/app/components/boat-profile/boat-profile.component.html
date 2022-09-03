@@ -1,0 +1,75 @@
+<div *ngIf="boatProfile">
+    <div class="boat-card">
+        <mat-card>
+            <mat-card-header class="header-cottage">
+                <mat-card-title>{{ boatProfile.name }}</mat-card-title>
+                <mat-card-subtitle>{{ boatProfile.address }}</mat-card-subtitle>
+                <mat-card-actions *ngIf="isMyBoat()" class="action-buttons">
+                    <!-- <button
+                        (click)="openAvailabilityDialog()"
+                        mat-stroked-button
+                        mat-flat-button
+                        color="accent"
+                    >
+                        Define Availability
+                    </button> -->
+                    <!-- <button
+                        (click)="openActionsDialog()"
+                        mat-stroked-button
+                        mat-flat-button
+                        color="accent"
+                    >
+                        Define Actions
+                    </button> -->
+                    <a
+                        mat-stroked-button
+                        href="/"
+                        mat-flat-button
+                        color="accent"
+                        >Edit</a
+                    >
+                </mat-card-actions>
+            </mat-card-header>
+            <mat-card-content>
+                <br />
+                <ngb-carousel>
+                    <ng-template
+                        ngbSlide
+                        *ngFor="
+                            let path of boatProfile.boatImages.imagePaths;
+                            let i = index
+                        "
+                    >
+                        <div class="picsum-img-wrapper">
+                            <img
+                                class="carousel-image img-size"
+                                src="assets/images/boats/{{
+                                    boatProfile.boatImages.imagePaths[i]
+                                }}"
+                                alt="Random first slide"
+                            />
+                        </div>
+                    </ng-template>
+                </ngb-carousel>
+                <br />
+                {{ boatProfile.description }}
+                <br />
+                <br />
+                <b>Rules: </b>{{ boatProfile.rules }} <br />
+                <b>Owner: </b
+                ><a href="https://www.google.com/" target="_blank"
+                    >{{ boatOwner?.name }} {{ boatOwner?.surname }}</a
+                >
+                <br />
+                <br />
+                <app-openlayers-map
+                    [lon]="boatProfile.longitude"
+                    [lat]="boatProfile.latitude"
+                    [readonly]="true"
+                ></app-openlayers-map>
+                <br />
+            </mat-card-content>
+            <mat-divider inset></mat-divider>
+        </mat-card>
+    </div>
+</div>

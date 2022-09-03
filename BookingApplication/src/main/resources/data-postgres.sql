@@ -33,8 +33,8 @@ insert into cottage(id, name, address, description, room_number, bed_number, rul
 --Boats
 insert into boat(id, name, address, latitude, longitude, description, rules, boat_owner_id) values
     (nextval('boat_seq_gen'), 'Posejdon', 'Ribarsko ostrvo', 45.233220, 19.838043, 'Sportski gliser najbolji izbor za vase malisane...', 'Zabaranjeno skakanje sa glisera', 3);
-    insert into boat_image(id, path, boat_id) values (nextval('image_seq_gen'), 'Posejdon_5514913a-4d40-4164-90e2-516222b93571', 1);
-    insert into boat_image(id, path, boat_id) values (nextval('image_seq_gen'), 'Posejdon_a6f12b5d-2099-4945-8976-28eae5e29e50', 1);
+    insert into boat_image(id, path, boat_id) values (nextval('image_seq_gen'), 'Posejdon_5514913a-4d40-4164-90e2-516222b93571.png', 1);
+    insert into boat_image(id, path, boat_id) values (nextval('image_seq_gen'), 'Posejdon_a6f12b5d-2099-4945-8976-28eae5e29e50.png', 1);
 
 
 --Create Reservation

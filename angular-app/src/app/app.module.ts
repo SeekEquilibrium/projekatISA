@@ -44,7 +44,9 @@ import { EditProfileComponent } from "./components/edit-profile/edit-profile.com
 import { OpenlayersMapComponent } from "./components/openlayers-map/openlayers-map.component";
 import { OwnerReviewComponent } from "./components/owner-review/owner-review.component";
 import { CreateReservationOwnerComponent } from "./components/create-reservation-owner/create-reservation-owner.component";
-import { ChartStatisticsComponent } from './components/chart-statistics/chart-statistics.component';
+import { ChartStatisticsComponent } from "./components/chart-statistics/chart-statistics.component";
+import { BoatProfileComponent } from "./components/boat-profile/boat-profile.component";
+import { BoatService } from "./service/boat.service";
 @NgModule({
     declarations: [
         AppComponent,
@@ -69,6 +71,7 @@ import { ChartStatisticsComponent } from './components/chart-statistics/chart-st
         OwnerReviewComponent,
         CreateReservationOwnerComponent,
         ChartStatisticsComponent,
+        BoatProfileComponent,
     ],
     imports: [
         BrowserModule,
@@ -96,6 +99,7 @@ import { ChartStatisticsComponent } from './components/chart-statistics/chart-st
         ConfigService,
         AuthGuardService,
         CottageService,
+        BoatService,
     ],
     bootstrap: [AppComponent],
     entryComponents: [
