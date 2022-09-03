@@ -1,0 +1,218 @@
+<div *ngIf="boatProfile" class="boat-card">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Edit boat profile</mat-card-title>
+        </mat-card-header>
+
+        <mat-divider inset></mat-divider>
+
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <mat-card-content fxLayout="column" fxLayoutAlign="start start">
+                <div style="width: 100%">
+                    <div fxLayout="column" fxLayoutAlign="center start">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Boat name: </mat-label>
+                            <input
+                                formControlName="name"
+                                [(ngModel)]="boatProfile.name"
+                                matInput
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="full-address-div">
+                        <mat-form-field
+                            class="address-div"
+                            appearance="outline"
+                        >
+                            <mat-label>Address: </mat-label>
+                            <input
+                                formControlName="address"
+                                matInput
+                                [(ngModel)]="boatProfile.address"
+                            />
+                        </mat-form-field>
+                        <mat-form-field class="lonlat" appearance="outline">
+                            <mat-label>Longitude: </mat-label>
+                            <input
+                                formControlName="longitude"
+                                matInput
+                                [(ngModel)]="boatProfile.longitude"
+                                [readonly]="true"
+                            />
+                        </mat-form-field>
+                        <mat-form-field class="lonlat" appearance="outline">
+                            <mat-label>Latitude: </mat-label>
+                            <input
+                                formControlName="latitude"
+                                matInput
+                                [(ngModel)]="boatProfile.latitude"
+                                [readonly]="true"
+                            />
+                        </mat-form-field>
+                    </div>
+                    <app-openlayers-map
+                        [lon]="boatProfile.longitude"
+                        [lat]="boatProfile.latitude"
+                        [readonly]="false"
+                        (longitude)="setLongitude($event)"
+                        (latitude)="setLatitude($event)"
+                    ></app-openlayers-map>
+                    <br />
+                    <div fxLayout="column" fxLayoutAlign="center start">
+                        <mat-form-field
+                            appearance="outline"
+                            id="description-div"
+                        >
+                            <mat-label>Description: </mat-label>
+                            <textarea
+                                formControlName="description"
+                                id="description-textarea"
+                                matInput
+                                [(ngModel)]="boatProfile.description"
+                            ></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxLayoutAlign="center start">
+                        <mat-form-field
+                            id="description-div"
+                            appearance="outline"
+                        >
+                            <mat-label>Rules: </mat-label>
+                            <textarea
+                                formControlName="rules"
+                                id="rules-textarea"
+                                matInput
+                                [(ngModel)]="boatProfile.rules"
+                            ></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div
+                        id="description-div"
+                        fxLayout="row"
+                        fxLayoutAlign="space-evenly start"
+                    >
+                        <!-- <div fxLayout="column" fxLayoutAlign="start center">
+                            <mat-form-field
+                                id="number-input"
+                                appearance="outline"
+                            >
+                                <mat-label>Number of rooms: </mat-label>
+                                <input
+                                    type="number"
+                                    matInput
+                                    min="1"
+                                    formControlName="roomNumber"
+                                    [(ngModel)]="cottageProfile.roomNumber"
+                                />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="column" fxLayoutAlign="start center">
+                            <mat-form-field
+                                id="number-input"
+                                appearance="outline"
+                            >
+                                <mat-label>Number of beds: </mat-label>
+                                <input
+                                    type="number"
+                                    matInput
+                                    min="1"
+                                    formControlName="bedNumber"
+                                    [(ngModel)]="cottageProfile.bedNumber"
+                                />
+                            </mat-form-field>
+                        </div> -->
+                    </div>
+
+                    <br />
+
+                    <div>
+                        <table class="table table-hover table-width">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Images</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let image of imageNames">
+                                    <td>
+                                        {{ image }}
+                                    </td>
+                                    <td>
+                                        <button
+                                            (click)="deleteImage(image)"
+                                            mat-flat-button
+                                            color="warn"
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr *ngFor="let file of addedImages">
+                                    <td>
+                                        {{ file.name }}
+                                    </td>
+                                    <td>
+                                        <button
+                                            (click)="deleteAddedImage(file)"
+                                            mat-flat-button
+                                            color="warn"
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <img
+                            class="image-width rounded"
+                            src="{{ imagePath }}{{ displayImage }}"
+                            alt=""
+                        />
+                    </div>
+
+                    <button
+                        class="edit-buttons"
+                        mat-flat-button
+                        color="primary"
+                        (click)="fileInput.click()"
+                        type="button"
+                    >
+                        Add Image
+                    </button>
+                    <input
+                        hidden
+                        (change)="onFileSelected($event)"
+                        #fileInput
+                        type="file"
+                        accept="image/*"
+                        multiple
+                    />
+                </div>
+            </mat-card-content>
+            <mat-divider inset></mat-divider>
+            <mat-card-actions
+                style="margin-right: 3px"
+                fxLayout="row"
+                fxLayoutAlign="end center"
+                fxLayoutGap="20px"
+            >
+                <a
+                    class="edit-buttons"
+                    mat-stroked-button
+                    color="primary"
+                    href="/boat/{{ boatProfile.name }}"
+                    >Cancel</a
+                >
+                <button
+                    [disabled]="!form.valid"
+                    class="edit-buttons"
+                    mat-flat-button
+                    color="primary"
+                    type="submit"
+                >
+                    Save
+                </button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>

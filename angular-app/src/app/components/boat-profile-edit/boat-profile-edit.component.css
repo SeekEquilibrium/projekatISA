@@ -1,0 +1,71 @@
+.boat-card {
+    width: 700px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    vertical-align: middle;
+    padding-bottom: 50px;
+}
+
+.row-content {
+    display: flex;
+    flex-direction: row;
+}
+
+#description-textarea {
+    min-height: 200px;
+    width: 100%;
+}
+
+#description-div {
+    width: 100%;
+}
+
+#rules-textarea {
+    min-height: 50px;
+}
+
+#number-input {
+    max-width: 150px;
+}
+
+.table-width {
+    max-width: 100%;
+}
+
+.image-width {
+    width: 45%;
+}
+
+.edit-buttons {
+    width: 100px;
+}
+
+mat-card-content {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+mat-divider {
+    margin-top: 200px;
+    margin-bottom: 20px;
+}
+
+.file-name {
+    margin-left: 1rem;
+}
+
+.full-address-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.address-div {
+    width: 40%;
+}
+
+.lonlat {
+    width: 20%;
+}

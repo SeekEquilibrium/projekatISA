@@ -1,19 +1,18 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ConfigService } from "../../service";
-import { CottageService } from "../../service/cottage.service";
-import { CottageProfile } from "../../shared/cottageProfile";
+import { ConfigService } from "src/app/service";
+import { BoatService } from "src/app/service/boat.service";
 
 @Component({
-    selector: "app-cottage-profile-edit",
-    templateUrl: "./cottage-profile-edit.component.html",
-    styleUrls: ["./cottage-profile-edit.component.css"],
+    selector: "app-boat-profile-edit",
+    templateUrl: "./boat-profile-edit.component.html",
+    styleUrls: ["./boat-profile-edit.component.css"],
 })
-export class CottageProfileEditComponent implements OnInit {
+export class BoatProfileEditComponent implements OnInit {
     form: FormGroup;
-    cottageProfile: any;
-    cottageOwner: any;
+    boatProfile: any;
+    boatOwner: any;
     imagePath: string;
     imageNames: string[];
     displayImage: string;
@@ -24,23 +23,20 @@ export class CottageProfileEditComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private cottageService: CottageService,
+        private boatService: BoatService,
         private configService: ConfigService,
         private router: Router,
         private formBuilder: FormBuilder
-    ) {
-        this.imagePath = this.configService.image_path();
-    }
+    ) {}
 
     ngOnInit() {
-        this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
-        this.cottageService
-            .getCottageProfile(this.route.snapshot.paramMap.get("name"))
+        this.boatService
+            .getBoatProfile(this.route.snapshot.paramMap.get("name"))
             .subscribe(
                 (response) => {
-                    this.cottageProfile = response;
-                    this.cottageOwner = this.cottageProfile.cottageOwner;
-                    this.imageNames = response.cottageImages.imagePaths;
+                    this.boatProfile = response;
+                    this.boatOwner = this.boatProfile.cottageOwner;
+                    this.imageNames = response.boatImages.imagePaths;
                     if (this.imageNames != null) {
                         this.displayImage = this.imageNames[0];
                     }
@@ -54,8 +50,6 @@ export class CottageProfileEditComponent implements OnInit {
             name: ["", Validators.required],
             description: ["", Validators.required],
             rules: ["", Validators.required],
-            roomNumber: [Validators.min(1), Validators.required],
-            bedNumber: [Validators.min(1), Validators.required],
             address: ["", Validators.required],
             longitude: ["", Validators.required],
             latitude: ["", Validators.required],
@@ -82,30 +76,28 @@ export class CottageProfileEditComponent implements OnInit {
     }
 
     setLongitude(lon) {
-        this.cottageProfile.longitude = lon;
+        this.boatProfile.longitude = lon;
     }
 
     setLatitude(lat) {
-        this.cottageProfile.latitude = lat;
+        this.boatProfile.latitude = lat;
     }
 
     onSubmit() {
-        const editCottage = {
-            id: this.cottageProfile.id,
+        const editBoat = {
+            id: this.boatProfile.id,
             name: this.form.value.name,
             address: this.form.value.address,
             description: this.form.value.description,
-            roomNumber: this.form.value.roomNumber,
-            bedNumber: this.form.value.bedNumber,
             rules: this.form.value.rules,
             deletedImages: this.deletedImages,
             files: this.addedImages,
             longitude: this.form.value.longitude,
             latitude: this.form.value.latitude,
         };
-        this.cottageService.editCottageProfile(editCottage).subscribe(
+        this.boatService.editBoatProfile(editBoat).subscribe(
             (response) => {
-                this.router.navigate(["/cottage/" + response.name]);
+                this.router.navigate(["/boat/" + response.name]);
             },
             (error) => {
                 console.log("error");

@@ -47,6 +47,9 @@ import { CreateReservationOwnerComponent } from "./components/create-reservation
 import { ChartStatisticsComponent } from "./components/chart-statistics/chart-statistics.component";
 import { BoatProfileComponent } from "./components/boat-profile/boat-profile.component";
 import { BoatService } from "./service/boat.service";
+import { BoatProfileEditComponent } from "./components/boat-profile-edit/boat-profile-edit.component";
+import { RegisterBoatComponent } from "./components/register-boat/register-boat.component";
+import { BoatsListComponent } from "./components/boats-list/boats-list.component";
 @NgModule({
     declarations: [
         AppComponent,
@@ -72,6 +75,9 @@ import { BoatService } from "./service/boat.service";
         CreateReservationOwnerComponent,
         ChartStatisticsComponent,
         BoatProfileComponent,
+        BoatProfileEditComponent,
+        RegisterBoatComponent,
+        BoatsListComponent,
     ],
     imports: [
         BrowserModule,
