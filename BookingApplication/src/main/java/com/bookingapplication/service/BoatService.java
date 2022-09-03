@@ -21,9 +21,9 @@ public class BoatService {
     private BoatRepository boatRepository;
 
     public Boolean existsByName(String name) { return boatRepository.existsByName(name); }
+    public Boolean existsById(long id) { return boatRepository.existsById(id); }
     public Boat findByName(String name) { return boatRepository.findByName(name); }
     public Boat findById(long id) { return boatRepository.findById(id); }
-
     public Boat registerBoat(RegisterBoatRequestDTO requestDTO, BoatOwner boatOwner) throws IOException {
         Boat boat = new Boat(
                 requestDTO.getName(),
@@ -74,6 +74,11 @@ public class BoatService {
         }
         boat.setBoatImages(boatImages);
         return boatRepository.save(boat);
+    }
+
+    public boolean ownerOwnsBoat(long boatOwnerId, long boatId){
+        //odraditi ovaj deo preko query
+        return findById(boatId).getBoatOwner().equals(boatOwnerId);
     }
 
     public ArrayList<Boat> findByBoatOwnerId(long cottageOwnerId){
