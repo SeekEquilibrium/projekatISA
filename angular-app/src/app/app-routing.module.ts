@@ -17,6 +17,7 @@ import { BoatProfileComponent } from "./components/boat-profile/boat-profile.com
 import { BoatProfileEditComponent } from "./components/boat-profile-edit/boat-profile-edit.component";
 import { RegisterBoatComponent } from "./components/register-boat/register-boat.component";
 import { BoatsListComponent } from "./components/boats-list/boats-list.component";
+import { BoatsReservationsComponent } from "./components/boats-reservations/boats-reservations.component";
 
 const routes: Routes = [
     {
@@ -76,8 +77,13 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
     },
     {
-        path: "reservations/:cottageId",
+        path: "reservations/cottage/:cottageId",
         component: CottagesReservationsComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: "reservations/boat/:boatId",
+        component: BoatsReservationsComponent,
         canActivate: [AuthGuardService],
     },
 ];

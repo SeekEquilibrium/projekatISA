@@ -177,4 +177,14 @@ export class BoatService {
                 })
             );
     }
+
+    public submitReport(report) {
+        return this.apiService
+            .post("http://localhost:8080/report/boat/report", report)
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
 }

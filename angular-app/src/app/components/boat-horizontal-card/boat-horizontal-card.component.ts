@@ -17,7 +17,7 @@ export class BoatHorizontalCardComponent implements OnInit {
     }
 
     statsClick() {
-        this.router.navigate(["reservations/" + this.boat.id]);
+        this.router.navigate(["reservations/boat/" + this.boat.id]);
     }
 
     navigateToBoat() {

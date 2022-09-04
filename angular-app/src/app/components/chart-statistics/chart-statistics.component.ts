@@ -31,11 +31,11 @@ export class ChartStatisticsComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log("STATS", this.stats);
+        // console.log("STATS", this.stats);
         for (let i = 0; i < 12 - (this.now.getMonth() + 1); i++) {
             this.yearly.unshift(this.yearly.pop());
         }
-        console.log(this.yearly);
+        // console.log(this.yearly);
         this.thisYearRevenue();
         this.thisYearVisits();
         this.lastFiveYearsRevenue();
@@ -46,7 +46,6 @@ export class ChartStatisticsComponent implements OnInit {
         let revenue = this.lastFiveYears.map(function (arr) {
             return arr.slice();
         });
-        console.log(revenue[0][0]);
         this.stats.visitsByYears.map((x) => {
             for (let j = 0; j < revenue.length; j++) {
                 if (revenue[j][0] == x.year) {
@@ -55,14 +54,13 @@ export class ChartStatisticsComponent implements OnInit {
                 }
             }
         });
-        console.log("VISITS", revenue);
         return new Chart("lastFiveYearsVisits", {
             type: "bar",
             data: {
                 labels: revenue.map((x) => x[0]),
                 datasets: [
                     {
-                        label: "Number of visits for the past 5 years",
+                        label: "Number of occupied days",
                         data: revenue.map((x) => x[1]),
                         backgroundColor: "rgba(104,60,180, 0.5)",
                         borderColor: "rgba(104,60,180, 1)",
@@ -87,7 +85,6 @@ export class ChartStatisticsComponent implements OnInit {
             return arr.slice();
         });
         // visits[2020][1] = 23;
-        console.log(revenue[0][0]);
         this.stats.revanueByYears.map((x) => {
             for (let j = 0; j < revenue.length; j++) {
                 if (revenue[j][0] == x.year) {
@@ -102,7 +99,7 @@ export class ChartStatisticsComponent implements OnInit {
                 labels: revenue.map((x) => x[0]),
                 datasets: [
                     {
-                        label: "Revenue for the past 5 years",
+                        label: "Revenue of the year",
                         data: revenue.map((x) => x[1]),
                         backgroundColor: "rgba(104,60,180, 0.5)",
                         borderColor: "rgba(104,60,180, 1)",
@@ -136,7 +133,7 @@ export class ChartStatisticsComponent implements OnInit {
                 labels: this.yearly.map((x) => x[1]),
                 datasets: [
                     {
-                        label: "Number of visits for the past year",
+                        label: "Number of occupied days",
                         data: visits,
                         backgroundColor: "rgba(104,60,180, 0.5)",
                         borderColor: "rgba(104,60,180, 1)",
@@ -168,7 +165,7 @@ export class ChartStatisticsComponent implements OnInit {
                 labels: this.yearly.map((x) => x[1]),
                 datasets: [
                     {
-                        label: "Revenue for the past year",
+                        label: "Revenue of the month",
                         data: revenue,
                         backgroundColor: "rgba(104,60,180, 0.5)",
                         borderColor: "rgba(104,60,180, 1)",

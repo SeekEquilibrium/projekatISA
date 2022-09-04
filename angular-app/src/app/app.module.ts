@@ -53,6 +53,7 @@ import { BoatsListComponent } from "./components/boats-list/boats-list.component
 import { BoatHorizontalCardComponent } from "./components/boat-horizontal-card/boat-horizontal-card.component";
 import { BoatDefineAvailabilityComponent } from "./components/boat-define-availability/boat-define-availability.component";
 import { BoatDefineActionsComponent } from "./components/boat-define-actions/boat-define-actions.component";
+import { BoatsReservationsComponent } from './components/boats-reservations/boats-reservations.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -84,6 +85,7 @@ import { BoatDefineActionsComponent } from "./components/boat-define-actions/boa
         BoatHorizontalCardComponent,
         BoatDefineAvailabilityComponent,
         BoatDefineActionsComponent,
+        BoatsReservationsComponent,
     ],
     imports: [
         BrowserModule,

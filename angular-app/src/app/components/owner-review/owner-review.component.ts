@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
+import { BoatService } from "src/app/service/boat.service";
 import { CottageService } from "src/app/service/cottage.service";
 
 @Component({
@@ -15,6 +16,7 @@ export class OwnerReviewComponent implements OnInit {
         public dialogRef: MatDialogRef<OwnerReviewComponent>,
         private formBuilder: FormBuilder,
         private cottageService: CottageService,
+        private boatService: BoatService,
         @Inject(MAT_DIALOG_DATA) public data: any
     ) {}
 
@@ -23,21 +25,39 @@ export class OwnerReviewComponent implements OnInit {
     }
 
     submit() {
-        const report = {
-            cottageId: this.data.element.cottageId,
-            clientId: this.data.element.user.id,
-            description: this.form.value.description,
-            reportClient: this.form.value.report,
-            didNotShowUp: this.form.value.didNotShowUp,
-        };
-        this.cottageService.submitReport(report).subscribe(
-            (response) => {
-                this.dialogRef.close();
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
+        if (this.data.type === "cottage") {
+            const report = {
+                cottageId: this.data.element.cottageId,
+                clientId: this.data.element.user.id,
+                description: this.form.value.description,
+                reportClient: this.form.value.report,
+                didNotShowUp: this.form.value.didNotShowUp,
+            };
+            this.cottageService.submitReport(report).subscribe(
+                (response) => {
+                    this.dialogRef.close();
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        } else if (this.data.type === "boat") {
+            const report = {
+                boatId: this.data.element.cottageId,
+                clientId: this.data.element.user.id,
+                description: this.form.value.description,
+                reportClient: this.form.value.report,
+                didNotShowUp: this.form.value.didNotShowUp,
+            };
+            this.boatService.submitReport(report).subscribe(
+                (response) => {
+                    this.dialogRef.close();
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        }
     }
 
     ngOnInit() {

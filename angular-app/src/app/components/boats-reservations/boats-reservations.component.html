@@ -1,0 +1,88 @@
+<div class="table-div">
+    <app-chart-statistics *ngIf="stats" [stats]="stats"></app-chart-statistics>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <ng-container matColumnDef="Boat">
+            <th class="centerHeader" mat-header-cell *matHeaderCellDef>Boat</th>
+            <td class="centerHeader" mat-cell *matCellDef="let element">
+                {{ element.cottageName }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Date Start">
+            <th class="centerHeader" mat-header-cell *matHeaderCellDef>
+                Date Start
+            </th>
+            <td class="centerHeader" mat-cell *matCellDef="let element">
+                {{ element.startDate | date: "shortDate" }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Date End">
+            <th class="centerHeader" mat-header-cell *matHeaderCellDef>
+                Date End
+            </th>
+            <td class="centerHeader" mat-cell *matCellDef="let element">
+                {{ element.endDate | date: "shortDate" }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Customer">
+            <th class="centerHeader" mat-header-cell *matHeaderCellDef>
+                Customer
+            </th>
+            <td class="centerHeader" mat-cell *matCellDef="let element">
+                <button
+                    (click)="openUserInfo(element.user)"
+                    mat-button
+                    color="primary"
+                >
+                    {{ element.user.name }} {{ element.user.surname }}
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Status">
+            <th class="centerHeader" mat-header-cell *matHeaderCellDef>
+                Status
+            </th>
+            <td class="centerHeader" mat-cell *matCellDef="let element">
+                {{ element.status }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Review">
+            <th class="centerHeader" mat-header-cell *matHeaderCellDef>
+                Review
+            </th>
+            <td class="centerHeader" mat-cell *matCellDef="let element">
+                <button
+                    *ngIf="showReviewButton(element)"
+                    (click)="reviewClick(element)"
+                    mat-button
+                    color="warn"
+                >
+                    Review
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="New Reservation">
+            <th class="centerHeader" mat-header-cell *matHeaderCellDef>
+                New Reservation
+            </th>
+            <td class="centerHeader" mat-cell *matCellDef="let element">
+                <button
+                    *ngIf="showReviewButton(element)"
+                    (click)="newReservationClick(element)"
+                    mat-button
+                    color="primary"
+                >
+                    New Reservation
+                </button>
+            </td>
+        </ng-container>
+    </table>
+</div>
