@@ -37,7 +37,7 @@ insert into boat(id, name, address, latitude, longitude, description, rules, boa
     insert into boat_image(id, path, boat_id) values (nextval('image_seq_gen'), 'Posejdon_a6f12b5d-2099-4945-8976-28eae5e29e50.png', 1);
 
 
---Create Reservation
+--Create Reservation for cottages
 insert into cottage_reservations(id, date_start, date_end, status, cottage_id, client_id) values (nextval('reservation_seq_gen'), '2022-05-16', '2022-05-18', 'RESERVED', 1, 2);
 insert into cottage_reservations(id, date_start, date_end, status, cottage_id, client_id) values (nextval('reservation_seq_gen'), '2020-08-16', '2020-08-18', 'RESERVED', 1, 2);
 insert into cottage_reservations(id, date_start, date_end, status, cottage_id, client_id) values (nextval('reservation_seq_gen'), '2021-06-16', '2021-06-18', 'RESERVED', 1, 2);
@@ -45,7 +45,7 @@ insert into cottage_reservations(id, date_start, date_end, status, cottage_id, c
 insert into cottage_reservations(id, date_start, date_end, status, cottage_id, client_id) values (nextval('reservation_seq_gen'), '2022-02-16', '2022-02-18', 'RESERVED', 1, 2);
 insert into cottage_reservations(id, date_start, date_end, status, cottage_id, client_id) values (nextval('reservation_seq_gen'), '2022-08-16', '2022-08-18', 'RESERVED', 1, 2);
 
---Available appointments
+--Available appointments for cottages
 insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type, client_id) values (nextval('free_appointment_seq_gen'), '2022-05-17', false, 1, 25, 'RESERVED', 2);
 insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type, client_id) values (nextval('free_appointment_seq_gen'), '2022-05-18', false, 1, 25, 'RESERVED', 2);
 insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type, client_id) values (nextval('free_appointment_seq_gen'), '2022-05-16', false, 1, 25, 'RESERVED', 2);
@@ -93,3 +93,30 @@ insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day,
 insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-09-07', true, 1, 10, 'AVAILABLE');
 insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-09-08', true, 1, 10, 'AVAILABLE');
 insert into appointment_cottage(id, date, has_action, cottage_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-09-09', true, 1, 10, 'AVAILABLE');
+
+--Create Reservation for boats
+
+
+--Available appointments for cottages
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-19', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-20', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-21', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-22', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-23', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-24', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-25', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-26', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-27', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-28', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-29', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-30', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-08-31', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-09-01', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-09-02', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-09-03', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-09-04', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-09-05', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-09-06', false, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-09-07', true, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-09-08', true, 1, 10, 'AVAILABLE');
+insert into appointment_boat(id, date, has_action, boat_id, price_per_day, type) values (nextval('free_appointment_seq_gen'), '2022-09-09', true, 1, 10, 'AVAILABLE');

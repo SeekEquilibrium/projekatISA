@@ -119,7 +119,7 @@ public class CottageAppointmentController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
         //Da li vikendica pripada gazdi koji salje zahtev
-        if(cottageService.ownerOwnsCottage(request.getClientId(), request.getCottageId())){
+        if(cottageService.ownerOwnsCottage(userApp.getId(), request.getCottageId())){
             return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
         }
         //Da li klijent postoji
@@ -209,15 +209,6 @@ public class CottageAppointmentController {
             ReservationDTO reservationDTO = new ReservationDTO(c.getId(), user, c.getDateStart(), c.getDateEnd(), c.getCottage().getName(), c.getCottage().getId(), c.getStatus().toString());
             reservationsDTO.add(reservationDTO);
         }
-//        ArrayList<AppointmentCottage> appointments = appointmentCottageService.getCottageReservations(cottageId);
-//        appointments.sort((o1,o2) -> o1.getDate().compareTo(o2.getDate()));
-//        ArrayList<ReservationDTO> reservations = new ArrayList<>();
-//        for(AppointmentCottage a : appointments){
-//            UserDTO user = new UserDTO(a.getClient());
-//            ReservationDTO reservationDTO = new ReservationDTO(a.getId(), user, a.getDate(), a.getPricePerDay(), a.isHasAction());
-//            reservations.add(reservationDTO);
-//        }
-
         return new ResponseEntity<>(reservationsDTO, HttpStatus.OK);
     }
 

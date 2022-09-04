@@ -82,4 +82,99 @@ export class BoatService {
                 })
             );
     }
+
+    public getBoatAvailability(boatId) {
+        return this.apiService
+            .get(
+                this.config.appointment_url +
+                    "/boat/getBoatAvailabilityAndReservations/" +
+                    boatId
+            )
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
+
+    public getBoatReservations(boatId) {
+        return this.apiService
+            .get(
+                this.config.appointment_url + "/boat/boatReservations/" + boatId
+            )
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
+
+    public getBoatActions(boatId) {
+        return this.apiService
+            .get(this.config.appointment_url + "/boat/getBoatActions/" + boatId)
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
+
+    public defineBoatAvailability(
+        boatId,
+        startDate,
+        endDate,
+        pricePerDay,
+        hasAction
+    ) {
+        return this.apiService
+            .post(this.config.appointment_url + "/boat/defineAvailability", {
+                boatId: boatId,
+                startDate,
+                endDate,
+                pricePerDay,
+                hasAction,
+            })
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
+
+    public getAvailability(boatId) {
+        return this.apiService
+            .get(
+                this.config.appointment_url +
+                    "/boat/getBoatAvailability/" +
+                    boatId
+            )
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
+
+    public createReservationForClient(reservation) {
+        return this.apiService
+            .post(
+                this.config.appointment_url + "/boat/ownerCreateReservation",
+                reservation
+            )
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
+
+    public getBoatStats(boatId) {
+        return this.apiService
+            .get(this.config.appointment_url + "/boat/stats/" + boatId)
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
 }

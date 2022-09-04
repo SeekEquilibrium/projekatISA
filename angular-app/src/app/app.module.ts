@@ -50,7 +50,9 @@ import { BoatService } from "./service/boat.service";
 import { BoatProfileEditComponent } from "./components/boat-profile-edit/boat-profile-edit.component";
 import { RegisterBoatComponent } from "./components/register-boat/register-boat.component";
 import { BoatsListComponent } from "./components/boats-list/boats-list.component";
-import { BoatHorizontalCardComponent } from './components/boat-horizontal-card/boat-horizontal-card.component';
+import { BoatHorizontalCardComponent } from "./components/boat-horizontal-card/boat-horizontal-card.component";
+import { BoatDefineAvailabilityComponent } from "./components/boat-define-availability/boat-define-availability.component";
+import { BoatDefineActionsComponent } from "./components/boat-define-actions/boat-define-actions.component";
 @NgModule({
     declarations: [
         AppComponent,
@@ -80,6 +82,8 @@ import { BoatHorizontalCardComponent } from './components/boat-horizontal-card/b
         RegisterBoatComponent,
         BoatsListComponent,
         BoatHorizontalCardComponent,
+        BoatDefineAvailabilityComponent,
+        BoatDefineActionsComponent,
     ],
     imports: [
         BrowserModule,
@@ -113,6 +117,8 @@ import { BoatHorizontalCardComponent } from './components/boat-horizontal-card/b
     entryComponents: [
         CottageDefineAvailabilityComponent,
         CottageDefineActionsComponent,
+        BoatDefineAvailabilityComponent,
+        BoatDefineActionsComponent,
         BasicUserInfoComponent,
         OwnerReviewComponent,
         CreateReservationOwnerComponent,

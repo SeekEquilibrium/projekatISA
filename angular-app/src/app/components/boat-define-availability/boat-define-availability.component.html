@@ -1,0 +1,62 @@
+<div *ngIf="!!availability_dates">
+    <p class="title">Define Availability</p>
+
+    <ngb-datepicker
+        #dp
+        (dateSelect)="onDateSelection($event)"
+        [displayMonths]="2"
+        [dayTemplate]="t"
+        outsideDays="hidden"
+        [minDate]="minDate"
+    >
+    </ngb-datepicker>
+
+    <ng-template #t let-date let-focused="focused">
+        <span
+            class="custom-day"
+            [class.focused]="focused"
+            [class.range]="isRange(date)"
+            [class.faded]="isHovered(date) || isInside(date)"
+            [class.red]="markDate(date)"
+            (mouseenter)="hoveredDate = date"
+            (mouseleave)="hoveredDate = null"
+        >
+            {{ date.day }}
+        </span>
+    </ng-template>
+
+    <hr />
+    <div class="price-div">
+        <mat-form-field class="price">
+            <mat-label>Price Per Day: </mat-label>
+            <span matSuffix>€ &nbsp;</span>
+            <input
+                class="price-input"
+                type="number"
+                [(ngModel)]="price"
+                min="0"
+                matInput
+            />
+        </mat-form-field>
+    </div>
+    <div class="flex-row">
+        <!-- prettier-ignore -->
+        <pre class="from">From: <pre class="no_margin" *ngIf="!!fromDate">{{ fromDate?.day }}.{{ fromDate?.month }}.{{ fromDate?.year }} </pre></pre>
+        <pre
+            class="to"
+        >To: <pre class="no_margin" *ngIf="!!toDate">{{ toDate?.day }}.{{ toDate?.month }}.{{ toDate?.year }} </pre></pre>
+    </div>
+    <div class="buttons">
+        <button mat-stroked-button color="primary" (click)="closeButton()">
+            Cancel
+        </button>
+        <button
+            [disabled]="saveButtonValidation()"
+            mat-flat-button
+            color="primary"
+            (click)="saveChanges()"
+        >
+            Save Changes
+        </button>
+    </div>
+</div>

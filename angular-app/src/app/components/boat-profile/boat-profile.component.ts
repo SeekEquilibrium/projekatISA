@@ -6,6 +6,8 @@ import { CottageService } from "../../service/cottage.service";
 import { CottageProfile } from "../../shared/cottageProfile";
 import { MatDialog } from "@angular/material/dialog";
 import { BoatService } from "src/app/service/boat.service";
+import { BoatDefineAvailabilityComponent } from "../boat-define-availability/boat-define-availability.component";
+import { BoatDefineActionsComponent } from "../boat-define-actions/boat-define-actions.component";
 
 @Component({
     selector: "app-boat-profile",
@@ -52,5 +54,17 @@ export class BoatProfileComponent implements OnInit {
             return false;
         }
         return this.boatOwner.username == this.userService.currentUser.username;
+    }
+
+    openAvailabilityDialog() {
+        this.dialog.open(BoatDefineAvailabilityComponent, {
+            data: { boatId: this.boatProfile.id },
+        });
+    }
+
+    openActionsDialog() {
+        this.dialog.open(BoatDefineActionsComponent, {
+            data: { boatId: this.boatProfile.id },
+        });
     }
 }

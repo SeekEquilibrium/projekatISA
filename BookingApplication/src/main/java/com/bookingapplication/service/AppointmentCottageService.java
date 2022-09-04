@@ -74,6 +74,7 @@ public class AppointmentCottageService {
         cottageReservationsService.save(new CottageReservations(startTime, endTime, ReservationStatus.RESERVED, cottage, client));
         return new CottageReservationResponseDTO(cottageId, clientId, startTime, endTime);
     }
+
     public boolean CheckActionAvailability (long cottageId, LocalDate startTime , LocalDate endTime){
         if(!existsByDate(startTime)|| !existsByDate(endTime)){
             return false;
