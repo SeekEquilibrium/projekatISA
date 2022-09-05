@@ -60,7 +60,7 @@ public class AppointmentCottageService {
                 }
             }
         }
-        Thread.sleep(10000);
+//        Thread.sleep(10000);
         saveAll(saveReservations);
         return new DefineCottageAvailabilityResponseDTO(cottage.getId(), request.getPricePerDay(), request.isHasAction(), request.getStartDate(), request.getEndDate());
     }

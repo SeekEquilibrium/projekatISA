@@ -59,7 +59,7 @@ public class AppointmentBoatService {
                 }
             }
         }
-        Thread.sleep(10000);
+//        Thread.sleep(10000);
         saveAll(saveReservations);
         return new DefineBoatAvailabilityResponseDTO(boat.getId(), request.getPricePerDay(), request.isHasAction(), request.getStartDate(), request.getEndDate());
     }

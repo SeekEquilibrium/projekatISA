@@ -10,6 +10,8 @@ import com.bookingapplication.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -31,6 +33,8 @@ public class CottageService {
 	public Cottage findById(long id) {
 		return cottageReposiotry.findById(id);
 	}
+
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public Cottage findByIdPess(long id){
 		return cottageReposiotry.findByIdPess(id);
 	}

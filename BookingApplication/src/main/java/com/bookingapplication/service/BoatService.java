@@ -7,6 +7,8 @@ import com.bookingapplication.repository.BoatRepository;
 import com.bookingapplication.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -74,6 +76,11 @@ public class BoatService {
         }
         boat.setBoatImages(boatImages);
         return boatRepository.save(boat);
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public Boat findByIdPess(long id){
+        return boatRepository.findByIdPess(id);
     }
 
     public boolean ownerOwnsBoat(long boatOwnerId, long boatId){

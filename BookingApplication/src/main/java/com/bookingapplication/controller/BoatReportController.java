@@ -32,7 +32,7 @@ public class BoatReportController {
 
     @PostMapping("/report")
     @PreAuthorize("hasAuthority('BOAT_OWNER')")
-    public ResponseEntity<BoatReportDTO> createReport(@Valid @RequestBody BoatReportDTO report){
+    public ResponseEntity<BoatReportDTO> createReport(@Valid @RequestBody BoatReportDTO report) throws InterruptedException {
         UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         BoatOwner boatOwner = boatOwnerService.findById(userApp.getId());
         //Da li vikendica pripada gazdi koji salje zahtev

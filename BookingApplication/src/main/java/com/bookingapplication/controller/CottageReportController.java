@@ -33,7 +33,7 @@ public class CottageReportController {
 
     @PostMapping("/report")
     @PreAuthorize("hasAuthority('COTTAGE_OWNER')")
-    public ResponseEntity<CottageReportDTO> createReport(@Valid @RequestBody CottageReportDTO report){
+    public ResponseEntity<CottageReportDTO> createReport(@Valid @RequestBody CottageReportDTO report) throws InterruptedException {
         UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         CottageOwner cottageOwner = cottageOwnerService.findById(userApp.getId());
         //Da li vikendica pripada gazdi koji salje zahtev
