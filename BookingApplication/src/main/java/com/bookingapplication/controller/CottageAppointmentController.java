@@ -39,7 +39,7 @@ public class CottageAppointmentController {
 
     @PostMapping("/defineAvailability")
     @PreAuthorize("hasAuthority('COTTAGE_OWNER')")
-    public ResponseEntity<DefineCottageAvailabilityResponseDTO> defineAvailabilityOrActions(@Valid @RequestBody DefineCottageAvailabilityRequestDTO request){
+    public ResponseEntity<DefineCottageAvailabilityResponseDTO> defineAvailabilityOrActions(@Valid @RequestBody DefineCottageAvailabilityRequestDTO request) throws InterruptedException {
         UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         CottageOwner cottageOwner = cottageOwnerService.findById(userApp.getId());
         //Da li vikendica postoji

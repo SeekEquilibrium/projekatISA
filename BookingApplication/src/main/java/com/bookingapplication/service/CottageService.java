@@ -31,6 +31,9 @@ public class CottageService {
 	public Cottage findById(long id) {
 		return cottageReposiotry.findById(id);
 	}
+	public Cottage findByIdPess(long id){
+		return cottageReposiotry.findByIdPess(id);
+	}
 
 	public Boolean existsByName(String name) { return cottageReposiotry.existsByName(name); }
 

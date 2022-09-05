@@ -37,7 +37,7 @@ public class BoatAppointmentController {
 
     @PostMapping("/defineAvailability")
     @PreAuthorize("hasAuthority('BOAT_OWNER')")
-    public ResponseEntity<DefineBoatAvailabilityResponseDTO> defineAvailabilityOrActions(@Valid @RequestBody DefineBoatAvailabilityRequestDTO request){
+    public ResponseEntity<DefineBoatAvailabilityResponseDTO> defineAvailabilityOrActions(@Valid @RequestBody DefineBoatAvailabilityRequestDTO request) throws InterruptedException {
         UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         BoatOwner boatOwner = boatOwnerService.findById(userApp.getId());
         //Da li vikendica postoji
@@ -131,6 +131,29 @@ public class BoatAppointmentController {
         }
         BoatReservationResponseDTO response = appointmentBoatService.CreateReservationForClient(
                 request.getClientId(), request.getBoatId(),request.getStartDate(),request.getEndDate());
+        if(response == null) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/clientCreateReservation")
+    @PreAuthorize("hasAuthority('CLIENT')")
+    public ResponseEntity<BoatReservationResponseDTO> clientReservationRequest (@Valid @RequestBody BoatClientReservationRequestDTO request) throws InterruptedException {
+        UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        //Da li vikendica postoji
+        if(!boatService.existsById(request.getBoatId())){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        //Da li je  datum u buducnosti, da li je pocetak pre kraja
+        if(dateValidation.isDateBeforeToday(request.getStartDate()) ||
+                !dateValidation.isFirstBeforeSecondDate(request.getStartDate(), request.getEndDate())){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        BoatReservationResponseDTO response = appointmentBoatService.CreateReservationForClient(
+                userApp.getId(),request.getBoatId(),request.getStartDate(),request.getEndDate()
+        );
         if(response == null) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }

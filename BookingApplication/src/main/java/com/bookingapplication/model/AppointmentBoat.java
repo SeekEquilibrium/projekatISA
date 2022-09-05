@@ -23,6 +23,10 @@ public class AppointmentBoat extends Appointment {
     @Enumerated(EnumType.STRING)
     private AppointmentType type;
 
+    @Version
+    @Column(name = "optlock", columnDefinition = "integer DEFAULT 0", nullable = false)
+    private Long version = 0L;
+
     public AppointmentBoat(LocalDate date, boolean hasAction, Boat boat, Double pricePerDay, AppointmentType type) {
         super(date, hasAction);
         this.boat = boat;
@@ -63,5 +67,13 @@ public class AppointmentBoat extends Appointment {
 
     public void setType(AppointmentType type) {
         this.type = type;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 }

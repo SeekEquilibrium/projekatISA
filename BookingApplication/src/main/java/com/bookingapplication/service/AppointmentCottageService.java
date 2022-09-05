@@ -38,7 +38,8 @@ public class AppointmentCottageService {
         return new DefineCottageAvailabilityResponseDTO(cottage.getId(), request.getPricePerDay(), request.isHasAction(), request.getStartDate(), request.getEndDate());
     }
 
-    public DefineCottageAvailabilityResponseDTO DefineCottageAction (DefineCottageAvailabilityRequestDTO request){
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public DefineCottageAvailabilityResponseDTO DefineCottageAction (DefineCottageAvailabilityRequestDTO request) throws InterruptedException {
         Cottage cottage = cottageService.findById(request.getCottageId());
         ArrayList<AppointmentCottage> saveReservations = new ArrayList<>();
         for(LocalDate date = request.getStartDate(); date.isBefore(request.getEndDate().plusDays(1)); date = date.plusDays(1)){
@@ -59,6 +60,8 @@ public class AppointmentCottageService {
                 }
             }
         }
+        Thread.sleep(10000);
+        saveAll(saveReservations);
         return new DefineCottageAvailabilityResponseDTO(cottage.getId(), request.getPricePerDay(), request.isHasAction(), request.getStartDate(), request.getEndDate());
     }
     //Vlasnik vikendice kreira rezervaciju za klijenta
@@ -83,9 +86,9 @@ public class AppointmentCottageService {
             saveReservations.add(reservation);
         }
 //        Thread.sleep(15000);
-
-        saveAll(saveReservations);
         cottageReservationsService.save(new CottageReservations(startTime, endTime, ReservationStatus.PENDING, cottage, client));
+        saveAll(saveReservations);
+
         return new CottageReservationResponseDTO(cottageId, clientId, startTime, endTime);
     }
 
