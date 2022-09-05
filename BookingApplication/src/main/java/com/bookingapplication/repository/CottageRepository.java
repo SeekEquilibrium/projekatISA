@@ -1,10 +1,7 @@
 package com.bookingapplication.repository;
 
 import com.bookingapplication.model.Cottage;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Lock;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.QueryHints;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -26,4 +23,8 @@ public interface CottageRepository extends JpaRepository<Cottage, Long> {
 	public Boolean existsByName(String name);
 	@Query("select c from Cottage c where c.cottageOwner.id=:ownerId")
 	public ArrayList<Cottage> findByCottageOwnerId(@Param("ownerId") long ownerId);
+
+	@Modifying
+	@Query("delete from Cottage c where c.id=:id")
+	public void deleteById(@Param("id")long id);
 }

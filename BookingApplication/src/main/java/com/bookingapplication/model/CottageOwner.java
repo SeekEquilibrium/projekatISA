@@ -9,9 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class CottageOwner extends UserApp {
-	@JsonIgnore
 	@OneToMany
-	(mappedBy = "cottageOwner", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+	(mappedBy = "cottageOwner", fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval=true)
 	public Set<Cottage> cottages = new HashSet<Cottage>();
 
 	//Obrazlozenje za registraciju

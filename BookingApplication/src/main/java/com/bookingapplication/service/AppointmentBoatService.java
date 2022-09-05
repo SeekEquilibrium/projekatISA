@@ -50,7 +50,7 @@ public class AppointmentBoatService {
 //                save(appointment);
             }else{
                 //izmena postojeceg termina, provera da li je taj termin vec na akciji (ako jeste, just skip)
-                AppointmentBoat appointment = findByDate(date);
+                AppointmentBoat appointment = findByDate(date, boat.getId());
                 if(!appointment.isHasAction()){
                     appointment.setHasAction(true);
                     appointment.setPricePerDay(request.getPricePerDay());
@@ -76,7 +76,7 @@ public class AppointmentBoatService {
         Client client = clientService.findById(clientId);
         ArrayList<AppointmentBoat> saveReservations = new ArrayList<>();
         for(LocalDate date = startTime; date.isBefore(endTime.plusDays(1)); date = date.plusDays(1)){
-            AppointmentBoat reservation = findByDate(date);
+            AppointmentBoat reservation = findByDate(date, boatId);
             if(reservation == null || reservation.getType() != AppointmentType.AVAILABLE){
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 return null;
@@ -89,6 +89,14 @@ public class AppointmentBoatService {
         boatReservationsService.save(new BoatReservations(startTime, endTime, ReservationStatus.PENDING, boat, client));
         saveAll(saveReservations);
         return new BoatReservationResponseDTO(boatId, clientId, startTime, endTime);
+    }
+
+    public boolean boatHasFutureReservations(long id){
+        int num = appointmentBoatRepository.boatHasFutureReservations(id);
+        if(num==0){
+            return false;
+        }
+        return true;
     }
 
     public List<?> getRevanueByYears(long boatId){
@@ -134,8 +142,8 @@ public class AppointmentBoatService {
         return appointmentBoatRepository.existsByDate(date);
     }
 
-    public AppointmentBoat findByDate(LocalDate date){
-        return appointmentBoatRepository.findByDate(date);
+    public AppointmentBoat findByDate(LocalDate date, long boatId){
+        return appointmentBoatRepository.findByDate(date, boatId);
     }
 
 

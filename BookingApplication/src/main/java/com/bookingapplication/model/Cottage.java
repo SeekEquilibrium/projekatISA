@@ -32,24 +32,27 @@ public class Cottage {
 	private Double longitude;
 	@Column
 	private Double latitude;
-	@JsonIgnore
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	@ManyToOne(fetch = FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private CottageOwner cottageOwner;
 	@OneToMany
-	(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval=true)
+			(mappedBy = "cottage", fetch = FetchType.EAGER, orphanRemoval=true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	public Set<CottageImage> cottageImages = new HashSet<CottageImage>();
 
 	@OneToMany
-			(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+			(mappedBy = "cottage", fetch = FetchType.EAGER, orphanRemoval=true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	public Set<AppointmentCottage> availableAppointmentsCottages = new HashSet<AppointmentCottage>();
 
 	@OneToMany
-			(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+			(mappedBy = "cottage", fetch = FetchType.EAGER, orphanRemoval=true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	public Set<CottageReport> cottageReports = new HashSet<CottageReport>();
 
 	@OneToMany
-			(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+			(mappedBy = "cottage", fetch = FetchType.EAGER, orphanRemoval=true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	public Set<CottageReservations> cottageReservations = new HashSet<>();
 
 
@@ -178,5 +181,29 @@ public class Cottage {
 
 	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
+	}
+
+	public Set<AppointmentCottage> getAvailableAppointmentsCottages() {
+		return availableAppointmentsCottages;
+	}
+
+	public void setAvailableAppointmentsCottages(Set<AppointmentCottage> availableAppointmentsCottages) {
+		this.availableAppointmentsCottages = availableAppointmentsCottages;
+	}
+
+	public Set<CottageReport> getCottageReports() {
+		return cottageReports;
+	}
+
+	public void setCottageReports(Set<CottageReport> cottageReports) {
+		this.cottageReports = cottageReports;
+	}
+
+	public Set<CottageReservations> getCottageReservations() {
+		return cottageReservations;
+	}
+
+	public void setCottageReservations(Set<CottageReservations> cottageReservations) {
+		this.cottageReservations = cottageReservations;
 	}
 }

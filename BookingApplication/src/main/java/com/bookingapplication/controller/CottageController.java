@@ -112,5 +112,16 @@ public class CottageController {
 
 	}
 
-
+	@DeleteMapping("/deleteCottage/{id}")
+	@PreAuthorize("hasAuthority('COTTAGE_OWNER')")
+	public ResponseEntity<?> deleteCottage(@PathVariable long id){
+		if(!cottageService.existsById(id)){
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+		boolean success = cottageService.deleteCottage(id);
+		if(!success){
+			return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<>(null, HttpStatus.OK);
+	}
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { CottageService } from "src/app/service/cottage.service";
 
 @Component({
     selector: "app-cottage-horizontal-card",
@@ -8,7 +9,10 @@ import { Router } from "@angular/router";
 })
 export class CottageHorizontalCardComponent implements OnInit {
     @Input() cottage;
-    constructor(private router: Router) {}
+    constructor(
+        private router: Router,
+        private cottageService: CottageService
+    ) {}
 
     ngOnInit() {
         console.log(this.cottage);
@@ -24,5 +28,19 @@ export class CottageHorizontalCardComponent implements OnInit {
 
     navigateToCottage() {
         this.router.navigate(["/cottage/" + this.cottage.name]);
+    }
+
+    deleteClick(event) {
+        event.stopPropagation();
+        this.cottageService.delete(this.cottage.id).subscribe(
+            (res) => {
+                location.reload();
+            },
+            (error) => {
+                alert(
+                    "You can't delete cottage which has reservations in the future."
+                );
+            }
+        );
     }
 }

@@ -50,7 +50,7 @@ public class AppointmentCottageService {
                 saveReservations.add(appointment);
             }else{
                 //izmena postojeceg termina, provera da li je taj termin vec na akciji (ako jeste, just skip)
-                AppointmentCottage appointment = findByDate(date);
+                AppointmentCottage appointment = findByDate(date, cottage.getId());
                 if(!appointment.isHasAction()){
                     appointment.setHasAction(true);
                     appointment.setPricePerDay(request.getPricePerDay());
@@ -76,7 +76,7 @@ public class AppointmentCottageService {
         Client client = clientService.findById(clientId);
         ArrayList<AppointmentCottage> saveReservations = new ArrayList<>();
         for(LocalDate date = startTime; date.isBefore(endTime.plusDays(1)); date = date.plusDays(1)){
-            AppointmentCottage reservation = findByDate(date);
+            AppointmentCottage reservation = findByDate(date,cottageId);
             if(reservation == null || reservation.getType() != AppointmentType.AVAILABLE){
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 return null;
@@ -98,7 +98,7 @@ public class AppointmentCottageService {
         }
         Cottage cottage = cottageService.findById(cottageId);
         for(LocalDate date = startTime; date.isBefore(endTime.plusDays(1)); date = date.plusDays(1)){
-            AppointmentCottage reservation = findByDate(date);
+            AppointmentCottage reservation = findByDate(date, cottageId);
             if(reservation.getType() != AppointmentType.AVAILABLE){
                if(reservation.isHasAction() != true){
                    return false;
@@ -106,6 +106,14 @@ public class AppointmentCottageService {
             }
         }
         return  true;
+    }
+
+    public boolean cottageHasFutureReservations(long id){
+        int num = appointmentCottageRepository.cottageHasFutureReservations(id);
+        if(num==0){
+            return false;
+        }
+        return true;
     }
 
     public List<?> getRevanueByYears(long cottageId){
@@ -151,7 +159,7 @@ public class AppointmentCottageService {
         return appointmentCottageRepository.existsByDate(date);
     }
 
-    public AppointmentCottage findByDate(LocalDate date){
-        return appointmentCottageRepository.findByDate(date);
+    public AppointmentCottage findByDate(LocalDate date, long cottageId){
+        return appointmentCottageRepository.findByDate(date, cottageId);
     }
 }

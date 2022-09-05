@@ -187,4 +187,14 @@ export class BoatService {
                 })
             );
     }
+
+    public delete(boatId) {
+        return this.apiService
+            .delete("http://localhost:8080/boat/deleteBoat/" + boatId)
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
 }

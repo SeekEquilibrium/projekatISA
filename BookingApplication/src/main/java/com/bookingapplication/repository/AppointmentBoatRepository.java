@@ -1,6 +1,7 @@
 package com.bookingapplication.repository;
 
 import com.bookingapplication.model.AppointmentBoat;
+import com.bookingapplication.model.AppointmentCottage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,7 +14,8 @@ import java.util.List;
 @Repository
 public interface AppointmentBoatRepository extends JpaRepository<AppointmentBoat, Long> {
     public Boolean existsByDate(LocalDate date);
-    public AppointmentBoat findByDate(LocalDate date);
+    @Query("select a from AppointmentBoat a where a.boat.id=:boatId and a.date=:date")
+    public AppointmentBoat findByDate(@Param("date") LocalDate date, @Param("boatId") long boatId);
 
     //Koristi se za prikaz definisanih termina za vlasnika vikendice
     @Query("select a from AppointmentBoat a where a.boat.id=:boatId and (a.type='AVAILABLE' or a.type='RESERVED')")
@@ -51,4 +53,7 @@ public interface AppointmentBoatRepository extends JpaRepository<AppointmentBoat
             "where a.boat.id=:boatId and a.type='RESERVED' and a.date < CURRENT_DATE and a.date > (CURRENT_DATE-365) " +
             "group by extract(month from a.date), extract(year from a.date)")
     public List<?> getReservationDaysForLastYear(@Param("boatId") long boatId);
+
+    @Query("select count(a) from AppointmentBoat a where a.boat.id=:boatId and a.type='RESERVED' and a.date > CURRENT_DATE")
+    public int boatHasFutureReservations(@Param("boatId") long boatId);
 }

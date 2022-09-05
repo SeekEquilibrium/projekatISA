@@ -14,7 +14,8 @@ import java.util.List;
 @Repository
 public interface AppointmentCottageRepository extends JpaRepository<AppointmentCottage, Long> {
     public Boolean existsByDate(LocalDate date);
-    public AppointmentCottage findByDate(LocalDate date);
+    @Query("select a from AppointmentCottage a where a.cottage.id=:cottageId and a.date=:date")
+    public AppointmentCottage findByDate(@Param("date") LocalDate date, @Param("cottageId") long cottageId);
 
     //Koristi se za prikaz definisanih termina za vlasnika vikendice
     @Query("select a from AppointmentCottage a where a.cottage.id=:cottageId and (a.type='AVAILABLE' or a.type='RESERVED')")
@@ -52,4 +53,7 @@ public interface AppointmentCottageRepository extends JpaRepository<AppointmentC
             "where a.cottage.id=:cottageId and a.type='RESERVED' and a.date < CURRENT_DATE and a.date > (CURRENT_DATE-365) " +
             "group by extract(month from a.date), extract(year from a.date)")
     public List<?> getReservationDaysForLastYear(@Param("cottageId") long cottageId);
+
+    @Query("select count(a) from AppointmentCottage a where a.cottage.id=:cottageId and a.type='RESERVED' and a.date > CURRENT_DATE")
+    public int cottageHasFutureReservations(@Param("cottageId") long cottageId);
 }

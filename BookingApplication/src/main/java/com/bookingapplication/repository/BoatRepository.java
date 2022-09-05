@@ -2,10 +2,7 @@ package com.bookingapplication.repository;
 
 import com.bookingapplication.model.Boat;
 import com.bookingapplication.model.Cottage;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Lock;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.QueryHints;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -25,4 +22,8 @@ public interface BoatRepository extends JpaRepository<Boat, Long> {
     @Query("select c from Boat c where c.id=:id")
     @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value ="0")})
     public Boat findByIdPess(@Param("id") long id);
+
+    @Modifying
+    @Query("delete from Boat b where b.id=:id")
+    public void deleteById(@Param("id")long id);
 }

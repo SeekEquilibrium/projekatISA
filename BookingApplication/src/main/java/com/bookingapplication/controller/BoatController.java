@@ -106,4 +106,17 @@ public class BoatController {
         return new ResponseEntity<>(boatInfoDTOS, HttpStatus.OK);
 
     }
+
+    @DeleteMapping("/deleteBoat/{id}")
+    @PreAuthorize("hasAuthority('BOAT_OWNER')")
+    public ResponseEntity<?> deleteBoat(@PathVariable long id){
+        if(!boatService.existsById(id)){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        boolean success = boatService.deleteBoat(id);
+        if(!success){
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 }

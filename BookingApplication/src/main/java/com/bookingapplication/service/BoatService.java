@@ -21,6 +21,8 @@ import java.util.UUID;
 public class BoatService {
     @Autowired
     private BoatRepository boatRepository;
+    @Autowired
+    private AppointmentBoatService appointmentBoatService;
 
     public Boolean existsByName(String name) { return boatRepository.existsByName(name); }
     public Boolean existsById(long id) { return boatRepository.existsById(id); }
@@ -81,6 +83,15 @@ public class BoatService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public Boat findByIdPess(long id){
         return boatRepository.findByIdPess(id);
+    }
+
+    public boolean deleteBoat(long id){
+        if(!appointmentBoatService.boatHasFutureReservations(id)){
+            boatRepository.deleteById(id);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public boolean ownerOwnsBoat(long boatOwnerId, long boatId){

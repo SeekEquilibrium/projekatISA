@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { BoatService } from "src/app/service/boat.service";
 
 @Component({
     selector: "app-boat-horizontal-card",
@@ -8,7 +9,7 @@ import { Router } from "@angular/router";
 })
 export class BoatHorizontalCardComponent implements OnInit {
     @Input() boat;
-    constructor(private router: Router) {}
+    constructor(private router: Router, private boatService: BoatService) {}
 
     ngOnInit() {}
 
@@ -22,5 +23,19 @@ export class BoatHorizontalCardComponent implements OnInit {
 
     navigateToBoat() {
         this.router.navigate(["/boat/" + this.boat.name]);
+    }
+
+    deleteClick(event) {
+        event.stopPropagation();
+        this.boatService.delete(this.boat.id).subscribe(
+            (res) => {
+                location.reload();
+            },
+            (error) => {
+                alert(
+                    "You can't delete boat which has reservations in the future."
+                );
+            }
+        );
     }
 }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 public class AppointmentCottage extends Appointment {
-    @OnDelete(action = OnDeleteAction.CASCADE)
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Cottage cottage;
 

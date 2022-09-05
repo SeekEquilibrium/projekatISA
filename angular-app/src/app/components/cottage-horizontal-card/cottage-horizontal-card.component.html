@@ -15,12 +15,14 @@
         </div>
     </div>
     <div class="cottage-horizontal-buttons">
-        <button (click)="statsClick()" mat-flat-button color="primary">
+        <button (click)="statsClick($event)" mat-flat-button color="primary">
             Stats
         </button>
-        <button (click)="editClick()" mat-flat-button color="accent">
+        <button (click)="editClick($event)" mat-flat-button color="accent">
             Edit
         </button>
-        <button mat-flat-button color="warn">Delete</button>
+        <button (click)="deleteClick($event)" mat-flat-button color="warn">
+            Delete
+        </button>
     </div>
 </mat-card>

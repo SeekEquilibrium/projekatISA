@@ -16,6 +16,8 @@
         <button (click)="editClick()" mat-flat-button color="accent">
             Edit
         </button>
-        <button mat-flat-button color="warn">Delete</button>
+        <button (click)="deleteClick($event)" mat-flat-button color="warn">
+            Delete
+        </button>
     </div>
 </mat-card>

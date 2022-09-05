@@ -32,6 +32,7 @@ public class Boat {
     private BoatOwner boatOwner;
     @OneToMany
             (mappedBy = "boat", fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval=true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public Set<BoatImage> boatImages = new HashSet<BoatImage>();
 
     public Boat(){

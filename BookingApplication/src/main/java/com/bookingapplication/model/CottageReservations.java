@@ -10,7 +10,6 @@ import java.time.LocalDate;
 
 @Entity
 public class CottageReservations extends Reservations{
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(fetch = FetchType.EAGER)
     private Cottage cottage;
 

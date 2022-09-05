@@ -199,4 +199,14 @@ export class CottageService {
                 })
             );
     }
+
+    public delete(cottageId) {
+        return this.apiService
+            .delete(this.config.cottage_url + "/deleteCottage/" + cottageId)
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
 }

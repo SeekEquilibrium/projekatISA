@@ -27,6 +27,8 @@ public class CottageService {
 	private CottageRepository cottageReposiotry;
 	@Autowired
 	private CottageImageService cottageImageService;
+	@Autowired
+	private AppointmentCottageService appointmentCottageService;
 
 	public Cottage findByName(String name) { return cottageReposiotry.findByNameIgnoringCase(name);	}
 
@@ -97,6 +99,15 @@ public class CottageService {
 		cottage.setCottageImages(cottageImages);
 		cottageReposiotry.save(cottage);
 		return cottage;
+	}
+
+	public boolean deleteCottage(long id){
+		if(!appointmentCottageService.cottageHasFutureReservations(id)){
+			cottageReposiotry.deleteById(id);
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public boolean ownerOwnsCottage(long cottageOwnerId, long cottageId){
