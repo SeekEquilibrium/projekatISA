@@ -23,6 +23,10 @@ public class AppointmentCottage extends Appointment {
     @Enumerated(EnumType.STRING)
     private AppointmentType type;
 
+    @Version
+    @Column(name = "optlock", columnDefinition = "integer DEFAULT 0", nullable = false)
+    private Long version = 0L;
+
     public AppointmentCottage() {
     }
 
@@ -69,5 +73,13 @@ public class AppointmentCottage extends Appointment {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 }

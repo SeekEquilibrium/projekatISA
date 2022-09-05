@@ -72,7 +72,7 @@ public class AppointmentBoatService {
             reservation.setType(AppointmentType.RESERVED);
             save(reservation);
         }
-        boatReservationsService.save(new BoatReservations(startTime, endTime, ReservationStatus.RESERVED, boat, client));
+        boatReservationsService.save(new BoatReservations(startTime, endTime, ReservationStatus.PENDING, boat, client));
         return new BoatReservationResponseDTO(boatId, clientId, startTime, endTime);
     }
 

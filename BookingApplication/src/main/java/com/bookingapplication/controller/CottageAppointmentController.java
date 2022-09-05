@@ -111,7 +111,7 @@ public class CottageAppointmentController {
 
     @PostMapping("/ownerCreateReservation")
     @PreAuthorize("hasAuthority('COTTAGE_OWNER')")
-    public ResponseEntity<CottageReservationResponseDTO> cottageOwnerReservationRequest (@Valid @RequestBody CottageOwnerReservationRequestDTO request) {
+    public ResponseEntity<CottageReservationResponseDTO> cottageOwnerReservationRequest (@Valid @RequestBody CottageOwnerReservationRequestDTO request) throws InterruptedException {
         UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         CottageOwner cottageOwner = cottageOwnerService.findById(userApp.getId());
         //Da li vikendica postoji
@@ -141,7 +141,7 @@ public class CottageAppointmentController {
 
     @PostMapping("/clientCreateReservation")
     @PreAuthorize("hasAuthority('CLIENT')")
-    public ResponseEntity<CottageReservationResponseDTO> clientReservationRequest (@Valid @RequestBody CottageClientReservationRequestDTO request) {
+    public ResponseEntity<CottageReservationResponseDTO> clientReservationRequest (@Valid @RequestBody CottageClientReservationRequestDTO request) throws InterruptedException {
         UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
         //Da li vikendica postoji
@@ -164,7 +164,7 @@ public class CottageAppointmentController {
 
     @PostMapping("/clientBookAction")
     @PreAuthorize("hasAuthority('CLIENT')")
-    public ResponseEntity<CottageReservationResponseDTO> clientBookAction (@Valid @RequestBody CottageClientReservationRequestDTO request){
+    public ResponseEntity<CottageReservationResponseDTO> clientBookAction (@Valid @RequestBody CottageClientReservationRequestDTO request) throws InterruptedException {
         UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 
         //Da li vikendica postoji

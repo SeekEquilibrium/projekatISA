@@ -4,9 +4,12 @@ import com.bookingapplication.dto.*;
 import com.bookingapplication.model.*;
 import com.bookingapplication.repository.AppointmentCottageRepository;
 
-import com.google.common.collect.ArrayListMultimap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -37,41 +40,52 @@ public class AppointmentCottageService {
 
     public DefineCottageAvailabilityResponseDTO DefineCottageAction (DefineCottageAvailabilityRequestDTO request){
         Cottage cottage = cottageService.findById(request.getCottageId());
+        ArrayList<AppointmentCottage> saveReservations = new ArrayList<>();
         for(LocalDate date = request.getStartDate(); date.isBefore(request.getEndDate().plusDays(1)); date = date.plusDays(1)){
             //proveriti da li postoji slobodan/zauzet termin tog datuma, da ne bi doslo do dupliranja istog datuma
             if(!existsByDate(date)){
                 AppointmentCottage appointment = new AppointmentCottage(date, request.isHasAction(), cottage, request.getPricePerDay(), AppointmentType.AVAILABLE);
-                save(appointment);
+//                save(appointment);
+                saveReservations.add(appointment);
             }else{
                 //izmena postojeceg termina, provera da li je taj termin vec na akciji (ako jeste, just skip)
                 AppointmentCottage appointment = findByDate(date);
                 if(!appointment.isHasAction()){
                     appointment.setHasAction(true);
                     appointment.setPricePerDay(request.getPricePerDay());
-                    save(appointment);
+//                    save(appointment);
+                    saveReservations.add(appointment);
+
                 }
             }
         }
         return new DefineCottageAvailabilityResponseDTO(cottage.getId(), request.getPricePerDay(), request.isHasAction(), request.getStartDate(), request.getEndDate());
     }
     //Vlasnik vikendice kreira rezervaciju za klijenta
-    public CottageReservationResponseDTO CreateReservationForClient (long clientId ,long cottageId,LocalDate startTime , LocalDate endTime){
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public CottageReservationResponseDTO CreateReservationForClient (long clientId ,long cottageId,LocalDate startTime , LocalDate endTime) throws InterruptedException {
         //Ako pokusa da rezervise u terminima kada nije definisana dostupnos vikendice
         if(!existsByDate(startTime)|| !existsByDate(endTime)){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return null;
         }
         Cottage cottage = cottageService.findById(cottageId);
         Client client = clientService.findById(clientId);
+        ArrayList<AppointmentCottage> saveReservations = new ArrayList<>();
         for(LocalDate date = startTime; date.isBefore(endTime.plusDays(1)); date = date.plusDays(1)){
             AppointmentCottage reservation = findByDate(date);
-            if(reservation.getType() != AppointmentType.AVAILABLE){
+            if(reservation == null || reservation.getType() != AppointmentType.AVAILABLE){
+                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 return null;
             }
             reservation.setClient(client);
             reservation.setType(AppointmentType.RESERVED);
-            save(reservation);
+            saveReservations.add(reservation);
         }
-        cottageReservationsService.save(new CottageReservations(startTime, endTime, ReservationStatus.RESERVED, cottage, client));
+//        Thread.sleep(15000);
+
+        saveAll(saveReservations);
+        cottageReservationsService.save(new CottageReservations(startTime, endTime, ReservationStatus.PENDING, cottage, client));
         return new CottageReservationResponseDTO(cottageId, clientId, startTime, endTime);
     }
 
@@ -124,6 +138,10 @@ public class AppointmentCottageService {
 
     public AppointmentCottage save(AppointmentCottage appointmentCottage){
         return appointmentCottageRepository.save(appointmentCottage);
+    }
+
+    public List<AppointmentCottage> saveAll(ArrayList<AppointmentCottage> appointmentCottageList){
+        return appointmentCottageRepository.saveAll(appointmentCottageList);
     }
 
     public boolean existsByDate(LocalDate date) {
