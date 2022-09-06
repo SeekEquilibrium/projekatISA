@@ -31,7 +31,7 @@ public class AppointmentCottageService {
         for(LocalDate date = request.getStartDate(); date.isBefore(request.getEndDate().plusDays(1)); date = date.plusDays(1)){
             AppointmentCottage appointment = new AppointmentCottage(date, request.isHasAction(), cottage, request.getPricePerDay(), AppointmentType.AVAILABLE);
             //proveriti da li postoji slobodan/zauzet termin tog datuma, da ne bi doslo do dupliranja istog datuma
-            if(!existsByDate(date)){
+            if(!existsByDateAndCottageId(date, cottage.getId())){
                 save(appointment);
             }
         }
@@ -44,7 +44,7 @@ public class AppointmentCottageService {
         ArrayList<AppointmentCottage> saveReservations = new ArrayList<>();
         for(LocalDate date = request.getStartDate(); date.isBefore(request.getEndDate().plusDays(1)); date = date.plusDays(1)){
             //proveriti da li postoji slobodan/zauzet termin tog datuma, da ne bi doslo do dupliranja istog datuma
-            if(!existsByDate(date)){
+            if(!existsByDateAndCottageId(date, cottage.getId())){
                 AppointmentCottage appointment = new AppointmentCottage(date, request.isHasAction(), cottage, request.getPricePerDay(), AppointmentType.AVAILABLE);
 //                save(appointment);
                 saveReservations.add(appointment);
@@ -68,7 +68,7 @@ public class AppointmentCottageService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public CottageReservationResponseDTO CreateReservationForClient (long clientId ,long cottageId,LocalDate startTime , LocalDate endTime) throws InterruptedException {
         //Ako pokusa da rezervise u terminima kada nije definisana dostupnos vikendice
-        if(!existsByDate(startTime)|| !existsByDate(endTime)){
+        if(!existsByDateAndCottageId(startTime,cottageId)|| !existsByDateAndCottageId(endTime,cottageId)){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return null;
         }
@@ -93,7 +93,7 @@ public class AppointmentCottageService {
     }
 
     public boolean CheckActionAvailability (long cottageId, LocalDate startTime , LocalDate endTime){
-        if(!existsByDate(startTime)|| !existsByDate(endTime)){
+        if(!existsByDateAndCottageId(startTime, cottageId)|| !existsByDateAndCottageId(endTime,cottageId)){
             return false;
         }
         Cottage cottage = cottageService.findById(cottageId);
@@ -155,8 +155,8 @@ public class AppointmentCottageService {
         return appointmentCottageRepository.saveAll(appointmentCottageList);
     }
 
-    public boolean existsByDate(LocalDate date) {
-        return appointmentCottageRepository.existsByDate(date);
+    public boolean existsByDateAndCottageId(LocalDate date, long cottageId) {
+        return appointmentCottageRepository.existsByDateAndCottageId(date, cottageId);
     }
 
     public AppointmentCottage findByDate(LocalDate date, long cottageId){

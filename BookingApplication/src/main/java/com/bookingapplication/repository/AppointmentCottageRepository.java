@@ -13,7 +13,8 @@ import java.util.List;
 
 @Repository
 public interface AppointmentCottageRepository extends JpaRepository<AppointmentCottage, Long> {
-    public Boolean existsByDate(LocalDate date);
+    public Boolean existsByDateAndCottageId(LocalDate date, long cottageId);
+
     @Query("select a from AppointmentCottage a where a.cottage.id=:cottageId and a.date=:date")
     public AppointmentCottage findByDate(@Param("date") LocalDate date, @Param("cottageId") long cottageId);
 

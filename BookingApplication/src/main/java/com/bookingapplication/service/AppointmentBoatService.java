@@ -31,7 +31,7 @@ public class AppointmentBoatService {
         for(LocalDate date = request.getStartDate(); date.isBefore(request.getEndDate().plusDays(1)); date = date.plusDays(1)){
             AppointmentBoat appointment = new AppointmentBoat(date, request.isHasAction(), boat, request.getPricePerDay(), AppointmentType.AVAILABLE);
             //proveriti da li postoji slobodan/zauzet termin tog datuma, da ne bi doslo do dupliranja istog datuma
-            if(!existsByDate(date)){
+            if(!existsByDate(date, request.getBoatId())){
                 save(appointment);
             }
         }
@@ -44,7 +44,7 @@ public class AppointmentBoatService {
         ArrayList<AppointmentBoat> saveReservations = new ArrayList<>();
         for(LocalDate date = request.getStartDate(); date.isBefore(request.getEndDate().plusDays(1)); date = date.plusDays(1)){
             //proveriti da li postoji slobodan/zauzet termin tog datuma, da ne bi doslo do dupliranja istog datuma
-            if(!existsByDate(date)){
+            if(!existsByDate(date, request.getBoatId())){
                 AppointmentBoat appointment = new AppointmentBoat(date, request.isHasAction(), boat, request.getPricePerDay(), AppointmentType.AVAILABLE);
                 saveReservations.add(appointment);
 //                save(appointment);
@@ -68,7 +68,7 @@ public class AppointmentBoatService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public BoatReservationResponseDTO CreateReservationForClient (long clientId , long boatId, LocalDate startTime , LocalDate endTime){
         //Ako pokusa da rezervise u terminima kada nije definisana dostupnos vikendice
-        if(!existsByDate(startTime)|| !existsByDate(endTime)){
+        if(!existsByDate(startTime, boatId)|| !existsByDate(endTime, boatId)){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return null;
         }
@@ -138,8 +138,8 @@ public class AppointmentBoatService {
         return appointmentBoatRepository.getAvailabeAppointmentsAndReservations(boatId);
     }
 
-    public boolean existsByDate(LocalDate date) {
-        return appointmentBoatRepository.existsByDate(date);
+    public boolean existsByDate(LocalDate date, long boatId) {
+        return appointmentBoatRepository.existsByDateAndBoatId(date, boatId);
     }
 
     public AppointmentBoat findByDate(LocalDate date, long boatId){
