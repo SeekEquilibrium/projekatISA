@@ -36,7 +36,7 @@ public class Cottage {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private CottageOwner cottageOwner;
 	@OneToMany
-			(mappedBy = "cottage", fetch = FetchType.EAGER, orphanRemoval=true)
+			(mappedBy = "cottage", fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval=true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	public Set<CottageImage> cottageImages = new HashSet<CottageImage>();
 
