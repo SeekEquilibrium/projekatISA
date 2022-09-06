@@ -17,10 +17,14 @@ public class DeleteAccountRequest {
     private UserApp userApp;
     @Column(columnDefinition="TEXT")
     private String reason;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private DeleteAccountRequestStatus status;
 
     public DeleteAccountRequest(UserApp userApp, String reason) {
         this.userApp = userApp;
         this.reason = reason;
+        this.status = DeleteAccountRequestStatus.PENDING;
     }
 
     public DeleteAccountRequest() {
@@ -48,5 +52,13 @@ public class DeleteAccountRequest {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public DeleteAccountRequestStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(DeleteAccountRequestStatus status) {
+        this.status = status;
     }
 }

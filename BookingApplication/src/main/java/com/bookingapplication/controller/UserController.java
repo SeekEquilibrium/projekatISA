@@ -7,6 +7,7 @@ import com.bookingapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,9 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.security.Principal;
 
 @RestController
@@ -56,6 +54,14 @@ public class UserController {
     public ResponseEntity<?> deleteRequest(@Valid @RequestBody DeleteAccountRequestDTO request) {
         UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         boolean response = deleteAccountRequestService.deleteAccountRequest(userApp, request.getReason());
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @PostMapping("/deleteResponse")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> adminDeleteResponse(@Valid @RequestBody AdminDeleteResponseDTO response) {
+        UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        boolean deletionResponse = deleteAccountRequestService.adminDeletionResponse(response.getRequestId(), response.isAcceptDeletion());
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }

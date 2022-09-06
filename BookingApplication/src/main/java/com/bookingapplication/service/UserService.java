@@ -66,6 +66,10 @@ public class UserService implements UserDetailsService {
 		return save(user);
 	}
 
+	public void deleteById(long id){
+		this.userRepository.deleteById(id);
+	}
+
 	public UserApp save(UserApp user) {
 		return userRepository.save(user);
 	}
