@@ -1,10 +1,8 @@
 package com.bookingapplication.controller;
 
-import com.bookingapplication.dto.EditProfileRequestDTO;
-import com.bookingapplication.dto.JwtAuthenticationRequest;
-import com.bookingapplication.dto.MyInfoDTO;
-import com.bookingapplication.dto.UserTokenState;
+import com.bookingapplication.dto.*;
 import com.bookingapplication.model.UserApp;
+import com.bookingapplication.service.DeleteAccountRequestService;
 import com.bookingapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +14,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.security.Principal;
 
 @RestController
@@ -23,7 +24,8 @@ import java.security.Principal;
 public class UserController {
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private DeleteAccountRequestService deleteAccountRequestService;
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -48,5 +50,12 @@ public class UserController {
         }
 
         return new ResponseEntity<>(userService.edit(editProfileRequestDTO, userApp.getId()), HttpStatus.OK);
+    }
+
+    @PostMapping("/deleteRequest")
+    public ResponseEntity<?> deleteRequest(@Valid @RequestBody DeleteAccountRequestDTO request) {
+        UserApp userApp = userService.FindUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        boolean response = deleteAccountRequestService.deleteAccountRequest(userApp, request.getReason());
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }

@@ -39,4 +39,16 @@ export class UserService {
     getAll() {
         return this.apiService.get(this.config.users_url);
     }
+
+    deleteRequest(reason) {
+        return this.apiService
+            .post("http://localhost:8080/user/deleteRequest", {
+                reason: reason,
+            })
+            .pipe(
+                map((res) => {
+                    return res;
+                })
+            );
+    }
 }

@@ -10,6 +10,17 @@
             *ngIf="!submitted"
             [formGroup]="form"
         >
+            <div class="deleteAccount-div">
+                <button
+                    class="deleteAccount-button"
+                    mat-flat-button
+                    color="warn"
+                    type="button"
+                    (click)="deleteAccountClick()"
+                >
+                    Delete Account
+                </button>
+            </div>
             <mat-form-field>
                 <mat-label>First Name: </mat-label>
                 <input formControlName="name" matInput [ngModel]="user?.name" />

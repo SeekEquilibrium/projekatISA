@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog } from "@angular/material";
 import { Router } from "@angular/router";
 import { AuthService, UserService } from "src/app/service";
+import { DeleteAccountDialogComponent } from "../delete-account-dialog/delete-account-dialog.component";
 
 @Component({
     selector: "app-edit-profile",
@@ -13,7 +15,8 @@ export class EditProfileComponent implements OnInit {
         private userService: UserService,
         private formBuilder: FormBuilder,
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        public dialog: MatDialog
     ) {}
     user = null;
     form: FormGroup;
@@ -116,5 +119,11 @@ export class EditProfileComponent implements OnInit {
                 }
             }
         );
+    }
+
+    deleteAccountClick() {
+        this.dialog.open(DeleteAccountDialogComponent, {
+            data: { userId: this.user.id },
+        });
     }
 }

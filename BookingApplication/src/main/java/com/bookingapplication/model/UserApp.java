@@ -45,7 +45,11 @@ public class UserApp implements UserDetails {
 	@OneToMany
 			(mappedBy = "owner", fetch = FetchType.EAGER, cascade= CascadeType.ALL)
 	public Set<Report> reports = new HashSet<>();
-	
+
+	@OneToMany
+			(mappedBy = "userApp", fetch = FetchType.EAGER, cascade= CascadeType.ALL, orphanRemoval=true)
+	public Set<DeleteAccountRequest> deleteAccountRequests = new HashSet<>();
+
 	public UserApp(long id, String username, String name, String surname, String email, String password, String phoneNumber,
 				   Role role) {
 		super();

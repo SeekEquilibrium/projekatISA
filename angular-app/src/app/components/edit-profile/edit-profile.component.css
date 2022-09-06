@@ -55,3 +55,12 @@ a {
     cursor: auto;
     color: #ffffff;
 }
+
+.deleteAccount-div {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.deleteAccount-button {
+    width: 30%;
+}

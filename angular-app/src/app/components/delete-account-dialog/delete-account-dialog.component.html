@@ -1,0 +1,27 @@
+<div class="main-div">
+    <div class="title">Reason For Delition</div>
+    <form class="form" [formGroup]="form">
+        <mat-form-field class="reason-div" appearance="fill">
+            <mat-label>Reason: </mat-label>
+            <textarea
+                formControlName="reason"
+                matInput
+                class="reason-textarea"
+            ></textarea>
+        </mat-form-field>
+        <div class="buttons">
+            <button mat-stroked-button color="warn" (click)="cancleClick()">
+                Cancle
+            </button>
+            <button
+                [disabled]="!form.valid"
+                color="primary"
+                mat-raised-button
+                (click)="submitClick()"
+            >
+                Submit Request
+            </button>
+            <br />
+        </div>
+    </form>
+</div>

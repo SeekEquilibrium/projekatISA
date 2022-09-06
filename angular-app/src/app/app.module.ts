@@ -53,7 +53,8 @@ import { BoatsListComponent } from "./components/boats-list/boats-list.component
 import { BoatHorizontalCardComponent } from "./components/boat-horizontal-card/boat-horizontal-card.component";
 import { BoatDefineAvailabilityComponent } from "./components/boat-define-availability/boat-define-availability.component";
 import { BoatDefineActionsComponent } from "./components/boat-define-actions/boat-define-actions.component";
-import { BoatsReservationsComponent } from './components/boats-reservations/boats-reservations.component';
+import { BoatsReservationsComponent } from "./components/boats-reservations/boats-reservations.component";
+import { DeleteAccountDialogComponent } from "./components/delete-account-dialog/delete-account-dialog.component";
 @NgModule({
     declarations: [
         AppComponent,
@@ -86,6 +87,7 @@ import { BoatsReservationsComponent } from './components/boats-reservations/boat
         BoatDefineAvailabilityComponent,
         BoatDefineActionsComponent,
         BoatsReservationsComponent,
+        DeleteAccountDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -124,6 +126,7 @@ import { BoatsReservationsComponent } from './components/boats-reservations/boat
         BasicUserInfoComponent,
         OwnerReviewComponent,
         CreateReservationOwnerComponent,
+        DeleteAccountDialogComponent,
     ],
 })
 export class AppModule {}
